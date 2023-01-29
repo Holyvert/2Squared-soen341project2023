@@ -20,7 +20,7 @@ This project revolves around building an application in which students can essen
 ## Languages & Techniques
 
 Languages: <br />
-    ~Front-End: TypeScript, HTML, CSS <br />
+    ~Front-End: TypeScript, HTML, SCSS <br />
     ~Back-End: TBD <br />
 Frameworks: Angular, Bootstrap <br />
 Environment: Node.js <br />
