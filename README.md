@@ -14,7 +14,7 @@ This project revolves around building an application in which students can essen
 ~ Isabelle Czuboka (GitHub: IsabelleCzuboka) Developer <br />
 ~ Guillaume Lachapelle (GitHub: Guillaume-Lachapelle) Project Manager & Developer <br />
 ~ Jonathan Miller(GitHub: ) Developer <br />
-~ Karina Sanchez (GitHub: ) Developer <br />
+~ Karina Sanchez-Duran (GitHub: ) Developer <br />
 ~ Olivier Vilney (GitHub: Holyvert) Technical Lead (Front-End) & Developer 
 
 ## Languages & Techniques
