@@ -10,21 +10,21 @@ This project revolves around building an application in which students can essen
 
 ## Team Members
 
-~ Ann-Marie Czuboka (GitHub: amczuboka) Developer 
-~ Isabelle Czuboka (GitHub: IsabelleCzuboka) Developer
-~ Guillaume Lachapelle (GitHub: Guillaume-Lachapelle) Project Manager & Developer
-~ Jonathan Miller(GitHub: ) Developer
-~ Karina Sanchez (GitHub: ) Developer
-~ Olivier Vilney (GitHub: Holyvert) Technical Lead (Front-End) & Developer
+~ Ann-Marie Czuboka (GitHub: amczuboka) Developer <br />
+~ Isabelle Czuboka (GitHub: IsabelleCzuboka) Developer <br />
+~ Guillaume Lachapelle (GitHub: Guillaume-Lachapelle) Project Manager & Developer <br />
+~ Jonathan Miller(GitHub: ) Developer <br />
+~ Karina Sanchez (GitHub: ) Developer <br />
+~ Olivier Vilney (GitHub: Holyvert) Technical Lead (Front-End) & Developer 
 
 ## Languages & Techniques
 
-Languages: 
-    ~Front-End: TypeScript, HTML, CSS
-    ~Back-End: TBD
-Frameworks: Angular, Bootstrap
-Environment: Node.js
-IDE: Visual Studio Code
+Languages: <br />
+    ~Front-End: TypeScript, HTML, CSS <br />
+    ~Back-End: TBD <br />
+Frameworks: Angular, Bootstrap <br />
+Environment: Node.js <br />
+IDE: Visual Studio Code <br />
 
 ## Square
 
