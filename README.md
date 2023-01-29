@@ -1,6 +1,35 @@
-# Square
+# SOEN 341
+
+## Objective
+
+Develop a job-hunting application for students.
+
+## Project Description
+
+This project revolves around building an application in which students can essentially find a job and employers can hire students. The main features of the application are students apply to postings (1) and update their portfolio (2), while employers upload job postings (3) and review applications from students (4).
+
+## Team Members
+
+~ Ann-Marie Czuboka (GitHub: amczuboka) Developer <br />
+~ Isabelle Czuboka (GitHub: IsabelleCzuboka) Developer <br />
+~ Guillaume Lachapelle (GitHub: Guillaume-Lachapelle) Project Manager & Developer <br />
+~ Jonathan Miller(GitHub: MillerSty) Developer <br />
+~ Karina Sanchez-Duran (GitHub: KarinaSandur) Developer <br />
+~ Olivier Vilney (GitHub: Holyvert) Technical Lead (Front-End) & Developer 
+
+## Languages & Techniques
+
+Languages: <br />
+    ~Front-End: TypeScript, HTML, SCSS <br />
+    ~Back-End: TBD <br />
+Frameworks: Angular, Bootstrap <br />
+Environment: Node.js <br />
+IDE: Visual Studio Code <br />
+
+## Square
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+
 
 ## Development server
 
