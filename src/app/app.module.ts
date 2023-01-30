@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +20,7 @@ import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 import { AuthguardGuard } from './services/authguard.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { faCoffee, fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -32,8 +37,16 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     MatMenuModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+    library.addIcons(faCoffee);
+  }
+
+  
+}
