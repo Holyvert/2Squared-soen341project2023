@@ -1,0 +1,19 @@
+<div class="col-lg-3 col-sm-1">
+    <div class="card h-100"  *ngFor="let post of jobsArray">
+        <div class="card-body">
+            <h2 class="card-title">{{post.jobTitle}}</h2>
+            <p class="card-text">{{post.jobDescription}}</p>
+        </div>
+        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+    </div>
+</div>
+
+<!-- <div class="col-md-4 mb-5">
+    <div class="card h-100">
+        <div class="card-body">
+            <h2 class="card-title">{{this.jobTitle}}</h2>
+            <p class="card-text">{{this.jobDescription}}</p>
+        </div>
+        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+    </div>
+</div> -->
