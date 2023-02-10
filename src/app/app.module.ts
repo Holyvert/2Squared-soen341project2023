@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import {
   FontAwesomeModule,
   FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
-
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { faCoffee, fas } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { JobPostComponent } from './job-post/job-post.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { JobPostComponent } from './job-post/job-post.component';
     LoginComponent,
     UserProfileComponent,
     JobPostComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,8 @@ import { JobPostComponent } from './job-post/job-post.component';
     MatSelectModule,
     HttpClientModule,
     FontAwesomeModule,
+    FormsModule,
+    MatIconModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],
@@ -55,6 +60,4 @@ export class AppModule {
     library.addIconPacks(fas);
     library.addIcons(faCoffee);
   }
-
-  
 }

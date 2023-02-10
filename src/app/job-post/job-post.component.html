@@ -1,12 +1,44 @@
-<div class="col-lg-3 col-sm-1">
-    <div class="card h-100"  *ngFor="let post of jobsArray">
-        <div class="card-body">
-            <h2 class="card-title">{{post.jobTitle}}</h2>
-            <p class="card-text">{{post.jobDescription}}</p>
+<app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+
+
+<div class="cardz" >
+  <div
+    *ngFor="let item of jobsArray"
+    data-aos="fade-up"
+    data-aos-duration="900"
+    data-aos-easing="ease-in-out-back"
+    data-aos-mirror=true
+  >
+    <a
+      href=""
+      *ngIf="
+        searchText === '' ||
+        item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.img.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.txt.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.nature.toLowerCase().includes(searchText.toLowerCase())
+      "
+      @fadeAnimation
+   
+    >
+      <div class="card">
+        <img src="{{ item.img }}" alt="" class="cardimg" />
+        <div class="card-content" value="">
+          <div class="top-card">
+            <h3>{{ item.name }}</h3>
+            <P>{{ item.txt }}</P>
+          </div>
+
+          <div class="bottom-card">
+            <mat-icon>{{ item.maticon }}</mat-icon>
+            <p class="watch">{{ item.nature }}</p>
+          </div>
         </div>
-        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
-    </div>
+      </div>
+    </a>
+  </div>
 </div>
+
 
 <!-- <div class="col-md-4 mb-5">
     <div class="card h-100">

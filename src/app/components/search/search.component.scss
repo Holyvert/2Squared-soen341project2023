@@ -1,0 +1,681 @@
+.setup {
+  padding-left: 12%;
+  padding-right: 12%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  width: inherit;
+}
+
+.set1 {
+  width: 50%;
+  display: flex;
+  min-width: 300px;
+  flex-direction: row;
+  align-items: center;
+}
+#login {
+  background-color: rgb(150, 38, 144);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+}
+.set1 div {
+  margin-right: 2vw;
+  font-size: 14px;
+}
+.set1 img {
+  height: 22px;
+  align-self: center;
+}
+.set2 {
+  width: 40%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.set2 a {
+  // padding-left: 9vw;
+  width: 50%;
+  font-size: 14px;
+  text-align: right;
+  // background-color: firebrick;
+  // border: solid 5px blue;
+}
+
+
+
+.bannerimg img {
+  width: 16%;
+  padding-top: 2.1%;
+  padding-bottom: 2.1%;
+  margin-left: 10%;
+}
+
+.dropbtn {
+  display: none;
+}
+nav {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.links {
+  padding-left: 12vw;
+  padding-right: 12vw;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+.links a {
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 12px;
+  width: 11%;
+  min-width: 100px;
+  font-weight: bold;
+  bottom: 0;
+  color: rgb(150, 38, 144);
+  //border-bottom: solid rgb(150, 38, 144) 4px ;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.underline,
+.sections {
+  text-decoration: none;
+  position: relative;
+  --after-width: 0%;
+}
+
+//.underline#HOME { border-bottom: solid 4px ;}
+
+.sections:after {
+  position: relative;
+  content: "";
+  height: 4px;
+  /* adjust this to move up and down. you may have to adjust the line height of the paragraph if you move it down a lot. */
+  bottom: -1px;
+  /****** 
+ optional values below 
+ ******/
+  /* center - (optional) use with adjusting width   */
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  //*******you have to change this below depending onthe link
+  //*********width: 50%;/
+  width: var(--after-width);
+
+  background: rgb(150, 38, 144);
+  /* optional animation */
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.underline:after {
+  position: relative;
+  content: "";
+  height: 4px;
+  /* adjust this to move up and down. you may have to adjust the line height of the paragraph if you move it down a lot. */
+  bottom: -1px;
+  /****** 
+ optional values below 
+ ******/
+  /* center - (optional) use with adjusting width   */
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  //*******you have to change this below depending onthe link
+  //*********width: 50%;/
+  width: 0%;
+  background: rgb(150, 38, 144);
+  /* optional animation */
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.set1 .underline:after,
+.set2 .underline:after {
+  background: black;
+}
+#login.underline:after {
+  background: white;
+}
+#twit.underline:after {
+  background: rgb(27, 157, 240);
+  bottom: -6px;
+}
+.set2 .underline:after {
+  left: 8vw;
+}
+.set2 .underline:hover:after {
+  width: 50%;
+}
+.set1 .underline:hover:after {
+  width: 100%;
+}
+/* optional hover classes used with anmiation */
+.underline:hover:after {
+  width: 80%;
+}
+
+.sections:hover:after {
+  width: 100%;
+}
+
+#touch {
+  display: none;
+}
+
+.carousel {
+  padding-top: 3vw;
+  padding-left: 12%;
+  padding-right: 12%;
+  padding-bottom: 40px;
+  position: relative;
+  background-color: rgb(200, 201, 203);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carousel > ul > li {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  column-gap: 22px;
+}
+
+.slide{
+  position: relative;
+  margin-left: -50%;
+  width: 100%;
+  padding-left: 12%;
+  padding-right: 12%;
+}
+.card-show {
+  // max-width: 700px;
+  // max-height: 171.11px;
+  width: 467px;
+  height: 149px;
+  display: flex;
+}
+
+.card-content {
+  background-color: white;
+  padding-top: 5px;
+  padding-right: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.card-content > .top-card > h3 {
+  margin-left: 1vw;
+  color: rgb(88, 88, 90);
+  font-size: 12px;
+  padding-bottom: 4px;
+  font-family: "Lora", serif;
+  font-weight: 500;
+}
+
+.card-content > .top-card > P {
+  margin-left: 1vw;
+  margin-top: -20px;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+.card-content > .watch {
+  margin-left: 1vw;
+  display: flex;
+  flex-flow: row;
+  font-size: 13px;
+  padding-top: 1vw;
+  margin-bottom: 0;
+  padding-bottom: 0vw;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.watch p {
+  margin-left: -10px;
+}
+
+.card-content mat-icon {
+  font-size: 13px;
+}
+.slide img {
+  width: 210px;
+  height: 149px;
+  object-fit: cover;
+
+  overflow: hidden;
+  object-position: 100% 0;
+}
+
+.selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 180px;
+  padding-bottom: 0vw;
+}
+
+.carousel-button {
+  // position: relative;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 50px;
+  color: rgb(88, 88, 90);
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.carousel-button :hover,
+.carousel-button :focus {
+  color: rgba(241, 241, 250, 0.76);
+}
+
+.carousel-button :focus {
+  outline: 1px solid black;
+}
+
+.carousel-button.prev {
+  margin-right: 1vw;
+}
+
+.carousel-button.next {
+  margin-left: 1vw;
+}
+
+.n {
+  background-color: rgb(233, 233, 234);
+  width: 30px;
+  height: 5px;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  margin-top: 7px;
+  cursor: pointer;
+}
+.example-full-width {
+  padding-left: 12%;
+  padding-right: 12%;
+  padding-top: 2.8vw;
+  width: 100%;
+  background-color: rgb(231, 231, 232);
+  padding-bottom: 0.7vw;
+}
+
+.search {
+  width: 100%;
+  font-size: 16px;
+}
+
+
+
+::ng-deep {
+  .mat-form-field .mat-form-field-flex {
+    background-color: white;
+    border: solid 1px rgb(200, 201, 203);
+    box-shadow: 3px 3px 15px 3px rgb(200, 201, 203);
+  }
+
+  mat-label {
+    margin-left: 30px;
+    color: black;
+  }
+
+  mat-icon {
+    padding: 0;
+  }
+}
+
+
+button{
+  border: 0;
+}
+
+#action, mat-label{
+  font-family: 'Orbitron', sans-serif;
+}
+
+mat-form-field{
+  width:100%;
+  padding-right: 0%;
+  font-size: 2vw;
+}
+#spacetop{
+ 
+  margin-bottom: 0;
+}
+input {
+  font-size: 2vw;
+}
+#spacetop button{
+  padding: 2vw;
+}
+#action button, mat-form-field button {
+  font-size: 2vw;
+        /* Fallback: Set a background color. */
+background-color: red;
+
+/* Create the gradient. */
+background-image: linear-gradient(to right, rgb(101, 14,65), rgb(150, 38, 144), rgb(136,255,254) );
+
+/* Set the background size and repeat properties. */
+background-size: 100%;
+background-repeat: repeat;
+
+/* Use the text as a mask for the background. */
+/* This will show the gradient as a text color rather than element bg. */
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-background-clip: text;
+-moz-text-fill-color: transparent;
+padding: 3vw;
+
+}
+
+.casslescoui\.\.\. mat-label{
+  /* Fallback: Set a background color. */
+  background-color: red;
+  
+  /* Create the gradient. */
+  background-image: linear-gradient(to right, rgb(150, 38, 144),rgb(101, 14,65));
+  
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+  padding-left: 3vw;
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.casslescoui\.\.\. input{
+  padding-left: 5%;
+  width: 95%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+.casslescoui\.\.\.{
+  background-color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+  .slide{
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+}
+
+@media only screen and (max-width: 788px) {
+  .setup {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+  .set1 {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .set2 {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  // .card-show {
+  //   width: 100%;
+  //   padding-top: 2vw;
+  // }
+
+  .carousel > ul > li {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 10px;
+  }
+
+  .slide{
+    padding: 0;
+    //margin-left: -45%;
+  }
+
+  .carousel {
+    padding-bottom: 2vw;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .selection {
+    padding-top: 3vw;
+    width: 30%;
+    margin-top: 340px;
+    padding-bottom: 2px;
+  }
+
+  // .card-content > h3 {
+  //   font-size: 3vw;
+  // }
+
+  // .card-content > P {
+  //   margin-top: 0vw;
+  //   font-size: 3vw;
+  //   line-height: 4vw;
+  // }
+  // .card-content > .watch {
+  //   margin-left: 1vw;
+  //   margin-top: 0vw;
+  //   font-size: 3vw;
+  //   margin-bottom: 2vw;
+  // }
+
+  #action button, mat-form-field button,input ,mat-form-field {
+    font-size: 3vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .setup {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+
+  .set1 {
+    flex-flow: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .set1 div {
+    margin-right: 0vw;
+    font-size: 14px;
+  }
+
+  .set2 {
+    width: 100%;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+
+  .set2 a{
+    width: 100%;
+    text-align: center;
+  }
+
+  .set2 div {
+    padding-left: 0vw;
+    font-size: 14px;
+  }
+
+  .bannerimg img {
+    width: 35%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-left: 5%;
+  }
+
+  .dropbtn {
+    display: block;
+    cursor: pointer;
+    border: none;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -moz-text-fill-color: transparent;
+    color: rgb(150, 38, 144);
+  }
+
+  .links {
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  .links a {
+    text-align: center;
+    display: flex;
+
+    flex-flow: column wrap;
+
+    font-size: 5vw;
+    width: 20%;
+    min-width: 100px;
+    font-weight: bold;
+    bottom: 0;
+    color: rgb(150, 38, 144);
+    //border-bottom: solid rgb(150, 38, 144) 4px ;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .slidez {
+    clear: both;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height 0.4s ease;
+  }
+
+  .card-show {
+    width: 99vw;
+    height: 150px;
+    padding-top: 2vw;
+  }
+
+  .slide img {
+    width: 40vw;
+    height: 100%;
+  }
+
+
+  .carousel {
+    padding-bottom: 2vw;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .selection {
+    padding-top: 3vw;
+    width: 30%;
+  }
+
+  .card-content > h3 {
+    font-size: 4vw;
+  }
+
+  .card-content > P {
+    margin-top: 0vw;
+    font-size: 4vw;
+    line-height: 4vw;
+  }
+  .card-content > .watch {
+    margin-left: 1vw;
+    margin-top: 0vw;
+    font-size: 4vw;
+    margin-bottom: 2vw;
+  }
+  span {
+    padding: 3vw;
+    cursor: pointer;
+    display: block;
+  }
+
+  .selection {
+    padding-bottom: 10px;
+  }
+  #touch {
+    position: relative;
+    opacity: 0;
+    height: 0px;
+  }
+
+  #touch:checked + .slidez {
+    height: 170vw;
+  }
+
+  .n {
+    display: none;
+  }
+
+  .example-full-width {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .casslescoui\.\.\.{
+    width: 100%;
+  }
+
+  #action button, mat-form-field button,input ,mat-form-field {
+    font-size: 5vw;
+  }
+ 
+ 
+}
