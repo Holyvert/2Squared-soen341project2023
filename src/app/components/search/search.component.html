@@ -1,10 +1,15 @@
 <div class="example-full-width">
-    <mat-form-field class="search"  >
-      <mat-label>Search by topic, title or therapeutic area</mat-label>
-      <div>      
-        <input matInput placeholder="Ex. CARDIOLOGY" name="" [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
-      </div>
-      <mat-icon matPrefix>search</mat-icon>
-    </mat-form-field>
-
-  </div>
+  <mat-form-field class="search">
+    <mat-label>Search by topic, title or therapeutic area</mat-label>
+    <div>
+      <input
+        matInput
+        placeholder="Ex. CARDIOLOGY"
+        name=""
+        [(ngModel)]="enteredSearchValue"
+        (input)="onSearchTextChanged()"
+      />
+    </div>
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+</div>

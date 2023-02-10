@@ -1,8 +1,5 @@
-
 .example-full-width {
-
   width: 100%;
-
 }
 
 .search {
@@ -10,10 +7,9 @@
   font-size: 16px;
 }
 
-.search > div {
-    width: 100%;
+.search div input {
+  width: 100%;
 }
-
 
 ::ng-deep {
   .mat-form-field .mat-form-field-flex {
@@ -32,18 +28,12 @@
   }
 }
 
-
-
-
 @media only screen and (max-width: 1000px) {
-  .slide{
+  .slide {
     padding-left: 1vw;
     padding-right: 1vw;
   }
 }
 
-
-
 @media only screen and (max-width: 500px) {
-
 }
