@@ -1,0 +1,259 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <section class="vh-200" style="background-color: #93aff6">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: 0.5rem">
+            <div class="row g-0">
+              <div
+                class="col-md-4 gradient-custom text-center text-white"
+                style="
+                  border-top-left-radius: 0.5rem;
+                  border-bottom-left-radius: 0.5rem;
+                "
+                style="background-color: #475db8"
+              >
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  alt="Avatar"
+                  class="img-fluid my-5"
+                  style="width: 80px"
+                />
+                <h5>
+                  <!-- first_name -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>First name</mat-label>
+                    <input
+                      matInput
+                      required
+                      name="first_name"
+                      formControlName="first_name"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.first_name.hasError('required') &&
+                        registerForm.controls.first_name.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.first_name.hasError('required')
+                      "
+                      >Enter your first name</mat-error
+                    >
+                  </mat-form-field>
+                  <!-- last name -->
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width"
+                    id="last_name"
+                  >
+                    <mat-label>Last name</mat-label>
+                    <input
+                      matInput
+                      required
+                      name="last_name"
+                      formControlName="last_name"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.last_name.hasError('required') &&
+                        registerForm.controls.last_name.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.last_name.hasError('required')
+                      "
+                      >Enter your last name</mat-error
+                    >
+                  </mat-form-field>
+                </h5>
+                <p>Web Designer</p>
+                <i class="far fa-edit mb-5"></i>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6></h6>
+                      <!-- email -->
+                      <mat-form-field
+                        appearance="outline"
+                        class="example-full-width"
+                        id="email"
+                      >
+                        <mat-label>Enter your email</mat-label>
+                        <input
+                          matInput
+                          placeholder="info@example.com"
+                          formControlName="email"
+                          name="email"
+                          [errorStateMatcher]="matcher"
+                        />
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            (registerForm.controls.email.hasError('email') ||
+                              registerForm.controls.email.hasError(
+                                'required'
+                              )) &&
+                            registerForm.controls.email.touched
+                          "
+                          >error_outline</mat-icon
+                        >
+                        <mat-error
+                          *ngIf="
+                            registerForm.controls.email.hasError('email') &&
+                            !registerForm.controls.email.hasError('required')
+                          "
+                        >
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error
+                          *ngIf="
+                            registerForm.controls.email.hasError('required')
+                          "
+                        >
+                          Email is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6></h6>
+                      <!-- phone number -->
+                      <mat-form-field
+                        appearance="outline"
+                        id="spacetop"
+                        class="example-full-width"
+                        id="tel"
+                      >
+                        <mat-label>Phone number</mat-label>
+                        <input
+                          matInput
+                          placeholder="555-555-5555"
+                          formControlName="tel"
+                          name="tel"
+                          [errorStateMatcher]="matcher"
+                          pattern="[- +()0-9]{10,12}"
+                          required
+                        />
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            (registerForm.controls.tel.hasError('required') ||
+                              registerForm.controls.tel.hasError('pattern') ||
+                              registerForm.controls.tel.hasError(
+                                'minlength'
+                              )) &&
+                            registerForm.controls.tel.touched
+                          "
+                          >error_outline</mat-icon
+                        >
+                        <mat-error
+                          *ngIf="registerForm.controls.tel.hasError('required')"
+                        >
+                          Be sure to enter your phone number
+                        </mat-error>
+
+                        <mat-error
+                          *ngIf="
+                            !registerForm.controls.tel.hasError('required') &&
+                            registerForm.controls.tel.hasError('pattern')
+                          "
+                        >
+                          Enter a proper phone number
+                        </mat-error>
+
+                        <mat-icon id="hide" matSuffix>phone</mat-icon>
+                      
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                  <h6>Projects</h6>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Recent</h6>
+                         <!-- language -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>language</mat-label>
+                    <input
+                      matInput
+                      required
+                      name="language"
+                      formControlName="language"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.language.hasError('required') &&
+                        registerForm.controls.language.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.language.hasError('required')
+                      "
+                      >Enter your language</mat-error
+                    >
+                  </mat-form-field>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Most Viewed</h6>
+                         <!-- mostView -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>mostView</mat-label>
+                    <input
+                      matInput
+                      required
+                      name="mostView"
+                      formControlName="mostView"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.mostView.hasError('required') &&
+                        registerForm.controls.mostView.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.mostView.hasError('required')
+                      "
+                      >Enter your mostView</mat-error
+                    >
+                  </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    <a href="#!"
+                      ><i class="fab fa-facebook-f fa-lg me-3"></i
+                    ></a>
+                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  </div>
+                </div>
+
+                <button mat-button type="submit">EDIT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
