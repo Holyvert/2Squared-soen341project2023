@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {AngularFireModule} from '@angular/fire/compat';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { JobPostComponent } from './job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
+import { environment } from 'src/environments/environment.development';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { SearchComponent } from './components/search/search.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],
