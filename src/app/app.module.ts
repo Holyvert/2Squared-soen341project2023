@@ -32,7 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { JobPostComponent } from './job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
