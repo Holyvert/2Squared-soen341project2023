@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-
+  myFunction() {
+    var x = document.getElementById("myDIV");
+    
+    if(x!=null)
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
 }
