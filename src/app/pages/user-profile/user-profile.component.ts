@@ -6,7 +6,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-
+import {Database,set,ref,update, onValue} from '@angular/fire/database'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -37,6 +37,7 @@ export class UserProfileComponent {
   submitted = false;
 
   constructor(
+    public database: Database,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar
   ) {}
@@ -56,13 +57,32 @@ export class UserProfileComponent {
   onSubmit() {
    
     console.log(this.registerForm.value);
+   
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
       return;
     }
+    this.registerUser(this.registerForm.value);
      this.submitted = true;
   }
+
+  registerUser(value:any){
+    set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
+      firstname: value.first_name,
+      lastname: value.last_name,
+      email: value.tel     
+    });
+alert('user created!')
+  }
+
+  grabUser(value:any){
+    const starCountRef = ref(this.database, 'students/' );
+  onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  });
+}
+
 
   sendNotification(text: string) {
     this.snackBar.open(text, '', {
