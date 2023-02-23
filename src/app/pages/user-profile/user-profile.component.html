@@ -26,7 +26,7 @@
                     <input
                       matInput
                       required
-                      name="first_name"
+                      ngModel name="first_name"
                       formControlName="first_name"
                       [errorStateMatcher]="matcher"
                     />
@@ -55,7 +55,7 @@
                     <input
                       matInput
                       required
-                      name="last_name"
+                      ngModel name="last_name"
                       formControlName="last_name"
                       [errorStateMatcher]="matcher"
                     />
@@ -141,7 +141,7 @@
                           matInput
                           placeholder="555-555-5555"
                           formControlName="tel"
-                          name="tel"
+                          ngModel name="tel"
                           [errorStateMatcher]="matcher"
                           pattern="[- +()0-9]{10,12}"
                           required
@@ -248,7 +248,7 @@
                   </div>
                 </div>
 
-                <button mat-button type="submit">EDIT</button>
+                <button mat-button type="submit" >EDIT</button>
               </div>
             </div>
           </div>

@@ -33,6 +33,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { JobPostComponent } from './job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import {provideDatabase,getDatabase} from '@angular/fire/database'
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { environment } from 'src/environments/environment';
     MatButtonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(()=> initializeApp(environment.firebase)),
+    provideDatabase(()=>getDatabase())
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],
