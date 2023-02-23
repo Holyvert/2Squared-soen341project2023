@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-
+import {Database,set,ref,update, onValue} from '@angular/fire/database'
+import { Data } from '@angular/router';
 @Component({
   selector: 'app-job-post',
   templateUrl: './job-post.component.html',
   styleUrls: ['./job-post.component.scss'],
 })
 export class JobPostComponent {
+  
   jobTitle: String = 'Software Developer';
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
+  teststring : string=this.grabUser(46) as unknown as string;
   jobsArray = [
     {
       img: 'https://source.unsplash.com/UcYoEO5nSNE',
-      name: 'PSYCHOLOGY',
+      name: this.teststring,
       txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
       maticon: 'video_library',
       nature: 'WATCH',
@@ -87,6 +90,14 @@ export class JobPostComponent {
     this.searchText = searchValue;
     console.log('a letter', this.searchText);
   }
+  grabUser(value:any){
+    const starCountRef = ref(this.database, 'students/'+value+'/firstname' );
+  onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  return data as string;
+  });
+}
+constructor(public database : Database){}
   // constructor(jobTitle: String, jobDescription: String) {
   //   this.jobTitle = jobTitle;
   //   this.jobDescription = jobDescription;

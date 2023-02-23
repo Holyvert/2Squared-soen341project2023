@@ -54,10 +54,8 @@ export class UserProfileComponent {
     });
   }
 
-  onSubmit() {
-   
-    console.log(this.registerForm.value);
-   
+  onSubmit() {   
+    console.log(this.registerForm.value);   
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
@@ -71,7 +69,7 @@ export class UserProfileComponent {
     set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
       firstname: value.first_name,
       lastname: value.last_name,
-      email: value.tel     
+      telephone: value.tel     
     });
 alert('user created!')
   }

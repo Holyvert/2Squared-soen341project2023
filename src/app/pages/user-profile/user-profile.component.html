@@ -26,7 +26,7 @@
                     <input
                       matInput
                       required
-                      ngModel name="first_name"
+                      name="first_name"
                       formControlName="first_name"
                       [errorStateMatcher]="matcher"
                     />
@@ -55,7 +55,7 @@
                     <input
                       matInput
                       required
-                      ngModel name="last_name"
+                      name="last_name"
                       formControlName="last_name"
                       [errorStateMatcher]="matcher"
                     />
@@ -141,7 +141,7 @@
                           matInput
                           placeholder="555-555-5555"
                           formControlName="tel"
-                          ngModel name="tel"
+                          name="tel"
                           [errorStateMatcher]="matcher"
                           pattern="[- +()0-9]{10,12}"
                           required
