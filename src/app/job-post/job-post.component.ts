@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
+import {Database,set,ref} from '@angular/fire/database'
 
 @Component({
   selector: 'app-job-post',
@@ -7,9 +8,14 @@ import AOS from 'aos';
   styleUrls: ['./job-post.component.scss'],
 })
 export class JobPostComponent {
+  constructor(
+    public database: Database
+  ) {};
+
   jobTitle: String = 'Software Developer';
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
+
   jobsArray = [
     {
       img: 'https://source.unsplash.com/UcYoEO5nSNE',
@@ -91,4 +97,14 @@ export class JobPostComponent {
   //   this.jobTitle = jobTitle;
   //   this.jobDescription = jobDescription;
   // }
+
+  createJobPosting() {
+    set(ref(this.database, 'job-postings/' + Math.floor(Math.random()*100)), {
+      Company: "VuWall",
+      Description: "The knowledge of typescript, node.js and angular are very ...",
+      JobTitle: "Software Developer"
+    });
+alert('Job Post created!')
+  }
+
 }
