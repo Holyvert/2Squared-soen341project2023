@@ -1,16 +1,74 @@
-<p>employer-form works!</p>
-<mat-form-field appearance="fill">
-    <mat-label>Input</mat-label>
-    <input matInput>
-  </mat-form-field>
+<form [formGroup]="employerForm" (ngSubmit)="onSubmit()">
+  <!--Job Title-->
   <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
+    <mat-label>Job Title</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="job_title"
+      formControlName="job_title"
+    >
+    <!--<mat-icon
+      matSuffix
+      *ngIf="employerForm.controls.job_title.hasError('required') 
+            && employerForm.controls.first_name.touched"
+      >error_outline
+    </mat-icon>-->
   </mat-form-field>
+
+  <!--Job Location-->
   <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
+    <mat-label>Job Location</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="job_location"
+      formControlName="job_location"
+    >
   </mat-form-field>
+  
+  <!--Job Location Type-->
+  <mat-form-field appearance="fill">
+    <mat-label>Job Location Type</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="job_location_type"
+      formControlName="job_location_type"
+    >
+  </mat-form-field>
+  
+  <!--Salary-->
+  <mat-form-field appearance="fill">
+    <mat-label>Salary</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="salary"
+      formControlName="salary"
+    >
+  </mat-form-field>
+  
+  <!--Duration-->
+  <mat-form-field appearance="fill">
+    <mat-label>Duration</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="duration"
+      formControlName="duration"
+    >
+  </mat-form-field>
+
+  <!--Job Description-->
+  <mat-form-field appearance="fill">
+    <mat-label>Job Description</mat-label>
+    <input 
+      matInput
+      required
+      ngModel name="job_description"
+      formControlName="job_description"
+    >
+  </mat-form-field>
+</form>
+  
