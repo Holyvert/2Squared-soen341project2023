@@ -22,12 +22,12 @@
                 <h5>
                   <!-- first_name -->
                   <mat-form-field appearance="outline">
-                    <mat-label>First name</mat-label>
+                    <mat-label>{{defaultStudent.FirstName}}</mat-label>
                     <input
                       matInput
                       required
                       ngModel name="first_name"
-                      formControlName="first_name"
+                      formControlName= "first_name"
                       [errorStateMatcher]="matcher"
                     />
                     <mat-icon
@@ -51,7 +51,7 @@
                     class="example-full-width"
                     id="last_name"
                   >
-                    <mat-label>Last name</mat-label>
+                    <mat-label>{{defaultStudent.LastName}}</mat-label>
                     <input
                       matInput
                       required
@@ -136,10 +136,9 @@
                         class="example-full-width"
                         id="tel"
                       >
-                        <mat-label>Phone number</mat-label>
+                        <mat-label>{{defaultStudent.PhoneNumber}}</mat-label>
                         <input
                           matInput
-                          placeholder="555-555-5555"
                           formControlName="tel"
                           ngModel name="tel"
                           [errorStateMatcher]="matcher"

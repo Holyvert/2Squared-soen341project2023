@@ -29,3 +29,9 @@ export interface JobPost{
   Salary: string;
   Supervisor: string;
 }
+
+export interface StudentProfile{
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
+}

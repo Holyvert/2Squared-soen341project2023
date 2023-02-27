@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import AOS from 'aos';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import { StudentProfile } from 'src/app/models/user.models';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -42,6 +44,8 @@ export class UserProfileComponent {
     private snackBar: MatSnackBar
   ) {}
 
+  defaultStudent = {} as StudentProfile;
+
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,6 +56,22 @@ export class UserProfileComponent {
       language: ['', [Validators.required]],
       mostView: ['', [Validators.required]],
     });
+
+    //example using a hard coded id (reading user profile)
+    AOS.init();
+    const dbRef = ref(this.database);
+    const starCountRef = child(dbRef, 'students/87');
+    onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    console.log(data);
+    console.log(keys);
+    console.log(values);
+    this.defaultStudent = data;
+    });
+
+    console.log("this isnfesubvorubs"+this.defaultStudent.FirstName)
   }
 
   onSubmit() {
@@ -73,9 +93,9 @@ export class UserProfileComponent {
 
   registerUser(value:any){
     set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
-      firstname: value.first_name,
-      lastname: value.last_name,
-      email: value.tel     
+      FirstName: value.first_name,
+      LastName: value.last_name,
+      PhoneNumber: value.tel     
     });
 alert('user created!')
   }
@@ -105,7 +125,7 @@ onEditUser(index:any, value:any) {
   update(child(dbRef, `students/${index}`), {
     firstname: value.first_name,
     lastname: value.last_name,
-    email: value.tel    
+    telephone: value.tel    
   });
   alert(`user ${index} was updated!`)
 }
