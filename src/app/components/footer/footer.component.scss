@@ -2,3 +2,11 @@
     position: absolute;
     margin-bottom: 0;
 }
+
+.input {
+    color: white !important;
+   }
+
+.input::placeholder {
+    color: white !important;
+}
