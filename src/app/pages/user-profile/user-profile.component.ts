@@ -6,7 +6,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import {Database,set,ref,update, onValue} from '@angular/fire/database'
+import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -65,6 +65,10 @@ export class UserProfileComponent {
     }
     this.registerUser(this.registerForm.value);
      this.submitted = true;
+
+    // this.readUser(90);
+    // this.onEdit(90, this.registerForm.value)
+    // this.onDeleteUser(90);
   }
 
   registerUser(value:any){
@@ -83,6 +87,34 @@ alert('user created!')
   });
 }
 
+readUser(value:any) {
+  const dbRef = ref(this.database);
+  get(child(dbRef, `students/${value}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+onEditUser(index:any, value:any) {
+  const dbRef = ref(this.database);
+  update(child(dbRef, `students/${index}`), {
+    firstname: value.first_name,
+    lastname: value.last_name,
+    email: value.tel    
+  });
+  alert(`user ${index} was updated!`)
+}
+
+onDeleteUser(index:any) {
+  const dbRef = ref(this.database);  
+  remove(child(dbRef, `students/${index}`));
+  alert(`user ${index} was deleted!`)
+}
 
   sendNotification(text: string) {
     this.snackBar.open(text, '', {
