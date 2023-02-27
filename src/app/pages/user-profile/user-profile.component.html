@@ -2,12 +2,9 @@
   <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-6 mb-4 mb-lg-0">
-          <div class="card mb-3" 
+        <div class="col col-lg-9 mb-4 mb-lg-0">
+          <div class="card mb-3 justify-content-center"
                style="border-radius: 0.5rem; 
-               min-width: 750px; 
-               
-               margin:auto;
                "
               
           >
@@ -52,6 +49,7 @@
                       >Enter your first name
                     </mat-error>
                   </mat-form-field>
+                  <br>
                   <!-- last name -->
                   <mat-form-field
                     appearance="fill"
@@ -81,13 +79,44 @@
                       >Enter your last name</mat-error
                     >
                   </mat-form-field>
+                  <br>
+                  <!--Program-->
+                  <mat-form-field
+                    appearance="fill"
+                    class="example-full-width"
+                    id="program"
+                  >
+                    <mat-label>Program of Study</mat-label>
+                    <input
+                      matInput
+                      required
+                      ngModel name="program"
+                      formControlName="program"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.program.hasError('required') &&
+                        registerForm.controls.program.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.program.hasError('required')
+                      "
+                      >Enter your program of study</mat-error
+                    >
+                  </mat-form-field>
+                  <br>
                 </p>
-                <p>Web Designer</p>
+                
                 <i class="far fa-edit mb-5"></i>
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
-                  <h6>Information</h6>
+                  <h3>Information</h3>
                   <hr class="mt-0 mb-4" />
                       <h6></h6>
                       <!-- email -->
@@ -132,7 +161,7 @@
                         </mat-error>
                         <mat-icon id="hide" matSuffix>email</mat-icon>
                       </mat-form-field>
-                    
+                      <br>
                     
                       <h6></h6>
                       <!-- phone number -->
@@ -182,10 +211,10 @@
                         <mat-icon id="hide" matSuffix>phone</mat-icon>
                       
                       </mat-form-field>
-   
+                      <br>
                       <!-- language -->
                       <mat-form-field appearance="fill">
-                      <mat-label>language</mat-label>
+                      <mat-label>Language</mat-label>
                       <input
                         matInput
                         required
@@ -207,35 +236,41 @@
                         "
                       >Enter your language</mat-error>
                       </mat-form-field>
-                    
+                    <br>
                     
                       <h6></h6>
-                         <!-- mostView -->
+                         <!-- Personal Description -->
                   <mat-form-field appearance="fill">
-                    <mat-label>mostView</mat-label>
-                    <input
+                    <mat-label>Personal Description</mat-label>
+                    <textarea
                       matInput
                       required
-                      name="mostView"
-                      formControlName="mostView"
+                      name="personal_description"
+                      formControlName="personal_description"
                       [errorStateMatcher]="matcher"
-                    />
+                    ></textarea>
                     <mat-icon
                       matSuffix
                       *ngIf="
-                        registerForm.controls.mostView.hasError('required') &&
-                        registerForm.controls.mostView.touched
+                        registerForm.controls.personal_description.hasError('required') &&
+                        registerForm.controls.personal_descriptioned
                       "
                       >error_outline</mat-icon
                     >
                     <mat-error
                       *ngIf="
-                        registerForm.controls.mostView.hasError('required')
+                        registerForm.controls.personal_description.hasError('required')
                       "
-                      >Enter your mostView</mat-error
+                      >Enter your personal description</mat-error
                     >
                   </mat-form-field>
+                   <br>
                     
+                  <label>
+                    <p>Your CV</p>
+                    <input required name="cv" type="file" class="form-control" />
+                  </label>
+                  <br>
                   
                   <div class="d-flex justify-content-start">
                     <a href="#!"
@@ -245,10 +280,7 @@
                     <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
                   </div>
                 </div>
-                <label class="d-block mb-4">
-                  <span class="form-label d-block">Your CV</span>
-                  <input required name="cv" type="file" class="form-control" />
-                </label>
+               
                 <button mat-button type="submit">EDIT</button>
               </div>
             </div>
@@ -258,3 +290,4 @@
     </div>
   </section>
 </form>
+
