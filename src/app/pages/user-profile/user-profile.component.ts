@@ -60,7 +60,7 @@ export class UserProfileComponent {
     //example using a hard coded id (reading user profile)
     AOS.init();
     const dbRef = ref(this.database);
-    const starCountRef = child(dbRef, 'students/87');
+    const starCountRef = child(dbRef, 'students/21');
     onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
     const keys = Object.keys(data);
@@ -70,8 +70,6 @@ export class UserProfileComponent {
     console.log(values);
     this.defaultStudent = data;
     });
-
-    console.log("this isnfesubvorubs"+this.defaultStudent.FirstName)
   }
 
   onSubmit() {
@@ -87,7 +85,7 @@ export class UserProfileComponent {
      this.submitted = true;
 
     // this.readUser(90);
-    // this.onEdit(90, this.registerForm.value)
+    // this.onEditUser(42, this.registerForm.value)
     // this.onDeleteUser(90);
   }
 
@@ -95,7 +93,9 @@ export class UserProfileComponent {
     set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
       FirstName: value.first_name,
       LastName: value.last_name,
-      PhoneNumber: value.tel     
+      PhoneNumber: value.tel,
+      Email: value.email,
+      Language: value.language,
     });
 alert('user created!')
   }
@@ -123,9 +123,11 @@ readUser(value:any) {
 onEditUser(index:any, value:any) {
   const dbRef = ref(this.database);
   update(child(dbRef, `students/${index}`), {
-    firstname: value.first_name,
-    lastname: value.last_name,
-    telephone: value.tel    
+    FirstName: value.first_name,
+    LastName: value.last_name,
+    PhoneNumber: value.tel,
+    Email: value.email,
+    Language: value.language,  
   });
   alert(`user ${index} was updated!`)
 }
