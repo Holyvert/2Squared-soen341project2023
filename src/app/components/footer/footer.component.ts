@@ -42,12 +42,6 @@ export class FooterComponent {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-    //  password: ['', [Validators.required, Validators.minLength(6)]],
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
-      tel: ['', [Validators.required, Validators.pattern('[- +()0-9]{8,12}')]],
-      language: ['', [Validators.required]],
-      mostView: ['', [Validators.required]],
     });
   }
 

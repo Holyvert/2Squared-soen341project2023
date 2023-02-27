@@ -23,14 +23,14 @@
                             id="email"
                             >
                             <mat-label class="text-white">Enter your email</mat-label>
-                            <input 
+                            <input class="input"
                                 matInput
                                 placeholder="info@example.com"
                                 formControlName="email"
                                 name="email"
                                 [errorStateMatcher]="matcher"
                             />
-                            <mat-icon class="text-white"
+                            <mat-icon
                                 matSuffix
                                 *ngIf="
                                 (registerForm.controls.email.hasError('email') ||
