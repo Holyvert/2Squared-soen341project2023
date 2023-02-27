@@ -119,7 +119,7 @@ readUser(value:any) {
     console.error(error);
   });
 }
-
+//Once authentication is implemented, firstname, lastname and email should not be modifiable
 onEditUser(index:any, value:any) {
   const dbRef = ref(this.database);
   update(child(dbRef, `students/${index}`), {
