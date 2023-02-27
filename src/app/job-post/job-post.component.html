@@ -1,6 +1,5 @@
 <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
 
-
 <div class="cardz" >
   <div
     *ngFor="let item of jobsArray"
@@ -13,39 +12,36 @@
       href=""
       *ngIf="
         searchText === '' ||
-        item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.img.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.txt.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.nature.toLowerCase().includes(searchText.toLowerCase())
+        item.Company.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.JobTitle.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.JobLocation.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Description.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Duration.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Image.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.JobLocationType.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Salary.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Supervisor.toLowerCase().includes(searchText.toLowerCase())
       "
       @fadeAnimation
    
     >
       <div class="card">
-        <img src="{{ item.img }}" alt="" class="cardimg" />
+        <img src="{{item.Image}}" alt="This shit doesnt work" class="cardimg" />
         <div class="card-content" value="">
           <div class="top-card">
-            <h3>{{ item.name }}</h3>
-            <P>{{ item.txt }}</P>
+            <h3>{{ item.Company }}</h3>
+            <P>{{ item.JobTitle }}</P>
+            <h4>{{item.JobLocation}}</h4>
           </div>
 
           <div class="bottom-card">
-            <mat-icon>{{ item.maticon }}</mat-icon>
-            <p class="watch">{{ item.nature }}</p>
+            <div *ngIf="item.JobLocationType=='Hybrid'"><mat-icon> transfer_within_a_station</mat-icon></div>
+            <div *ngIf="item.JobLocationType=='Remote'"><mat-icon>wifi</mat-icon></div>
+            <div *ngIf="item.JobLocationType=='On-site'"><mat-icon>business</mat-icon></div>
+            <p class="watch">{{ item.JobLocationType }}</p>
           </div>
         </div>
       </div>
     </a>
   </div>
 </div>
-
-
-<!-- <div class="col-md-4 mb-5">
-    <div class="card h-100">
-        <div class="card-body">
-            <h2 class="card-title">{{this.jobTitle}}</h2>
-            <p class="card-text">{{this.jobDescription}}</p>
-        </div>
-        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
-    </div>
-</div> -->
