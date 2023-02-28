@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,6 +61,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
+    MatCardModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
