@@ -37,7 +37,8 @@ export class UserProfileComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
-
+  canEdit: Boolean = false;
+  
   constructor(
     public database: Database,
     private formBuilder: FormBuilder,
@@ -83,6 +84,8 @@ export class UserProfileComponent {
       this.sendNotification('make sure to answer all required fields');
       return;
     }
+    this.EnableForm();
+    
     // send "this.registerForm.value.CV" to firebase storage
     // get download url for cv BEFORE sending the rest of the form to firebase database
     // send download link with rest of registerForm.value to firebase database
@@ -150,5 +153,8 @@ onDeleteUser(index:any) {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+  EnableForm(){
+    this.canEdit =!this.canEdit;
   }
 }
