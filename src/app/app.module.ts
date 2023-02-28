@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {AngularFireModule} from '@angular/fire/compat';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +35,9 @@ import { JobPostComponent } from './job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import {provideDatabase,getDatabase} from '@angular/fire/database'
+import {provideDatabase,getDatabase} from '@angular/fire/database';
+import {provideFirestore,getFirestore} from '@angular/fire/firestore';
+import {provideStorage,getStorage} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import {provideDatabase,getDatabase} from '@angular/fire/database'
     ReactiveFormsModule,
     MatSnackBarModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
-    provideDatabase(()=>getDatabase())
+    provideDatabase(()=>getDatabase()),
+    provideFirestore(()=>getFirestore()),
+    provideStorage(()=>getStorage()),
+    MatProgressSpinnerModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],
