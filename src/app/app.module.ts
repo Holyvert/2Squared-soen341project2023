@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {AngularFireModule} from '@angular/fire/compat';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,6 +71,7 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     provideDatabase(()=>getDatabase()),
     provideFirestore(()=>getFirestore()),
     provideStorage(()=>getStorage()),
+    MatProgressSpinnerModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],

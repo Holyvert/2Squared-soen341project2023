@@ -39,6 +39,7 @@ export class UserProfileComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
+  Uploading = false;
 
   public file: any = {};
 
@@ -89,12 +90,15 @@ export class UserProfileComponent {
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
+     
       return;
+       
     }
-
+    
+    this.Uploading = true;
     var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
-
+    this.Uploading = false;
     // this.registerUser(this.registerForm.value);
     //  this.submitted = true;
 
@@ -111,7 +115,7 @@ export class UserProfileComponent {
       Email: value.email,
       Language: value.language,
     });
-alert('user created!')
+this.sendNotification('user created!');
   }
 
   grabUser(value:any){
@@ -144,13 +148,13 @@ onEditUser(index:any, value:any, myDownloadLink: string) {
     Language: value.language, 
     CV: myDownloadLink, 
   });
-  alert(`user ${index} was updated!`)
+  this.sendNotification(`user ${index} was updated!`);
 }
 
 onDeleteUser(index:any) {
   const dbRef = ref(this.database);  
   remove(child(dbRef, `students/${index}`));
-  alert(`user ${index} was deleted!`)
+  this.sendNotification(`user ${index} was deleted!`);
 }
 
   sendNotification(text: string) {
