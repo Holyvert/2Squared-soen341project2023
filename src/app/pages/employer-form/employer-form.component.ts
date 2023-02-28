@@ -22,6 +22,18 @@ export class EmployerFormComponent {
       salary: ['', [Validators.required]],
       duration: ['', [Validators.required]],
       job_description: ['', [Validators.required]],
+      job_requirements: ['', [Validators.required]],
+      deadline: ['', [Validators.required]],
+      docs_required: ['', [Validators.required]],
+      application_method: ['', [Validators.required]],
+      organization: ['', [Validators.required]],
+      jc_first_name: ['', [Validators.required]],
+      jc_last_name: ['', [Validators.required]],
+      website: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      province: ['', [Validators.required]],
+      postal_code: ['', [Validators.required]],
     });
   }
 
