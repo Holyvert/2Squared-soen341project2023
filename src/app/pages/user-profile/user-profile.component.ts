@@ -84,7 +84,7 @@ export class UserProfileComponent {
     this.file = event.target.files[0];
   }
 
-  onSubmit() {
+  async onSubmit() {
 
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
@@ -92,7 +92,7 @@ export class UserProfileComponent {
       return;
     }
 
-    var myDownloadLink = this.storageService.uploadToFirestore(this.file, 'CVs/', this.storage);
+    var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
     // (async() => {
     //   console.log("waiting for variable");
     //   while(!myDownloadLink) // define the condition as you like
