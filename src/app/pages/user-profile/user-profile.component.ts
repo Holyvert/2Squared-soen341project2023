@@ -93,13 +93,6 @@ export class UserProfileComponent {
     }
 
     var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
-    // (async() => {
-    //   console.log("waiting for variable");
-    //   while(!myDownloadLink) // define the condition as you like
-    //     await new Promise(resolve => setTimeout(resolve, 1000));
-    // console.log("variable is defined");
-    // console.log(myDownloadLink)
-    // })();
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
 
     // this.registerUser(this.registerForm.value);
