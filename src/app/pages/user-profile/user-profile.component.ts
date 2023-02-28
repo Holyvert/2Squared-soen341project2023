@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import AOS from 'aos';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import {Database,set,ref,update, onValue} from '@angular/fire/database'
+import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import { StudentProfile } from 'src/app/models/user.models';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -42,6 +44,8 @@ export class UserProfileComponent {
     private snackBar: MatSnackBar
   ) {}
 
+  defaultStudent = {} as StudentProfile;
+
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,6 +56,20 @@ export class UserProfileComponent {
       language: ['', [Validators.required]],
       personal_description: ['', [Validators.required]],
       program: ['', [Validators.required]],
+    });
+
+    //example using a hard coded id (reading user profile)
+    AOS.init();
+    const dbRef = ref(this.database);
+    const starCountRef = child(dbRef, 'students/21');
+    onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    console.log(data);
+    console.log(keys);
+    console.log(values);
+    this.defaultStudent = data;
     });
   }
 
@@ -66,13 +84,19 @@ export class UserProfileComponent {
     }
     this.registerUser(this.registerForm.value);
      this.submitted = true;
+
+    // this.readUser(90);
+    // this.onEditUser(42, this.registerForm.value)
+    // this.onDeleteUser(90);
   }
 
   registerUser(value:any){
     set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
-      firstname: value.first_name,
-      lastname: value.last_name,
-      email: value.tel     
+      FirstName: value.first_name,
+      LastName: value.last_name,
+      PhoneNumber: value.tel,
+      Email: value.email,
+      Language: value.language,
     });
 alert('user created!')
   }
@@ -84,6 +108,36 @@ alert('user created!')
   });
 }
 
+readUser(value:any) {
+  const dbRef = ref(this.database);
+  get(child(dbRef, `students/${value}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+//Once authentication is implemented, firstname, lastname and email should not be modifiable
+onEditUser(index:any, value:any) {
+  const dbRef = ref(this.database);
+  update(child(dbRef, `students/${index}`), {
+    FirstName: value.first_name,
+    LastName: value.last_name,
+    PhoneNumber: value.tel,
+    Email: value.email,
+    Language: value.language,  
+  });
+  alert(`user ${index} was updated!`)
+}
+
+onDeleteUser(index:any) {
+  const dbRef = ref(this.database);  
+  remove(child(dbRef, `students/${index}`));
+  alert(`user ${index} was deleted!`)
+}
 
   sendNotification(text: string) {
     this.snackBar.open(text, '', {

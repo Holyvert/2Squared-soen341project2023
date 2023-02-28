@@ -17,3 +17,23 @@ export interface Employer{
   language: string;
   password: string;
 }
+
+export interface JobPost{
+  Company: string;
+  Description: string;
+  Duration: string;
+  Image: string;
+  JobLocation: string;
+  JobLocationType: string;
+  JobTitle: string;
+  Salary: string;
+  Supervisor: string;
+}
+
+export interface StudentProfile{
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
+  Email: string;
+  Language: string;
+}
