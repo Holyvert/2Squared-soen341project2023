@@ -2,16 +2,20 @@
   <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-6 mb-4 mb-lg-0">
-          <div class="card mb-3" style="border-radius: 0.5rem">
+        <div class="col col-lg-9 mb-4 mb-lg-0">
+          <div class="card mb-3 justify-content-center"
+               style="border-radius: 0.5rem; 
+               "
+              
+          >
             <div class="row g-0">
               <div
                 class="col-md-4 gradient-custom text-center text-white"
                 style="
                   border-top-left-radius: 0.5rem;
                   border-bottom-left-radius: 0.5rem;
+                  background-color: #475db8
                 "
-                style="background-color: #475db8"
               >
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
@@ -19,9 +23,9 @@
                   class="img-fluid my-5"
                   style="width: 80px"
                 />
-                <h5>
+                <p>
                   <!-- first_name -->
-                  <mat-form-field appearance="outline">
+                  <mat-form-field appearance="fill">
                     <mat-label>{{defaultStudent.FirstName}}</mat-label>
                     <input
                       matInput
@@ -36,18 +40,19 @@
                         registerForm.controls.first_name.hasError('required') &&
                         registerForm.controls.first_name.touched
                       "
-                      >error_outline</mat-icon
-                    >
+                      >error_outline
+                    </mat-icon>
                     <mat-error
                       *ngIf="
                         registerForm.controls.first_name.hasError('required')
                       "
-                      >Enter your first name</mat-error
-                    >
+                      >Enter your first name
+                    </mat-error>
                   </mat-form-field>
+                  <br>
                   <!-- last name -->
                   <mat-form-field
-                    appearance="outline"
+                    appearance="fill"
                     class="example-full-width"
                     id="last_name"
                   >
@@ -74,20 +79,49 @@
                       >Enter your last name</mat-error
                     >
                   </mat-form-field>
-                </h5>
-                <p>Web Designer</p>
+                  <br>
+                  <!--Program-->
+                  <mat-form-field
+                    appearance="fill"
+                    class="example-full-width"
+                    id="program"
+                  >
+                    <mat-label>Program of Study</mat-label>
+                    <input
+                      matInput
+                      required
+                      ngModel name="program"
+                      formControlName="program"
+                      [errorStateMatcher]="matcher"
+                    />
+                    <mat-icon
+                      matSuffix
+                      *ngIf="
+                        registerForm.controls.program.hasError('required') &&
+                        registerForm.controls.program.touched
+                      "
+                      >error_outline</mat-icon
+                    >
+                    <mat-error
+                      *ngIf="
+                        registerForm.controls.program.hasError('required')
+                      "
+                      >Enter your program of study</mat-error
+                    >
+                  </mat-form-field>
+                  <br>
+                </p>
+                
                 <i class="far fa-edit mb-5"></i>
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
-                  <h6>Information</h6>
+                  <h3>Information</h3>
                   <hr class="mt-0 mb-4" />
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
                       <h6></h6>
                       <!-- email -->
                       <mat-form-field
-                        appearance="outline"
+                        appearance="fill"
                         class="example-full-width"
                         id="email"
                       >
@@ -125,13 +159,14 @@
                         >
                           Email is <strong>required</strong>
                         </mat-error>
+                        <mat-icon id="hide" matSuffix>email</mat-icon>
                       </mat-form-field>
-                    </div>
-                    <div class="col-6 mb-3">
+                      <br>
+                    
                       <h6></h6>
                       <!-- phone number -->
                       <mat-form-field
-                        appearance="outline"
+                        appearance="fill"
                         id="spacetop"
                         class="example-full-width"
                         id="tel"
@@ -175,69 +210,67 @@
                         <mat-icon id="hide" matSuffix>phone</mat-icon>
                       
                       </mat-form-field>
-
-                    </div>
-                  </div>
-                  <h6>Projects</h6>
-                  <hr class="mt-0 mb-4" />
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Recent</h6>
-                         <!-- language -->
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{defaultStudent.Language}}</mat-label>
-                    <input
-                      matInput
-                      required
-                      name="language"
-                      formControlName="language"
-                      [errorStateMatcher]="matcher"
-                    />
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        registerForm.controls.language.hasError('required') &&
-                        registerForm.controls.language.touched
-                      "
-                      >error_outline</mat-icon
-                    >
-                    <mat-error
-                      *ngIf="
+                      <br>
+                      <!-- language -->
+                      <mat-form-field appearance="fill">
+                      <mat-label>{{defaultStudent.Language}}</mat-label>
+                      <input
+                        matInput
+                        required
+                        name="language"
+                        formControlName="language"
+                        [errorStateMatcher]="matcher"
+                      />
+                      <mat-icon
+                        matSuffix
+                        *ngIf="
+                          registerForm.controls.language.hasError('required') &&
+                          registerForm.controls.language.touched
+                        "
+                        >error_outline</mat-icon
+                      >
+                      <mat-error
+                        *ngIf="
                         registerForm.controls.language.hasError('required')
-                      "
-                      >Enter your language</mat-error
-                    >
-                  </mat-form-field>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>Most Viewed</h6>
-                         <!-- mostView -->
-                  <mat-form-field appearance="outline">
-                    <mat-label>mostView</mat-label>
-                    <input
+                        "
+                      >Enter your language</mat-error>
+                      </mat-form-field>
+                    <br>
+                    
+                      <h6></h6>
+                         <!-- Personal Description -->
+                  <mat-form-field appearance="fill">
+                    <mat-label>Personal Description</mat-label>
+                    <textarea
                       matInput
                       required
-                      name="mostView"
-                      formControlName="mostView"
+                      name="personal_description"
+                      formControlName="personal_description"
                       [errorStateMatcher]="matcher"
-                    />
+                    ></textarea>
                     <mat-icon
                       matSuffix
                       *ngIf="
-                        registerForm.controls.mostView.hasError('required') &&
-                        registerForm.controls.mostView.touched
+                        registerForm.controls.personal_description.hasError('required') &&
+                        registerForm.controls.personal_descriptioned
                       "
                       >error_outline</mat-icon
                     >
                     <mat-error
                       *ngIf="
-                        registerForm.controls.mostView.hasError('required')
+                        registerForm.controls.personal_description.hasError('required')
                       "
-                      >Enter your mostView</mat-error
+                      >Enter your personal description</mat-error
                     >
                   </mat-form-field>
-                    </div>
-                  </div>
+                   <br>
+                    
+                  <label>
+                    <p>Your CV</p>
+                    <input required name="cv" type="file" class="form-control" />
+                  </label>
+                  <br>
+                  
                   <div class="d-flex justify-content-start">
                     <a href="#!"
                       ><i class="fab fa-facebook-f fa-lg me-3"></i
@@ -246,8 +279,8 @@
                     <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
                   </div>
                 </div>
-
-                <button mat-button type="submit" >EDIT</button>
+               
+                <button mat-button type="submit">EDIT</button>
               </div>
             </div>
           </div>
@@ -256,3 +289,4 @@
     </div>
   </section>
 </form>
+

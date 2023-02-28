@@ -54,7 +54,8 @@ export class UserProfileComponent {
       last_name: ['', [Validators.required]],
       tel: ['', [Validators.required, Validators.pattern('[- +()0-9]{8,12}')]],
       language: ['', [Validators.required]],
-      mostView: ['', [Validators.required]],
+      personal_description: ['', [Validators.required]],
+      program: ['', [Validators.required]],
     });
 
     //example using a hard coded id (reading user profile)
