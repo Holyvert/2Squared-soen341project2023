@@ -34,7 +34,9 @@ import { JobPostComponent } from './job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import {provideDatabase,getDatabase} from '@angular/fire/database'
+import {provideDatabase,getDatabase} from '@angular/fire/database';
+import {provideFirestore,getFirestore} from '@angular/fire/firestore';
+import {provideStorage,getStorage} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import {provideDatabase,getDatabase} from '@angular/fire/database'
     ReactiveFormsModule,
     MatSnackBarModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
-    provideDatabase(()=>getDatabase())
+    provideDatabase(()=>getDatabase()),
+    provideFirestore(()=>getFirestore()),
+    provideStorage(()=>getStorage()),
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
   bootstrap: [AppComponent],

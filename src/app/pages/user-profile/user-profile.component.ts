@@ -8,7 +8,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { StudentProfile } from 'src/app/models/user.models';
+import { StorageService } from 'src/app/services/storage.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,8 +40,12 @@ export class UserProfileComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
 
+  public file: any = {};
+
   constructor(
     public database: Database,
+    public storage: Storage,
+    public storageService: StorageService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar
   ) {}
@@ -56,14 +62,14 @@ export class UserProfileComponent {
       language: ['', [Validators.required]],
       personal_description: ['', [Validators.required]],
       program: ['', [Validators.required]],
-      CV: ['', [Validators.required]],
+      CV: [null, [Validators.required]],
     });
 
     //example using a hard coded id (reading user profile)
     AOS.init();
     const dbRef = ref(this.database);
-    const starCountRef = child(dbRef, 'students/21');
-    onValue(starCountRef, (snapshot) => {
+    const studentRef = child(dbRef, 'students/21');
+    onValue(studentRef, (snapshot) => {
     const data = snapshot.val();
     const keys = Object.keys(data);
     const values = Object.values(data);
@@ -74,18 +80,27 @@ export class UserProfileComponent {
     });
   }
 
+  handleFileInput(event: any){
+    this.file = event.target.files[0];
+  }
+
   onSubmit() {
-   
-    console.log(this.registerForm.value);
 
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
       return;
     }
-    // send "this.registerForm.value.CV" to firebase storage
-    // get download url for cv BEFORE sending the rest of the form to firebase database
-    // send download link with rest of registerForm.value to firebase database
+
+    var myDownloadLink = this.storageService.uploadToFirestore(this.file, 'CVs/', this.storage);
+    // (async() => {
+    //   console.log("waiting for variable");
+    //   while(!myDownloadLink) // define the condition as you like
+    //     await new Promise(resolve => setTimeout(resolve, 1000));
+    // console.log("variable is defined");
+    // console.log(myDownloadLink)
+    // })();
+    this.onEditUser(35, this.registerForm.value, myDownloadLink);
 
     // this.registerUser(this.registerForm.value);
     //  this.submitted = true;
@@ -107,8 +122,8 @@ alert('user created!')
   }
 
   grabUser(value:any){
-    const starCountRef = ref(this.database, 'students/' );
-  onValue(starCountRef, (snapshot) => {
+    const studentRef = ref(this.database, 'students/' );
+  onValue(studentRef, (snapshot) => {
   const data = snapshot.val();
   });
 }
@@ -126,14 +141,15 @@ readUser(value:any) {
   });
 }
 //Once authentication is implemented, firstname, lastname and email should not be modifiable
-onEditUser(index:any, value:any) {
+onEditUser(index:any, value:any, myDownloadLink: string) {
   const dbRef = ref(this.database);
   update(child(dbRef, `students/${index}`), {
     FirstName: value.first_name,
     LastName: value.last_name,
     PhoneNumber: value.tel,
     Email: value.email,
-    Language: value.language,  
+    Language: value.language, 
+    CV: myDownloadLink, 
   });
   alert(`user ${index} was updated!`)
 }
