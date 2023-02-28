@@ -56,6 +56,7 @@ export class UserProfileComponent {
       language: ['', [Validators.required]],
       personal_description: ['', [Validators.required]],
       program: ['', [Validators.required]],
+      CV: ['', [Validators.required]],
     });
 
     //example using a hard coded id (reading user profile)
@@ -76,14 +77,18 @@ export class UserProfileComponent {
   onSubmit() {
    
     console.log(this.registerForm.value);
-   
+
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
       return;
     }
-    this.registerUser(this.registerForm.value);
-     this.submitted = true;
+    // send "this.registerForm.value.CV" to firebase storage
+    // get download url for cv BEFORE sending the rest of the form to firebase database
+    // send download link with rest of registerForm.value to firebase database
+
+    // this.registerUser(this.registerForm.value);
+    //  this.submitted = true;
 
     // this.readUser(90);
     // this.onEditUser(42, this.registerForm.value)

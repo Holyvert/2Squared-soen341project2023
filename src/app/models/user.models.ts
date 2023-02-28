@@ -36,4 +36,5 @@ export interface StudentProfile{
   PhoneNumber: string;
   Email: string;
   Language: string;
+  CV: string;
 }
