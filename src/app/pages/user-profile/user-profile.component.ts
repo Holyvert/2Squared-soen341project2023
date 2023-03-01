@@ -106,24 +106,27 @@ export class UserProfileComponent {
       this.storage
     );
     // Change user id when authentication is implemented
-    this.onEditUser(35, this.registerForm.value, myDownloadLink);
+    // this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
 
-    // this.registerUser(this.registerForm.value);
+    // this.registerUser(this.registerForm.value, myDownloadLink);
     //  this.submitted = true;
 
     // this.readUser(90);
     // this.onEditUser(42, this.registerForm.value)
-    // this.onDeleteUser(90);
+    this.onDeleteUser(42);
   }
 
-  registerUser(value: any) {
+  registerUser(value: any, myDownloadLink: string) {
     set(ref(this.database, 'students/' + Math.floor(Math.random() * 100)), {
       FirstName: value.first_name,
       LastName: value.last_name,
       PhoneNumber: value.tel,
       Email: value.email,
       Language: value.language,
+      Program: value.program,
+      Description: value.personal_description,
+      CV: myDownloadLink,
     });
     this.sendNotification('user created!');
   }
