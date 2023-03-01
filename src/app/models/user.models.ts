@@ -30,11 +30,13 @@ export interface JobPost{
   Supervisor: string;
 }
 
-export interface StudentProfile{
+export interface StudentProfile {
   FirstName: string;
   LastName: string;
   PhoneNumber: string;
   Email: string;
+  Program: string;
+  Description: string;
   Language: string;
   CV: string;
 }

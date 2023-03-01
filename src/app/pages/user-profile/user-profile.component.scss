@@ -1,5 +1,23 @@
 .information{
     font-size: 17px;
+  
+}
+
+.information a{
+  text-decoration: none;
+  color: black;
+  /* optional animation */
+  
+}
+.information a span{
+  transition: all 0.2s ease-in-out , opacity 0.4s linear ;
+}
+.information a span:hover{
+ color: blue !important;
+ 
+}
+.information fa-icon{
+  color: red;
 }
 .heading{
     font-size: 13px;

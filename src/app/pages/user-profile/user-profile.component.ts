@@ -11,6 +11,7 @@ import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fir
 import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { StudentProfile } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
+import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -35,17 +36,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class UserProfileComponent {
   registerForm!: FormGroup;
+  faFilePdf = faFilePdf;
+  faFilePowerpoint = faFilePowerpoint;
+  faDownload = faDownload;
   matcher = new MyErrorStateMatcher();
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
   canEdit: Boolean = false;
-  
-
   Uploading = false;
-
   public file: any = {};
-
+  defaultStudent = {} as StudentProfile;
 
   constructor(
     public database: Database,
@@ -55,12 +56,23 @@ export class UserProfileComponent {
     private snackBar: MatSnackBar
   ) {}
 
-  defaultStudent = {} as StudentProfile;
-
   ngOnInit(): void {
+    //example using a hard coded id (reading user profile)
+    const dbRef = ref(this.database);
+    const studentRef = child(dbRef, 'students/35');
+    onValue(studentRef, (snapshot) => {
+      const data = snapshot.val();
+      const keys = Object.keys(data);
+      const values = Object.values(data);
+      console.log(data);
+      console.log(keys);
+      console.log(values);
+      this.defaultStudent = data;
+    });
+    
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-    //  password: ['', [Validators.required, Validators.minLength(6)]],
+      //  password: ['', [Validators.required, Validators.minLength(6)]],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       tel: ['', [Validators.required, Validators.pattern('[- +()0-9]{8,12}')]],
@@ -70,39 +82,29 @@ export class UserProfileComponent {
       CV: [null, [Validators.required]],
     });
 
-    //example using a hard coded id (reading user profile)
     AOS.init();
-    const dbRef = ref(this.database);
-    const studentRef = child(dbRef, 'students/21');
-    onValue(studentRef, (snapshot) => {
-    const data = snapshot.val();
-    const keys = Object.keys(data);
-    const values = Object.values(data);
-    console.log(data);
-    console.log(keys);
-    console.log(values);
-    this.defaultStudent = data;
-    });
   }
 
-  handleFileInput(event: any){
+  handleFileInput(event: any) {
     this.file = event.target.files[0];
   }
 
   async onSubmit() {
-
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
-     
+
       return;
-       
     }
 
     this.EnableForm();
-    
+
     this.Uploading = true;
-    var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
+    var myDownloadLink = await this.storageService.uploadToFirestore(
+      this.file,
+      'curriculum_vitae/',
+      this.storage
+    );
     // Change user id when authentication is implemented
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
@@ -115,55 +117,59 @@ export class UserProfileComponent {
     // this.onDeleteUser(90);
   }
 
-  registerUser(value:any){
-    set(ref(this.database, 'students/' + Math.floor(Math.random()*100)), {
+  registerUser(value: any) {
+    set(ref(this.database, 'students/' + Math.floor(Math.random() * 100)), {
       FirstName: value.first_name,
       LastName: value.last_name,
       PhoneNumber: value.tel,
       Email: value.email,
       Language: value.language,
     });
-this.sendNotification('user created!');
+    this.sendNotification('user created!');
   }
 
-  grabUser(value:any){
-    const studentRef = ref(this.database, 'students/' );
-  onValue(studentRef, (snapshot) => {
-  const data = snapshot.val();
-  });
-}
+  grabUser(value: any) {
+    const studentRef = ref(this.database, 'students/');
+    onValue(studentRef, (snapshot) => {
+      const data = snapshot.val();
+    });
+  }
 
-readUser(value:any) {
-  const dbRef = ref(this.database);
-  get(child(dbRef, `students/${value}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-}
-//Once authentication is implemented, firstname, lastname and email should not be modifiable
-onEditUser(index:any, value:any, myDownloadLink: string) {
-  const dbRef = ref(this.database);
-  update(child(dbRef, `students/${index}`), {
-    FirstName: value.first_name,
-    LastName: value.last_name,
-    PhoneNumber: value.tel,
-    Email: value.email,
-    Language: value.language, 
-    CV: myDownloadLink, 
-  });
-  this.sendNotification(`user ${index} was updated!`);
-}
+  readUser(value: any) {
+    const dbRef = ref(this.database);
+    get(child(dbRef, `students/${value}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  //Once authentication is implemented, firstname, lastname and email should not be modifiable
+  onEditUser(index: any, value: any, myDownloadLink: string) {
+    const dbRef = ref(this.database);
+    update(child(dbRef, `students/${index}`), {
+      FirstName: value.first_name,
+      LastName: value.last_name,
+      PhoneNumber: value.tel,
+      Email: value.email,
+      Language: value.language,
+      Program: value.program,
+      Description: value.personal_description,
+      CV: myDownloadLink,
+    });
+    this.sendNotification(`user ${index} was updated!`);
+  }
 
-onDeleteUser(index:any) {
-  const dbRef = ref(this.database);  
-  remove(child(dbRef, `students/${index}`));
-  this.sendNotification(`user ${index} was deleted!`);
-}
+  onDeleteUser(index: any) {
+    const dbRef = ref(this.database);
+    remove(child(dbRef, `students/${index}`));
+    this.sendNotification(`user ${index} was deleted!`);
+  }
 
   sendNotification(text: string) {
     this.snackBar.open(text, '', {
@@ -172,7 +178,7 @@ onDeleteUser(index:any) {
       verticalPosition: this.verticalPosition,
     });
   }
-  EnableForm(){
-    this.canEdit =!this.canEdit;
+  EnableForm() {
+    this.canEdit = !this.canEdit;
   }
 }
