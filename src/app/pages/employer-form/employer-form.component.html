@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
                       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Title</mat-label>
                         <input 
                           matInput
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Location</mat-label>
                         <input 
                           matInput
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Location Type</mat-label>
                         <input 
                           matInput
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Salary</mat-label>
                         <input 
                           matInput
@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Duration</mat-label>
                         <input 
                           matInput
@@ -187,7 +187,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Supervisor</mat-label>
                         <input 
                           matInput
@@ -220,14 +220,14 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Description</mat-label>
-                        <input 
+                        <textarea
                           matInput
                           required
                           ngModel name="job_description"
                           formControlName="job_description"
-                        >
+                        ></textarea>
                         <mat-icon
                           matSuffix
                           *ngIf="
@@ -252,14 +252,14 @@
       
                     </div>
                     <div class="col-md-9 pe-5">
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Requirements</mat-label>
-                        <input 
+                        <textarea 
                           matInput
                           required
                           ngModel name="job_requirements"
                           formControlName="job_requirements"
-                        >
+                        ></textarea>
                         <mat-icon
                           matSuffix
                           *ngIf="
@@ -288,7 +288,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Deadline</mat-label>
                         <input 
                           matInput
@@ -321,7 +321,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Documents Required</mat-label>
                         <input 
                           matInput
@@ -354,7 +354,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Application Method</mat-label>
                         <input 
                           matInput
@@ -391,7 +391,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Organization</mat-label>
                         <input 
                           matInput
@@ -425,7 +425,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
                       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Contact First Name</mat-label>
                         <input 
                           matInput
@@ -458,7 +458,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Contact Last Name</mat-label>
                         <input 
                           matInput
@@ -490,7 +490,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Website</mat-label>
                         <input 
                           matInput
@@ -523,7 +523,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>City</mat-label>
                         <input 
                           matInput
@@ -557,7 +557,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Province</mat-label>
                         <input 
                           matInput
@@ -590,7 +590,7 @@
                     </div>
                     <div class="col-md-9 pe-5">
       
-                      <mat-form-field appearance="outline">
+                      <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Postal Code</mat-label>
                         <input 
                           matInput
@@ -616,25 +616,24 @@
                   <!--Accepting Picture from User-->
                   <hr class="mt-0 mb-4" />
                   <div class="row align-items-center pt-3 pb-3">
-                    <div class="col-md-3 ps-5">
+                    <div class="col-md-12 ps-5">
       
                       <h3 class="mb-3">Company Picture: </h3>
                       <p>This picture will appear on the page of your company's job posting when a student wants to learn more about the job opportunity!</p>
       
                     </div>
-                    <div class="col-md-9 pe-5">
-      
+                    <div class="col-md-12 ps-5">
                       <label class="image-upload-container btn btn-bwm">
                         <input #imageInput
                                 type="file"
                                 accept="image/*"
                         >
                         </label>
-      
                     </div>
                   </div> 
                   <br><br>
-                  <button type="button" class="btn btn-primary" style="align-content: center;">Submit</button>
+                  <div class="col-md-12 text-center"><button type="button" class="btn btn-primary">Submit</button></div>
+                  
 
                 </div>
             </div>
@@ -643,6 +642,4 @@
       </div>
     </div>
   </section>
-
-  
 </form>
