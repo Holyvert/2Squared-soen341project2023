@@ -101,14 +101,9 @@ export class UserProfileComponent {
 
     this.EnableForm();
     
-    // send "this.registerForm.value.CV" to firebase storage
-    // get download url for cv BEFORE sending the rest of the form to firebase database
-    // send download link with rest of registerForm.value to firebase database
-
-
-    
     this.Uploading = true;
     var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
+    // Change user id when authentication is implemented
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
 
