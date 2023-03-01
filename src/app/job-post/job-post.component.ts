@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
+import { JobPost } from '../models/user.models';
+import { Database, set, ref, update, onValue, getDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-job-post',
@@ -7,88 +10,40 @@ import AOS from 'aos';
   styleUrls: ['./job-post.component.scss'],
 })
 export class JobPostComponent {
+
+  constructor(public database: Database) {
+  }
+
   jobTitle: String = 'Software Developer';
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
-  jobsArray = [
-    {
-      img: 'https://source.unsplash.com/UcYoEO5nSNE',
-      name: 'PSYCHOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'video_library',
-      nature: 'WATCH',
-      category: '',
-      keywords: '',
-    },
-    {
-      img: 'https://source.unsplash.com/go8WfzJ3KlE',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'reorder',
-      nature: 'READ',
-      category: '',
-      keywords: '',
-    },
 
-    {
-      img: 'https://source.unsplash.com/7JYVKRo7i5Q',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'reorder',
-      nature: 'READ',
-      category: '',
-      keywords: '',
-    },
-    {
-      img: 'https://source.unsplash.com/zi7cG2d6Mrk',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'video_library',
-      nature: 'WATCH',
-      category: '',
-      keywords: '',
-    },
-
-    {
-      img: 'https://source.unsplash.com/uVPDAwgqLXY',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'video_library',
-      nature: 'WATCH',
-      category: '',
-      keywords: '',
-    },
-
-    {
-      img: 'https://source.unsplash.com/GibvqWh_OcE',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'video_library',
-      nature: 'WATCH',
-      category: '',
-      keywords: '',
-    },
-
-    {
-      img: 'https://source.unsplash.com/dq0x8AvNKv8',
-      name: 'CARDIOLOGY',
-      txt: 'Getting to the heart of the matter: a tailored approah to AF to trt rt  trhtrt rthrt rtr trtrt rtr tr trtrtr trt rt gdfg fdh dsg fdg fdsg fds gfd gfdg fdsg fd gfds ',
-      maticon: 'video_library',
-      nature: 'WATCH',
-      category: '',
-      keywords: '',
-    },
-  ];
+  jobsArray = [{} as JobPost];
 
   ngOnInit(): void {
     AOS.init();
+    const starCountRef = ref(this.database, 'job-postings/' );
+    onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    // const keys = Object.keys(data);
+    // const values = Object.values(data);
+    // console.log(data);
+    // console.log(keys);
+    // console.log(values);
+    this.jobsArray = ((Object as any).values(data));
+    });
   }
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
     console.log('a letter', this.searchText);
   }
-  // constructor(jobTitle: String, jobDescription: String) {
-  //   this.jobTitle = jobTitle;
-  //   this.jobDescription = jobDescription;
-  // }
+
+  createJobPosting() {
+    set(ref(this.database, 'job-postings/' + Math.floor(Math.random()*100)), {
+      Company: "VuWall",
+      Description: "The knowledge of typescript, node.js and angular are very ...",
+      JobTitle: "Software Developer"
+    });
+alert('Job Post created!')
+  }
 }
