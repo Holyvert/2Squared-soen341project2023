@@ -38,6 +38,7 @@ import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import {provideDatabase,getDatabase} from '@angular/fire/database';
+import { EmployerFormComponent } from './pages/employer-form/employer-form.component';
 import { IndividualJobPostingComponent } from './pages/individual-job-posting/individual-job-posting.component'
 import { RouterModule } from '@angular/router';
 import {provideFirestore,getFirestore} from '@angular/fire/firestore';
@@ -55,6 +56,7 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     UserProfileComponent,
     JobPostComponent,
     SearchComponent,
+    EmployerFormComponent,
     IndividualJobPostingComponent,
   ],
   imports: [
