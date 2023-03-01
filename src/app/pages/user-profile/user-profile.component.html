@@ -270,7 +270,8 @@
                     
                   <label>
                     <p>Your CV</p>
-                    <input required name="CV" type="file" class="form-control" formControlName="CV"/>
+                    <input required name="CV" type="file" class="form-control" formControlName="CV" (change)="handleFileInput($event)"
+                    />
                   </label>
                   <br>
                   
@@ -409,4 +410,6 @@
     </div>
   </section>
 </form>
+<div class="loading-indicator" *ngIf="Uploading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
