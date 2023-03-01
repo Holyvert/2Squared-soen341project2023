@@ -39,9 +39,13 @@ export class UserProfileComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
+  canEdit: Boolean = false;
+  
+
   Uploading = false;
 
   public file: any = {};
+
 
   constructor(
     public database: Database,
@@ -94,11 +98,20 @@ export class UserProfileComponent {
       return;
        
     }
+
+    this.EnableForm();
+    
+    // send "this.registerForm.value.CV" to firebase storage
+    // get download url for cv BEFORE sending the rest of the form to firebase database
+    // send download link with rest of registerForm.value to firebase database
+
+
     
     this.Uploading = true;
     var myDownloadLink = await this.storageService.uploadToFirestore(this.file, 'curriculum_vitae/', this.storage);
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
+
     // this.registerUser(this.registerForm.value);
     //  this.submitted = true;
 
@@ -163,5 +176,8 @@ onDeleteUser(index:any) {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+  EnableForm(){
+    this.canEdit =!this.canEdit;
   }
 }
