@@ -12,8 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 import {AngularFireModule} from '@angular/fire/compat';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,8 +38,11 @@ import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import {provideDatabase,getDatabase} from '@angular/fire/database';
+import { IndividualJobPostingComponent } from './pages/individual-job-posting/individual-job-posting.component'
+import { RouterModule } from '@angular/router';
 import {provideFirestore,getFirestore} from '@angular/fire/firestore';
 import {provideStorage,getStorage} from '@angular/fire/storage';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +55,7 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     UserProfileComponent,
     JobPostComponent,
     SearchComponent,
+    IndividualJobPostingComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,11 +67,13 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
+    MatCardModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    RouterModule,
     MatSnackBarModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideDatabase(()=>getDatabase()),
