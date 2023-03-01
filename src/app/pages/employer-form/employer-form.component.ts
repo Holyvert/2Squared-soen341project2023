@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-employer-form',
   templateUrl: './employer-form.component.html',
@@ -14,6 +15,7 @@ import {
 export class EmployerFormComponent {
   employerForm!: FormGroup;
  
+  
 
   constructor(
     private form_builder: FormBuilder
@@ -26,6 +28,7 @@ export class EmployerFormComponent {
       job_location_type: ['', [Validators.required]],
       salary: ['', [Validators.required]],
       duration: ['', [Validators.required]],
+      supervisor: ['', [Validators.required]],
       job_description: ['', [Validators.required]],
       job_requirements: ['', [Validators.required]],
       deadline: ['', [Validators.required]],
@@ -51,6 +54,7 @@ export class EmployerFormComponent {
     }*/
   }
 
+  
 
 
 } //end of EmployerFormComponent

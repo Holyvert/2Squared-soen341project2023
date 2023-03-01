@@ -7,375 +7,634 @@
             <!--Image taken from Adobe Stock Images (royalty free)-->
             <img src="https://t4.ftcdn.net/jpg/04/03/02/41/240_F_403024148_sIJoD571eHza96q1VtfYO1J1yccC5prn.jpg"
               class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
-              alt="Sample photo">
-            <div class="card-body p-4 p-md-5">
-              <h2>Post a New Job Opening!</h2>
-  
+              alt="picture not available">
+            <div class="card-body p-4 p-md-5 justify-content-center align-items-center h-100">
+              <h2 class="text-center">Post a New Job Opening!</h2><br>
                 <div class="form-outline mb-4">
-                  <h3>Job Posting Information</h3>
+                  <h3 class="text-center">1. Job Posting Information</h3><br>
                   <!--Job Title-->
-                  <mat-form-field appearance="fill">
-                  <mat-label>Job Title</mat-label>
-                  <input 
-                    matInput
-                    required
-                    ngModel name="job_title"
-                    formControlName="job_title"
-                  >
-                  <mat-icon
-                    matSuffix
-                    *ngIf="
-                      employerForm.controls.job_title.hasError('required') &&
-                      employerForm.controls.job_title.touched"
-                      >error_outline</mat-icon>
-                  <mat-error
-                    *ngIf="employerForm.controls.job_title.hasError('required')"
-                      >Enter the job title</mat-error>
-                  </mat-form-field>
-                  <br>
-
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job title: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Title</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="job_title"
+                          formControlName="job_title"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.job_title.hasError('required') &&
+                            employerForm.controls.job_title.touched"
+                            >error_outline</mat-icon>
+                        <mat-error
+                          *ngIf="employerForm.controls.job_title.hasError('required')"
+                            >Enter the job title</mat-error>
+                        </mat-form-field>
+                        <br>
+      
+                    </div>
+                  </div>
                    <!--Job Location-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Location</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="job_location"
-                      formControlName="job_location"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.job_location.hasError('required') &&
-                        employerForm.controls.job_location.touched"
-                        >error_outline</mat-icon>
-                    <mat-error
-                      *ngIf="employerForm.controls.job_location.hasError('required')"
-                      >Enter the job location</mat-error>
-                  </mat-form-field>
-                  <br>
+                   <hr class="mt-0 mb-4" />
+                   <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job location: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Location</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="job_location"
+                          formControlName="job_location"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.job_location.hasError('required') &&
+                            employerForm.controls.job_location.touched"
+                            >error_outline</mat-icon>
+                        <mat-error
+                          *ngIf="employerForm.controls.job_location.hasError('required')"
+                          >Enter the job location</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div> 
+                  
           
                   <!--Job Location Type-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Location Type</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="job_location_type"
-                      formControlName="job_location_type"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.job_location_type.hasError('required') &&
-                        employerForm.controls.job_location_type.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.job_location_type.hasError('required')"
-                      >Enter the job location type</mat-error>
-                  </mat-form-field>
-                  <br>
-          
-                  <!--Salary-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Salary</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="salary"
-                      formControlName="salary"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.salary.hasError('required') &&
-                        employerForm.controls.salary.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.salary.hasError('required')"
-                      >Enter the salary</mat-error>
-                  </mat-form-field>
-                  <br>
-                  
-                  <!--Duration-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Duration</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="duration"
-                      formControlName="duration"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.duration.hasError('required') &&
-                        employerForm.controls.duration.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.duration.hasError('required')"
-                      >Enter the duration</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-4 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-0">Enter job location type: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Location Type</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="job_location_type"
+                          formControlName="job_location_type"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.job_location_type.hasError('required') &&
+                            employerForm.controls.job_location_type.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.job_location_type.hasError('required')"
+                          >Enter the job location type</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
 
+                  <!--Salary-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter salary (per hour): </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Salary</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="salary"
+                          formControlName="salary"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.salary.hasError('required') &&
+                            employerForm.controls.salary.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.salary.hasError('required')"
+                          >Enter the salary</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+
+                  <!--Duration-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job duration: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Duration</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="duration"
+                          formControlName="duration"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.duration.hasError('required') &&
+                            employerForm.controls.duration.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.duration.hasError('required')"
+                          >Enter the duration</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+
+                  <!--Supervisor-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter supervisor: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Supervisor</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="supervisor"
+                          formControlName="supervisor"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.supervisor.hasError('required') &&
+                            employerForm.controls.supervisor.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.supervisor.hasError('required')"
+                          >Enter the supervisor</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
                   <!--Job Description-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Description</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="job_description"
-                      formControlName="job_description"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.job_description.hasError('required') &&
-                        employerForm.controls.job_description.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.job_description.hasError('required')"
-                      >Enter the job description</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job description: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Description</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="job_description"
+                          formControlName="job_description"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.job_description.hasError('required') &&
+                            employerForm.controls.job_description.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.job_description.hasError('required')"
+                          >Enter the job description</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
 
                   <!--Job Requirements-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Requirements</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="job_requirements"
-                      formControlName="job_requirements"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.job_requirements.hasError('required') &&
-                        employerForm.controls.job_requirements.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.job_requirements.hasError('required')"
-                      >Enter the job requirements</mat-error>
-                  </mat-form-field>
-                  <br>
                   <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job requirements: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Requirements</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="job_requirements"
+                          formControlName="job_requirements"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.job_requirements.hasError('required') &&
+                            employerForm.controls.job_requirements.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.job_requirements.hasError('required')"
+                          >Enter the job requirements</mat-error>
+                      </mat-form-field>
+                      <br>
+                    </div>
+                  </div>
 
-                  <h3>Application Information</h3>
+                  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                  <hr class="mt-0 mb-4" /><br>
+                  <br><h3 class="text-center">2. Application Information</h3><br><br>
+                  
                   <!--Application Deadline-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Deadline</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="deadline"
-                      formControlName="deadline"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.deadline.hasError('required') &&
-                        employerForm.controls.deadline.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.deadline.hasError('required')"
-                      >Enter the application deadline</mat-error>
-                  </mat-form-field>
-                  <br>
-
-                  <!--Application Documents Required-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Documents Required</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="docs_required"
-                      formControlName="docs_required"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.docs_required.hasError('required') &&
-                        employerForm.controls.docs_required.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.docs_required.hasError('required')"
-                      >Enter the documents required</mat-error>
-                  </mat-form-field>
-                  <br>
-
-                  <!--Application Method-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Application Method</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="application_method"
-                      formControlName="application_method"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.application_method.hasError('required') &&
-                        employerForm.controls.application_method.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.application_method.hasError('required')"
-                      >Enter the application method</mat-error>
-                  </mat-form-field>
-                  <br>
-
                   <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter deadline: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Deadline</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="deadline"
+                          formControlName="deadline"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.deadline.hasError('required') &&
+                            employerForm.controls.deadline.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.deadline.hasError('required')"
+                          >Enter the application deadline</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
+                  <!--Application Documents Required-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter documents required: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Documents Required</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="docs_required"
+                          formControlName="docs_required"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.docs_required.hasError('required') &&
+                            employerForm.controls.docs_required.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.docs_required.hasError('required')"
+                          >Enter the documents required</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
+                  <!--Application Method-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter application method: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Application Method</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="application_method"
+                          formControlName="application_method"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.application_method.hasError('required') &&
+                            employerForm.controls.application_method.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.application_method.hasError('required')"
+                          >Enter the application method</mat-error>
+                      </mat-form-field>
+                      <br>
+    
+      
+                    </div>
+                  </div>
 
-                  <h3>Company Information</h3>
+                  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                  <hr class="mt-0 mb-4" /><br>
+                  <br><h3 class="text-center">3. Company Information</h3><br><br>
                   <!--Organization-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Organization</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="organization"
-                      formControlName="organization"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.organization.hasError('required') &&
-                        employerForm.controls.organization.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.organization.hasError('required')"
-                      >Enter the organization</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter organization: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Organization</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="organization"
+                          formControlName="organization"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.organization.hasError('required') &&
+                            employerForm.controls.organization.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.organization.hasError('required')"
+                          >Enter the organization</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
 
                   <!--Job Contact First Name-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Contact First Name</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="jc_first_name"
-                      formControlName="jc_first_name"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.jc_first_name.hasError('required') &&
-                        employerForm.controls.jc_first_name.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.jc_first_name.hasError('required')"
-                      >Enter the job contact first name</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job contact first name: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Contact First Name</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="jc_first_name"
+                          formControlName="jc_first_name"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.jc_first_name.hasError('required') &&
+                            employerForm.controls.jc_first_name.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.jc_first_name.hasError('required')"
+                          >Enter the job contact first name</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
 
                   <!--Job Contact Last Name-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Job Contact Last Name</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="jc_last_name"
-                      formControlName="jc_last_name"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.jc_last_name.hasError('required') &&
-                        employerForm.controls.jc_last_name.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.jc_last_name.hasError('required')"
-                      >Enter the job contact last name</mat-error>
-                  </mat-form-field>
-                  <br>
-
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter job contact last name: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Job Contact Last Name</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="jc_last_name"
+                          formControlName="jc_last_name"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.jc_last_name.hasError('required') &&
+                            employerForm.controls.jc_last_name.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.jc_last_name.hasError('required')"
+                          >Enter the job contact last name</mat-error>
+                      </mat-form-field>
+                      <br>
+                    </div>
+                  </div>
+                  
                   <!--Address Line One-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Website</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="website"
-                      formControlName="website"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.website.hasError('required') &&
-                        employerForm.controls.website.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.website.hasError('required')"
-                      >Enter the website</mat-error>
-                  </mat-form-field>
-                  <br>
-
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter wesbite: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Website</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="website"
+                          formControlName="website"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.website.hasError('required') &&
+                            employerForm.controls.website.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.website.hasError('required')"
+                          >Enter the website</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                
                   <!--City-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>City</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="city"
-                      formControlName="city"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.city.hasError('required') &&
-                        employerForm.controls.city.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.city.hasError('required')"
-                      >Enter the city</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter city: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>City</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="city"
+                          formControlName="city"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.city.hasError('required') &&
+                            employerForm.controls.city.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.city.hasError('required')"
+                          >Enter the city</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
 
                   <!--Province-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Province</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="province"
-                      formControlName="province"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.province.hasError('required') &&
-                        employerForm.controls.province.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.province.hasError('required')"
-                      >Enter the province</mat-error>
-                  </mat-form-field>
-                  <br>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter province: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Province</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="province"
+                          formControlName="province"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.province.hasError('required') &&
+                            employerForm.controls.province.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.province.hasError('required')"
+                          >Enter the province</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
 
                   <!--Postal Code-->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Postal Code</mat-label>
-                    <input 
-                      matInput
-                      required
-                      ngModel name="postal_code"
-                      formControlName="postal_code"
-                    >
-                    <mat-icon
-                      matSuffix
-                      *ngIf="
-                        employerForm.controls.postal_code.hasError('required') &&
-                        employerForm.controls.postal_code.touched"
-                        >error_outline</mat-icon>
-                      <mat-error
-                        *ngIf="employerForm.controls.postal_code.hasError('required')"
-                      >Enter the postal code</mat-error>
-                  </mat-form-field>
-                  <br>
-
-                  <button type="button" class="btn btn-primary">Submit</button>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Enter postal code: </h3>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Postal Code</mat-label>
+                        <input 
+                          matInput
+                          required
+                          ngModel name="postal_code"
+                          formControlName="postal_code"
+                        >
+                        <mat-icon
+                          matSuffix
+                          *ngIf="
+                            employerForm.controls.postal_code.hasError('required') &&
+                            employerForm.controls.postal_code.touched"
+                            >error_outline</mat-icon>
+                          <mat-error
+                            *ngIf="employerForm.controls.postal_code.hasError('required')"
+                          >Enter the postal code</mat-error>
+                      </mat-form-field>
+                      <br>
+      
+                    </div>
+                  </div>
+                  
+                  <!--Accepting Picture from User-->
+                  <hr class="mt-0 mb-4" />
+                  <div class="row align-items-center pt-3 pb-3">
+                    <div class="col-md-3 ps-5">
+      
+                      <h3 class="mb-3">Company Picture: </h3>
+                      <p>This picture will appear on the page of your company's job posting when a student wants to learn more about the job opportunity!</p>
+      
+                    </div>
+                    <div class="col-md-9 pe-5">
+      
+                      <label class="image-upload-container btn btn-bwm">
+                        <input #imageInput
+                                type="file"
+                                accept="image/*"
+                        >
+                        </label>
+      
+                    </div>
+                  </div> 
+                  <br><br>
+                  <button type="button" class="btn btn-primary" style="align-content: center;">Submit</button>
 
                 </div>
             </div>
