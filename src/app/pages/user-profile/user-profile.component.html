@@ -302,7 +302,7 @@
 </div>
 
 <div *ngIf="!canEdit">
-  <form id="userProfile" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
     <section class="vh-200" style="background-color: #93aff6">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -418,7 +418,7 @@
         </div>
       </div>
     </section>
-  </form>
+
   <div class="loading-indicator" *ngIf="Uploading">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
