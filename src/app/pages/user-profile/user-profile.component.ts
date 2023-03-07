@@ -106,7 +106,7 @@ export class UserProfileComponent {
       this.storage
     );
     // Change user id when authentication is implemented
-    // this.onEditUser(35, this.registerForm.value, myDownloadLink);
+    this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
 
     // this.registerUser(this.registerForm.value, myDownloadLink);
@@ -114,7 +114,7 @@ export class UserProfileComponent {
 
     // this.readUser(90);
     // this.onEditUser(42, this.registerForm.value)
-    this.onDeleteUser(42);
+    // this.onDeleteUser(42);
   }
 
   registerUser(value: any, myDownloadLink: string) {
