@@ -18,25 +18,20 @@ export class StorageService {
     storage: Storage
   ): Promise<string> {
     var url = '';
-    const storageRef = ref_storage(storage, path + file.name);
+    var storageRef = ref_storage(storage, path + file.name);
     var url = await getDownloadURL(storageRef);
-    if (url != '') {
-      const newFilePath = ref_storage(
-        storage,
-        path + file.name + Math.random().toString(36).substring(2)
-      );
-      const uploadTask = uploadBytesResumable(newFilePath, file);
-      // monitor the upload progress
-      uploadTask.on('state_changed', (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      });
-      // get the download URL once the upload is complete
-      const snapshot = await uploadTask;
-      var downloadURL = await getDownloadURL(snapshot.ref);
-      return downloadURL;
-    } else {
+    while(url != '' || url == undefined){
+      try{
+        storageRef = ref_storage(
+          storage,
+          path + Math.random().toString(36).substring(2) + file.name
+        );
+        var url = await getDownloadURL(storageRef);
+        console.log('in while loop');
+      }catch(err){
+        break;
+      }
+    }
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on('state_changed', (snapshot) => {
         const progress =
@@ -53,5 +48,4 @@ export class StorageService {
       // });
       // return url;
     }
-  }
 }
