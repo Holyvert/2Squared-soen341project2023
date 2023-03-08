@@ -40,11 +40,6 @@ export class StorageService {
       const snapshot = await uploadTask;
       var downloadURL = await getDownloadURL(snapshot.ref);
       return downloadURL;
-      // .then((snapshot) => {
-      //   // Return the download URL
-      //   const url = getDownloadURL(snapshot.ref);
-      //   return url;
-      // });
-      // return url;
+  
     }
 }
