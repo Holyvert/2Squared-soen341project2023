@@ -9,7 +9,9 @@
     data-aos-mirror=true
   >
     <a
-      href=""
+    
+      [routerLink]="['individual']"
+      [queryParams]="item"
       *ngIf="
         searchText === '' ||
         item.Company.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -22,7 +24,7 @@
         item.Salary.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Supervisor.toLowerCase().includes(searchText.toLowerCase())
       "
-      @fadeAnimation
+     
    
     >
       <div class="card">
