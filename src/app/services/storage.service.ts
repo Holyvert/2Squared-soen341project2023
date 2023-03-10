@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Database } from '@angular/fire/database';
 import {
   Storage,
   ref as ref_storage,
@@ -19,27 +20,30 @@ export class StorageService {
   ): Promise<string> {
     var url = '';
     var storageRef = ref_storage(storage, path + file.name);
-    var url = await getDownloadURL(storageRef);
-    while(url != '' || url == undefined){
-      try{
+
+    while (url != '' || url == undefined) {
+      var url = await getDownloadURL(storageRef);
+      try {
         storageRef = ref_storage(
           storage,
           path + Math.random().toString(36).substring(2) + file.name
         );
         var url = await getDownloadURL(storageRef);
-      }catch(err){
+      } catch (err) {
         break;
       }
     }
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on('state_changed', (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      });
-      const snapshot = await uploadTask;
-      var downloadURL = await getDownloadURL(snapshot.ref);
-      return downloadURL;
-  
-    }
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on('state_changed', (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    });
+    const snapshot = await uploadTask;
+    var downloadURL = await getDownloadURL(snapshot.ref);
+    return downloadURL;
+  }
+
+  IDgenerator( path: string, data: Database) {
+    return '';
+  }
 }

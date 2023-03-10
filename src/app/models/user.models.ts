@@ -1,13 +1,3 @@
-export interface Student {
-  uid: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  language: string;
-  password: string;
-}
-
-
 export interface Employer{
   uid: string;
   company: string;
@@ -18,7 +8,7 @@ export interface Employer{
   password: string;
 }
 
-export interface JobPost{
+export interface JobPost {
   Company: string;
   Description: string;
   Duration: string;
@@ -28,6 +18,8 @@ export interface JobPost{
   JobTitle: string;
   Salary: string;
   Supervisor: string;
+  StudentListIDs: any; // list vof ids
+  id: string; //its own id
 }
 
 export interface StudentProfile {
@@ -38,5 +30,6 @@ export interface StudentProfile {
   Program: string;
   Description: string;
   Language: string;
+  JobsApplied: any; // list vof ids
   CV: string;
 }

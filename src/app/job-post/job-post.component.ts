@@ -32,6 +32,8 @@ export class JobPostComponent {
     // console.log(values);
     this.jobsArray = ((Object as any).values(data));
     });
+
+    console.log(this.jobsArray)
   }
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
