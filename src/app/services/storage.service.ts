@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Database } from '@angular/fire/database';
+import { child, Database, onValue, ref as ref_data } from '@angular/fire/database';
 import {
   Storage,
   ref as ref_storage,
@@ -43,7 +43,29 @@ export class StorageService {
     return downloadURL;
   }
 
-  IDgenerator( path: string, data: Database) {
-    return '';
+  // Creates a unique id to store the user in the database
+  // Will mostly be used for job postings, as the users' id will be created by the authentication
+  // EXAMPLE OF HOW TO USE THIS FUNCTION
+  // var id = await this.storageService.IDgenerator('job-postings/', this.database);
+  async IDgenerator( path: string, database: Database) {
+    var id = '';
+    var isGood = false;
+    var data: never[] | null | undefined = [];
+    const dbRef = ref_data(database);
+    while (!isGood) {
+      try {
+        id = Math.random().toString(36).substring(2);
+        var databaseRef = child(dbRef, path+id);
+        onValue(databaseRef, (snapshot) => {
+          data = snapshot.val();
+        });
+        if(data == null || data == undefined || data.length == 0){
+          isGood = true;
+        }
+      } catch (err) {
+        break;
+      }
+    }
+    return id;
   }
 }

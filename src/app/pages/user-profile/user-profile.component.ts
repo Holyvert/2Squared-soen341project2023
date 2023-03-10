@@ -105,11 +105,13 @@ export class UserProfileComponent {
       'curriculum_vitae/',
       this.storage
     );
+
     // Change user id when authentication is implemented
     this.onEditUser(35, this.registerForm.value, myDownloadLink);
     this.Uploading = false;
 
-    // this.registerUser(this.registerForm.value, myDownloadLink);
+
+    // this.registerUser(this.registerForm.value, myDownloadLink, id);
     //  this.submitted = true;
 
     // this.readUser(90);
@@ -117,8 +119,8 @@ export class UserProfileComponent {
     // this.onDeleteUser(42);
   }
 
-  registerUser(value: any, myDownloadLink: string) {
-    set(ref(this.database, 'students/' + Math.floor(Math.random() * 100)), {
+  registerUser(value: any, myDownloadLink: string, id: string) {
+    set(ref(this.database, 'students/' + id), {
       FirstName: value.first_name,
       LastName: value.last_name,
       PhoneNumber: value.tel,
