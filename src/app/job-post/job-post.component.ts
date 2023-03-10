@@ -40,12 +40,5 @@ export class JobPostComponent {
     console.log('a letter', this.searchText);
   }
 
-  createJobPosting() {
-    set(ref(this.database, 'job-postings/' + Math.floor(Math.random()*100)), {
-      Company: "VuWall",
-      Description: "The knowledge of typescript, node.js and angular are very ...",
-      JobTitle: "Software Developer"
-    });
-alert('Job Post created!')
-  }
+
 }
