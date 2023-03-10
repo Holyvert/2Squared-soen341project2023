@@ -1,5 +1,5 @@
 <div *ngIf="canEdit">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm" >
     <section class="vh-200" style="background-color: #93aff6">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -290,7 +290,7 @@
                     </div>
                   </div>
 
-                  <button mat-button type="submit">SAVE</button>
+                  <button mat-button type="submit" (click)="onSubmit()">SAVE</button>
                 </div>
               </div>
             </div>
