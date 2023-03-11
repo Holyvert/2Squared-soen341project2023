@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+
+  
   myFunction() {
     var x = document.getElementById("myDIV");
     
