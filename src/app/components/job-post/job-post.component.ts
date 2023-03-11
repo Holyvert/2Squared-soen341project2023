@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-import { JobPost } from '../models/user.models';
+import { JobPost } from '../../models/user.models';
 import { Database, set, ref, update, onValue, getDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 

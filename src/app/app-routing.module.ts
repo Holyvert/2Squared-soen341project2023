@@ -6,6 +6,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { LoginComponent } from './pages/login/login.component';
 import { EmployerFormComponent } from './pages/employer-form/employer-form.component';
 import { IndividualJobPostingComponent } from './pages/individual-job-posting/individual-job-posting.component';
+import { EditEmployerFormComponent } from './pages/edit-employer-form/edit-employer-form.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'employer-form', component: EmployerFormComponent },
   { path: 'individual', component: IndividualJobPostingComponent },
+  { path: 'edit-employer-form', component: EditEmployerFormComponent}
 
 ];
 
