@@ -18,27 +18,28 @@ export interface Employer{
   password: string;
 }
 
-export interface JobPost{
-  job_title:String,
-  job_location:String,
-  job_location_type:String,
-  salary:String,
-  duration:String,
-  supervisor:String,
-  job_description:String,
-  job_requirements:String,
-  deadline:String,
-  docs_required:String,
-  application_method:String,
-  organization:String,
-  jc_first_name:String,
-  jc_last_name:String,
-  website:String,
-  // address:value.address,
-  city:String,
-  province:String,
-  postal_code:String,
-  image:String,
+export interface JobPost {
+  Company: string;
+  Description: string;
+  Duration: string;
+  Image: string;
+  JobLocation: string;
+  JobLocationType: string;
+  JobTitle: string;
+  Salary: string;
+  Supervisor: string;
+  StudentListIDs: any; // list vof ids
+  ID: string; //its own id
+  Requirements: String;
+  Deadline: String;
+  DocsRequired: String;
+  ApplicationMethod: String;
+  JcFirstName: String;
+  JcLastName: String;
+  Website: String;
+  City: String;
+  Province: String;
+  PostalCode: String;
 }
 
 export interface StudentProfile {

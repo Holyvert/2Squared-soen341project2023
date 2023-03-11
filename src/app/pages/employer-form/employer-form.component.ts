@@ -13,92 +13,89 @@ import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-employer-form',
   templateUrl: './employer-form.component.html',
-  styleUrls: ['./employer-form.component.scss']
+  styleUrls: ['./employer-form.component.scss'],
 })
 export class EmployerFormComponent {
   employerForm!: FormGroup;
-  horizontalPosition: any;
-  snackBar: any;
-  verticalPosition: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   canEdit: Boolean = false;
   faFilePdf = faFilePdf;
   faFilePowerpoint = faFilePowerpoint;
   faDownload = faDownload;
   Uploading = false;
- public file: any = {};
-  
+  public file: any = {};
 
   constructor(
     private form_builder: FormBuilder,
     public database: Database,
     public storage: Storage,
-    public storageService: StorageService
+    public storageService: StorageService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.employerForm = this.form_builder.group({
-      job_title: ['', [Validators.required]],
-      job_location: ['', [Validators.required]],
-      job_location_type: ['', [Validators.required]],
-      salary: ['', [Validators.required]],
-      duration: ['', [Validators.required]],
-      supervisor: ['', [Validators.required]],
-      job_description: ['', [Validators.required]],
-      job_requirements: ['', [Validators.required]],
-      deadline: ['', [Validators.required]],
-      docs_required: ['', [Validators.required]],
-      application_method: ['', [Validators.required]],
-      organization: ['', [Validators.required]],
-      jc_first_name: ['', [Validators.required]],
-      jc_last_name: ['', [Validators.required]],
-      website: ['', [Validators.required]],
-      // address: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      province: ['', [Validators.required]],
-      postal_code: ['', [Validators.required]],
+      JobTitle: ['', [Validators.required]],
+      JobLocation: ['', [Validators.required]],
+      JobLocationType: ['', [Validators.required]],
+      Salary: ['', [Validators.required]],
+      Duration: ['', [Validators.required]],
+      Supervisor: ['', [Validators.required]],
+      Description: ['', [Validators.required]],
+      Requirements: ['', [Validators.required]],
+      Deadline: ['', [Validators.required]],
+      DocsRequired: ['', [Validators.required]],
+      ApplicationMethod: ['', [Validators.required]],
+      Company: ['', [Validators.required]],
+      JcFirstName: ['', [Validators.required]],
+      JcLastName: ['', [Validators.required]],
+      Website: ['', [Validators.required]],
+      Image: [null, [Validators.required]],
+      City: ['', [Validators.required]],
+      Province: ['', [Validators.required]],
+      PostalCode: ['', [Validators.required]],
     });
   }
-async onSubmit() {
-   
+  async onSubmit() {
     // console.log(this.employerForm.value);
-   
-    /*if (this.employerForm.invalid) {
+
+    if (this.employerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
       return;
-    }*/
+    }
     this.Uploading = true;
     var myDownloadLink = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
-    this.registerJobPosting(this.employerForm.value,myDownloadLink);
+    this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
   }
   registerJobPosting(value: any, myDownloadLink: string) {
     set(ref(this.database, 'job-postings/' + Math.floor(Math.random() * 100)), {
-      job_title:value.job_title,
-      job_location:value.job_location,
-      job_location_type:value.job_location_type,
-      salary:value.salary,
-      duration:value.duration,
-      supervisor:value.supervisor,  
-      job_description:value.job_description,
-      job_requirements:value.job_requirements,
-      deadline:value.deadline,
-      docs_required:value.docs_required,
-      application_method:value.application_method,
-      organization:value.organization,
-      jc_first_name:value.jc_first_name,
-      jc_last_name:value.jc_last_name,
-      website:value.website,
-      // address:value.address,
-      city:value.city,
-      province: value.province,
-      postal_code:value.postal_code,
-      image:myDownloadLink,
+      JobTitle: value.JobTitle,
+      JobLocation: value.JobLocation,
+      JobLocationType: value.JobLocationType,
+      Salary: value.Salary,
+      Duration: value.Duration,
+      Supervisor: value.Supervisor,
+      Description: value.Description,
+      Requirements: value.Requirements,
+      Deadline: value.Deadline,
+      DocsRequired: value.DocsRequired,
+      ApplicationMethod: value.ApplicationMethod,
+      Company: value.Company,
+      JcFirstName: value.JcFirstName,
+      JcLastName: value.JcLastName,
+      Website: value.Website,
+      City: value.City,
+      Province: value.Province,
+      PostalCode: value.PostalCode,
+      Image: myDownloadLink,
     });
-    alert("Job Created")
+    this.sendNotification('Job Created');
   }
 
   //error with send notification function, probably positions?
@@ -108,12 +105,11 @@ async onSubmit() {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
-
-} 
-handleFileInput(event: any) {
-  this.file = event.target.files[0];
-}
-EnableForm() {
-  this.canEdit = !this.canEdit;
-}
+  }
+  handleFileInput(event: any) {
+    this.file = event.target.files[0];
+  }
+  EnableForm() {
+    this.canEdit = !this.canEdit;
+  }
 }//end of EmployerFormComponent
