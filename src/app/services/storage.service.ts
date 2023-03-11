@@ -19,8 +19,9 @@ export class StorageService {
   ): Promise<string> {
     var url = '';
     var storageRef = ref_storage(storage, path + file.name);
-    var url = await getDownloadURL(storageRef);
+    
     while(url != '' || url == undefined){
+      var url = await getDownloadURL(storageRef);
       try{
         storageRef = ref_storage(
           storage,
@@ -42,4 +43,6 @@ export class StorageService {
       return downloadURL;
   
     }
+
+
 }
