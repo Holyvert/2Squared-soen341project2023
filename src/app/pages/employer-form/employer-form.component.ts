@@ -36,26 +36,27 @@ export class EmployerFormComponent {
   ) {}
 
   ngOnInit(): void {
-    this.employerForm = this.form_builder.group({
-      job_title: ['', [Validators.required]],
-      job_location: ['', [Validators.required]],
-      job_location_type: ['', [Validators.required]],
-      salary: ['', [Validators.required]],
-      duration: ['', [Validators.required]],
-      supervisor: ['', [Validators.required]],
-      job_description: ['', [Validators.required]],
-      job_requirements: ['', [Validators.required]],
-      deadline: ['', [Validators.required]],
-      docs_required: ['', [Validators.required]],
-      application_method: ['', [Validators.required]],
-      organization: ['', [Validators.required]],
-      jc_first_name: ['', [Validators.required]],
-      jc_last_name: ['', [Validators.required]],
-      website: ['', [Validators.required]],
-      // address: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      province: ['', [Validators.required]],
-      postal_code: ['', [Validators.required]],
+    this.employerForm = this.form_builder.group({    
+      JobTitle:['', [Validators.required]],
+      JobLocation:['', [Validators.required]],
+      JobLocationType:['', [Validators.required]],
+      Salary:['', [Validators.required]],
+      Duration:['', [Validators.required]],
+      Supervisor:['', [Validators.required]],
+      Description:['', [Validators.required]],
+      JobRequirements:['', [Validators.required]],
+      Deadline:['', [Validators.required]],
+      DocsRequired:['', [Validators.required]],
+      ApplicationMethod:['', [Validators.required]],
+      Company:['', [Validators.required]],
+      JCFirstName:['', [Validators.required]],
+      JCLastName:['', [Validators.required]],
+      Website:['', [Validators.required]],
+      // address:value.address,
+      City:['', [Validators.required]],
+      Province: ['', [Validators.required]],
+      PostalCode:['', [Validators.required]],
+    
     });
   }
 async onSubmit() {
@@ -77,26 +78,26 @@ async onSubmit() {
   }
   registerJobPosting(value: any, myDownloadLink: string) {
     set(ref(this.database, 'job-postings/' + Math.floor(Math.random() * 100)), {
-      job_title:value.job_title,
-      job_location:value.job_location,
-      job_location_type:value.job_location_type,
-      salary:value.salary,
-      duration:value.duration,
-      supervisor:value.supervisor,  
-      job_description:value.job_description,
-      job_requirements:value.job_requirements,
-      deadline:value.deadline,
-      docs_required:value.docs_required,
-      application_method:value.application_method,
-      organization:value.organization,
-      jc_first_name:value.jc_first_name,
-      jc_last_name:value.jc_last_name,
+      JobTitle:value.JobTitle,
+      JobLocation:value.JobLocation,
+      JobLocationType:value.JobLocationType,
+      Salary:value.Salary,
+      Duration:value.Duration,
+      Supervisor:value.Supervisor,  
+      Description:value.JobDescription,
+      JobRequirements:value.JobRequirements,
+      Deadline:value.Deadline,
+      DocsRequired:value.DocsRequired,
+      ApplicationMethod:value.ApplicationMethod,
+      Company:value.Organization,
+      JCFirstName:value.jc_first_name,
+      JCLastName:value.jc_last_name,
       website:value.website,
       // address:value.address,
       city:value.city,
       province: value.province,
       postal_code:value.postal_code,
-      image:myDownloadLink,
+      Image:myDownloadLink,
     });
     alert("Job Created")
   }
@@ -104,7 +105,7 @@ async onSubmit() {
   //error with send notification function, probably positions?
   sendNotification(text: string) {
     this.snackBar.open(text, '', {
-      duration: 3000,
+      Duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
