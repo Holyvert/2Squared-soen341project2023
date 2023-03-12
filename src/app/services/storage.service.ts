@@ -24,6 +24,7 @@ export class StorageService {
     while (url != '' || url == undefined) {
       var url = await getDownloadURL(storageRef);
       try {
+
         storageRef = ref_storage(
           storage,
           path + Math.random().toString(36).substring(2) + file.name
@@ -66,6 +67,8 @@ export class StorageService {
         break;
       }
     }
+
     return id;
   }
+
 }

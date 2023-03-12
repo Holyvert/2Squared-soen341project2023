@@ -19,7 +19,17 @@ export interface JobPost {
   Salary: string;
   Supervisor: string;
   StudentListIDs: any; // list vof ids
-  id: string; //its own id
+  ID: string; //its own id
+  Requirements: String;
+  Deadline: String;
+  DocsRequired: String;
+  ApplicationMethod: String;
+  JcFirstName: String;
+  JcLastName: String;
+  Website: String;
+  City: String;
+  Province: String;
+  PostalCode: String;
 }
 
 export interface StudentProfile {
