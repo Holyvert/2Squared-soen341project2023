@@ -13,5 +13,6 @@ export class IndividualJobPostingComponent implements OnInit {
 
   ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
+    console.log(this.posting.getAll('Deadline'));
   }
 }

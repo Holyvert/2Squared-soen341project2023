@@ -18,16 +18,6 @@ export interface JobPost {
   JobTitle: string;
   Salary: string;
   Supervisor: string;
-  ApplicationMethod: string;
-  City: string;
-  Deadline: string;
-  DocsRequired: string;
-  JcFirstName: string;
-  JcLastName: string;
-  PostalCode: string;
-  Province: string;
-  Requirements: string;
-  Website: string;
   StudentListIDs: any; // list vof ids
   ID: string; //its own id
   Requirements: String;

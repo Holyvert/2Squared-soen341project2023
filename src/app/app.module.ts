@@ -49,6 +49,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { getAuth } from 'firebase/auth';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -87,6 +89,8 @@ import { getAuth } from 'firebase/auth';
     ReactiveFormsModule,
     RouterModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideDatabase(()=>getDatabase()),
