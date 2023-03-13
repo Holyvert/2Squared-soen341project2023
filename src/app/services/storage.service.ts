@@ -1,5 +1,11 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Database } from '@angular/fire/database';
+import {
+  child,
+  Database,
+  onValue,
+  ref as ref_data,
+} from '@angular/fire/database';
 import {
   Storage,
   ref as ref_storage,
@@ -11,22 +17,30 @@ import {
   providedIn: 'root',
 })
 export class StorageService {
-  constructor() {}
+  constructor(private router: Router) {}
 
   async uploadToFirestore(
     file: any,
     path: string,
-    storage: Storage
+    storage: Storage,
   ): Promise<string> {
     var url = '';
+    var tempName = ''
     var storageRef = ref_storage(storage, path + file.name);
 
-    while (url != '' || url == undefined) {
+    try {
       var url = await getDownloadURL(storageRef);
+    } catch (err) {
+      url = '';
+    }
+    console.log(url);
+
+    while (url != '' || url == undefined) {
       try {
+        tempName = Math.random().toString(36).substring(2);
         storageRef = ref_storage(
           storage,
-          path + Math.random().toString(36).substring(2) + file.name
+          path + tempName + file.name
         );
         var url = await getDownloadURL(storageRef);
       } catch (err) {
@@ -40,10 +54,33 @@ export class StorageService {
     });
     const snapshot = await uploadTask;
     var downloadURL = await getDownloadURL(snapshot.ref);
-    return downloadURL;
+    return downloadURL + ',' + tempName;
   }
 
-  IDgenerator( path: string, data: Database) {
-    return '';
+  // Creates a unique id to store the user in the database
+  // Will mostly be used for job postings, as the users' id will be created by the authentication
+  // EXAMPLE OF HOW TO USE THIS FUNCTION
+  // var id = await this.storageService.IDgenerator('job-postings/', this.database);
+  async IDgenerator(path: string, database: Database) {
+    var id = '';
+    var isGood = false;
+    var data: never[] | null | undefined = [];
+    const dbRef = ref_data(database);
+    while (!isGood) {
+      try {
+        id = Math.random().toString(36).substring(2);
+        var databaseRef = child(dbRef, path + id);
+        onValue(databaseRef, (snapshot) => {
+          data = snapshot.val();
+        });
+        if (data == null || data == undefined || data.length == 0) {
+          isGood = true;
+        }
+      } catch (err) {
+        break;
+      }
+    }
+
+    return id;
   }
 }

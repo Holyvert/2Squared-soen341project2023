@@ -4,6 +4,7 @@
     }
     </style>
 <!-- Responsive navbar-->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-5">
         <a class="navbar-brand" href="#!">Job Hunting Application</a>
@@ -14,15 +15,18 @@
 
                 <!-- For when authentication is implemented, replace ngIf with *ngIf="User==Student"-->
 
-                <li class="nav-item"><a class="nav-link" href="#!">Applications</a></li>
+                <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="#!">Applications</a></li>
 
                 <!-- For when authentication is implemented -->
-                <!-- <li *ngIf="User==Employer" class="nav-item"><a class="nav-link" href="#!">Postings</a></li> -->
-                <li class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
+                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="#!">My Postings</a></li>
+                <!-- This will take employers to their "interviews" page, which is different from the students' "interviews" page -->
+                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
+                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-form">Create New Posting</a></li>
+                <!-- This will take students to their "interviews" page -->
+                <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                <li *ngIf="authService.isLoggedIn" class="nav-item"><a class="nav-link" (click)="authService.SignOut()">Log Out</a></li>
             </ul>
+          </div>
         </div>
-       
-    </div>
-   
-</nav>
+    </nav>
