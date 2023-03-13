@@ -160,13 +160,16 @@ export class UserProfileComponent {
           .catch((error) => {});
       }
 
-      var myDownloadLink = await this.storageService.uploadToFirestore(
+      var result = await this.storageService.uploadToFirestore(
         this.file,
         'curriculum_vitae/',
-        this.storage
+        this.storage,
       );
+      var myValues = result.split(',');
+      var myDownloadLink = myValues[0];
+      var myFileName = myValues[1] + this.file.name;
 
-      this.onEditUser(this.myUser.uid, this.registerForm.value, myDownloadLink);
+      this.onEditUser(this.myUser.uid, this.registerForm.value, myDownloadLink, myFileName);
       this.Uploading = false;
 
     }else if(this.isEmployer){
@@ -197,7 +200,7 @@ export class UserProfileComponent {
         console.error(error);
       });
   }
-  onEditUser(index: any, value: any, myDownloadLink?: string) {
+  onEditUser(index: any, value: any, myDownloadLink?: string, myFileName?: string) {
     const dbRef = ref(this.database);
     if (this.isStudent){
       update(child(dbRef, `students/${index}`), {
@@ -208,7 +211,7 @@ export class UserProfileComponent {
         Program: value.program,
         Description: value.personal_description,
         CV: myDownloadLink,
-        CVName: this.file.name,
+        CVName: myFileName,
       });
     } else if (this.isEmployer) {
       update(child(dbRef, `employers/${index}`), {
