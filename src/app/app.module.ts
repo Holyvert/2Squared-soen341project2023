@@ -43,6 +43,14 @@ import { IndividualJobPostingComponent } from './pages/individual-job-posting/in
 import { RouterModule } from '@angular/router';
 import {provideFirestore,getFirestore} from '@angular/fire/firestore';
 import {provideStorage,getStorage} from '@angular/fire/storage';
+import {provideAuth} from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { getAuth } from 'firebase/auth';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -67,6 +75,10 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     MatMenuModule,
     MatSelectModule,
     HttpClientModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     FontAwesomeModule,
     FormsModule,
     MatCardModule,
@@ -77,10 +89,14 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     ReactiveFormsModule,
     RouterModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideDatabase(()=>getDatabase()),
     provideFirestore(()=>getFirestore()),
     provideStorage(()=>getStorage()),
+    provideAuth(()=>getAuth()),
     MatProgressSpinnerModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],

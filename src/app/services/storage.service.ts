@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { child, Database, onValue, ref as ref_data } from '@angular/fire/database';
 import {
@@ -11,7 +12,8 @@ import {
   providedIn: 'root',
 })
 export class StorageService {
-  constructor() {}
+  
+  constructor(private router: Router) {}
 
   async uploadToFirestore(
     file: any,

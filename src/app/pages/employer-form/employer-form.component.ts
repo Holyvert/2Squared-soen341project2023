@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {
@@ -5,11 +6,13 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
 import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
+
 @Component({
   selector: 'app-employer-form',
   templateUrl: './employer-form.component.html',
@@ -24,6 +27,8 @@ export class EmployerFormComponent {
   faFilePowerpoint = faFilePowerpoint;
   faDownload = faDownload;
   Uploading = false;
+  myUser: any = {};
+  myEmployer = {} as Employer;
   public file: any = {};
 
   constructor(
@@ -31,10 +36,25 @@ export class EmployerFormComponent {
     public database: Database,
     public storage: Storage,
     public storageService: StorageService,
+    private authService: AuthService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
+    this.myUser = this.authService.getUser();
+    if (this.myUser.photoURL == 'Student') {
+      this.router.navigate([''])
+    }
+
+    const dbRef = ref(this.database);
+    const userRef = child(dbRef, 'employers/' + this.myUser.uid);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+        this.myEmployer = data;
+        console.log(this.myEmployer.Company);
+    });
+
     this.employerForm = this.form_builder.group({
       JobTitle: ['', [Validators.required]],
       JobLocation: ['', [Validators.required]],
@@ -47,7 +67,6 @@ export class EmployerFormComponent {
       Deadline: ['', [Validators.required]],
       DocsRequired: ['', [Validators.required]],
       ApplicationMethod: ['', [Validators.required]],
-      Company: ['', [Validators.required]],
       JcFirstName: ['', [Validators.required]],
       JcLastName: ['', [Validators.required]],
       Website: ['', [Validators.required]],
@@ -58,7 +77,6 @@ export class EmployerFormComponent {
     });
   }
   async onSubmit() {
-    // console.log(this.employerForm.value);
 
     if (this.employerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
@@ -70,11 +88,15 @@ export class EmployerFormComponent {
       'images/',
       this.storage
     );
-    this.registerJobPosting(this.employerForm.value, myDownloadLink);
+    await this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
+    // Navigate to the home page (can be changed to a different page)
+    this.router.navigate(['']);
   }
-  registerJobPosting(value: any, myDownloadLink: string) {
-    set(ref(this.database, 'job-postings/' + Math.floor(Math.random() * 100)), {
+
+  async registerJobPosting(value: any, myDownloadLink: string) {
+    var myId = await this.storageService.IDgenerator('job-postings/', this.database)
+    set(ref(this.database, 'job-postings/' + myId), {
       JobTitle: value.JobTitle,
       JobLocation: value.JobLocation,
       JobLocationType: value.JobLocationType,
@@ -83,10 +105,10 @@ export class EmployerFormComponent {
       Supervisor: value.Supervisor,
       Description: value.Description,
       Requirements: value.Requirements,
-      Deadline: value.Deadline,
+      Deadline: JSON.stringify(value.Deadline).substring(1,11),
       DocsRequired: value.DocsRequired,
       ApplicationMethod: value.ApplicationMethod,
-      Company: value.Company,
+      Company: this.myEmployer.Company,
       JcFirstName: value.JcFirstName,
       JcLastName: value.JcLastName,
       Website: value.Website,
@@ -95,6 +117,7 @@ export class EmployerFormComponent {
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
     });
+    this.Uploading = false;
     this.sendNotification('Job Created');
   }
 
