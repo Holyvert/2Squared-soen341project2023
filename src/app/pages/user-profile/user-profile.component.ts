@@ -140,6 +140,10 @@ export class UserProfileComponent {
     this.file = event.target.files[0];
   }
 
+  async onCancel(){
+    this.EnableForm();
+  }
+
   async onSubmit() {
     if (this.isStudent) {
       if (this.registerForm.invalid) {
