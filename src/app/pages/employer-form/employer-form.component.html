@@ -49,7 +49,7 @@
                    <div class="row align-items-center pt-3 pb-3">
                     <div class="col-md-3 ps-5">
       
-                      <h3 class="mb-3">Enter job location: </h3>
+                      <h3 class="mb-3">Enter job location (Address Line): </h3>
       
                     </div>
                     <div class="col-md-9 pe-5">
@@ -90,12 +90,15 @@
       
                       <mat-form-field appearance="outline" style="width: 100%;">
                         <mat-label>Job Location Type</mat-label>
-                        <input 
-                          matInput
+                        <mat-select
                           required
-                          ngModel name="job_location_type"
+                          name="job_location_type"
                           formControlName="job_location_type"
                         >
+                        <mat-option value="On-site">On-site</mat-option>
+                        <mat-option value="Hybrid">Hybrid</mat-option>
+                        <mat-option value="Remote">Remote</mat-option>
+                        </mat-select>
                         <mat-icon
                           matSuffix
                           *ngIf="
@@ -643,3 +646,7 @@
     </div>
   </section>
 </form>
+
+<div class="loading-indicator" *ngIf="Uploading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>

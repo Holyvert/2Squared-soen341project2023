@@ -1,11 +1,11 @@
 export interface Employer{
-  uid: string;
-  company: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  language: string;
-  password: string;
+  ID: string;
+  Company: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Language: string;
+  Password: string;
 }
 
 export interface JobPost {
@@ -18,6 +18,16 @@ export interface JobPost {
   JobTitle: string;
   Salary: string;
   Supervisor: string;
+  ApplicationMethod: string;
+  City: string;
+  Deadline: string;
+  DocsRequired: string;
+  JcFirstName: string;
+  JcLastName: string;
+  PostalCode: string;
+  Province: string;
+  Requirements: string;
+  Website: string;
   StudentListIDs: any; // list vof ids
   id: string; //its own id
 }
@@ -32,4 +42,13 @@ export interface StudentProfile {
   Language: string;
   JobsApplied: any; // list vof ids
   CV: string;
+  CVName: string;
+  ID: string;
+  Password: string;
+}
+
+export interface User {
+  uid: string;
+  email: string;
+  photoURL: string;
 }
