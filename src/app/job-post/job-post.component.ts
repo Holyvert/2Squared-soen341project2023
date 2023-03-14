@@ -24,7 +24,7 @@ export class JobPostComponent {
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
-  isAlone: boolean = false;
+ // isAlone: boolean = false;
 
   jobsArray = [{} as JobPost];
   soloApplication = {} as JobPost;
@@ -40,17 +40,25 @@ export class JobPostComponent {
       this.jobsArray = ((Object as any).values(data));
       });
 
-      this.isAlone = false;
+    //  this.isAlone = false;
       console.log(this.jobsArray)
     }
     else {
       const dbRef = ref(this.database);
-      const starCountRef = child(dbRef, `students/${this.myUser.uid}`);
+      const starCountRef = child(
+        dbRef,
+        `students/${this.myUser.uid}/JobsApplied`
+      );
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const keys = Object.keys(data);
+
+    for ( const item of keys){
+    
+    //this.jobsArray.push(this.getApplications(item);)
+    }
       const values = Object.values(data);
-      this.getApplications(data.JobsApplied);
+      
       });  
       
     }
@@ -68,6 +76,7 @@ export class JobPostComponent {
     console.log(data);
     this.soloApplication = data;
     });
-    this.isAlone= true;
+   // this.isAlone= true;
+    //return somethis
   }
 }

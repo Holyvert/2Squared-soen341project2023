@@ -1,6 +1,6 @@
 <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
 
-<div *ngIf="isAlone == false" class="cardz" >
+<div  class="cardz" >
   <div
     *ngFor="let item of jobsArray"
     data-aos="fade-up"
@@ -42,50 +42,6 @@
             <div *ngIf="item.JobLocationType=='Remote'"><mat-icon>wifi</mat-icon></div>
             <div *ngIf="item.JobLocationType=='On-site'"><mat-icon>business</mat-icon></div>
             <p class="watch">{{ item.JobLocationType }}</p>
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
-<div *ngIf="isAlone == true" class="cardz" >
-  <div
-    data-aos="fade-up"
-    data-aos-duration="900"
-    data-aos-easing="ease-in-out-back"
-    data-aos-mirror=true
-  >
-    <a
-      *ngIf="
-        searchText === '' || 
-        soloApplication.Company.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.JobTitle.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.JobLocation.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.City.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.Description.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.Duration.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.Image.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.JobLocationType.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.Salary.toLowerCase().includes(searchText.toLowerCase()) ||
-        soloApplication.Supervisor.toLowerCase().includes(searchText.toLowerCase())
-      "
-     
-   
-    >
-      <div class="card">
-        <img src="{{soloApplication.Image}}" alt="Image not found" class="cardimg" />
-        <div class="card-content" value="">
-          <div class="top-card">
-            <h3>{{ soloApplication.Company }}</h3>
-            <P>{{ soloApplication.JobTitle }}</P>
-            <h4>{{soloApplication.City}}</h4>
-          </div>
-
-          <div class="bottom-card">
-            <div *ngIf="soloApplication.JobLocationType=='Hybrid'"><mat-icon> transfer_within_a_station</mat-icon></div>
-            <div *ngIf="soloApplication.JobLocationType=='Remote'"><mat-icon>wifi</mat-icon></div>
-            <div *ngIf="soloApplication.JobLocationType=='On-site'"><mat-icon>business</mat-icon></div>
-            <p class="watch">{{ soloApplication.JobLocationType }}</p>
           </div>
         </div>
       </div>
