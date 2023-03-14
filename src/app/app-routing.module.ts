@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { EmployerFormComponent } from './pages/employer-form/employer-form.component';
 import { IndividualJobPostingComponent } from './pages/individual-job-posting/individual-job-posting.component';
 import { AuthguardGuard} from './services/authguard.guard';
+import { ApplicationsComponent } from './pages/applications/applications.component';
 
 
 
@@ -18,9 +19,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthguardGuard] },
   { path: 'employer-form', component: EmployerFormComponent, canActivate: [AuthguardGuard] },
   { path: 'individual', component: IndividualJobPostingComponent, canActivate: [AuthguardGuard] },
-
+  { path: 'applications', component: ApplicationsComponent, canActivate: [AuthguardGuard] },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

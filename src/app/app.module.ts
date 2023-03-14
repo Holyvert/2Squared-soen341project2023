@@ -51,6 +51,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { getAuth } from 'firebase/auth';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ApplicationsComponent } from './pages/applications/applications.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     SearchComponent,
     EmployerFormComponent,
     IndividualJobPostingComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,

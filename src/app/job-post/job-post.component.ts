@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
 import { JobPost } from '../models/user.models';
-import { Database, set, ref, update, onValue, getDatabase } from '@angular/fire/database';
+import { Database, set, ref, update, onValue, getDatabase, child } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-job-post',
@@ -11,34 +14,60 @@ import { Observable } from 'rxjs';
 })
 export class JobPostComponent {
 
-  constructor(public database: Database) {
-  }
+  constructor(
+    public database: Database, 
+    private router: Router,
+    public authService: AuthService
+    ) {}
 
   jobTitle: String = 'Software Developer';
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
+  myUser: any = {};
+  isAlone: boolean = false;
 
   jobsArray = [{} as JobPost];
+  soloApplication = {} as JobPost;
 
   ngOnInit(): void {
     AOS.init();
-    const starCountRef = ref(this.database, 'job-postings/' );
-    onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val();
-    // const keys = Object.keys(data);
-    // const values = Object.values(data);
-    // console.log(data);
-    // console.log(keys);
-    // console.log(values);
-    this.jobsArray = ((Object as any).values(data));
-    });
+    this.myUser = this.authService.getUser();  
+    
+    if (this.router.url === "/#!") {
+      const starCountRef = ref(this.database, 'job-postings/' );
+      onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      this.jobsArray = ((Object as any).values(data));
+      });
 
-    console.log(this.jobsArray)
+      this.isAlone = false;
+      console.log(this.jobsArray)
+    }
+    else {
+      const dbRef = ref(this.database);
+      const starCountRef = child(dbRef, `students/${this.myUser.uid}`);
+      onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      const keys = Object.keys(data);
+      const values = Object.values(data);
+      this.getApplications(data.JobsApplied);
+      });  
+      
+    }
   }
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
     console.log('a letter', this.searchText);
   }
 
-
+  getApplications(id: any) {
+    const dbRef = ref(this.database);
+    const starCountRef = child(dbRef, `job-postings/${id}` );
+    onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+    this.soloApplication = data;
+    });
+    this.isAlone= true;
+  }
 }
