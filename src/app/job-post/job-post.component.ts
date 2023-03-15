@@ -32,7 +32,6 @@ export class JobPostComponent {
   ngOnInit(): void {
     AOS.init();
     this.myUser = this.authService.getUser();  
-    
     if (this.router.url === "/#!") {
       const starCountRef = ref(this.database, 'job-postings/' );
       onValue(starCountRef, (snapshot) => {
