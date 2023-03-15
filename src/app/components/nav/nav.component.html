@@ -20,7 +20,7 @@
                 <!-- For when authentication is implemented -->
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="#!">My Postings</a></li>
                 <!-- This will take employers to their "interviews" page, which is different from the students' "interviews" page -->
-                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
+                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-interviews">Interviews</a></li>
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-form">Create New Posting</a></li>
                 <!-- This will take students to their "interviews" page -->
                 <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
