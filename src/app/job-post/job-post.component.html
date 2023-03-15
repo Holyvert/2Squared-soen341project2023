@@ -1,6 +1,6 @@
 <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
 
-<div  class="cardz" >
+<div class="cardz" >
   <div
     *ngFor="let item of jobsArray"
     data-aos="fade-up"
@@ -10,7 +10,7 @@
   >
     <a
     
-      [routerLink]="['individual']"
+      [routerLink]="['../individual']"
       [queryParams]="item"
       *ngIf="
         searchText === '' || 
