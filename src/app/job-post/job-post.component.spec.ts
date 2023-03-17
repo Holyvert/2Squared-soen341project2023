@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '../app.module';
 
 import { JobPostComponent } from './job-post.component';
 
@@ -8,6 +9,7 @@ describe('JobPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ AppModule ],
       declarations: [ JobPostComponent ]
     })
     .compileComponents();
