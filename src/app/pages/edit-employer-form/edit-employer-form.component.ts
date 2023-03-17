@@ -82,6 +82,7 @@ export class EditEmployerFormComponent {
       JcFirstName: ['', [Validators.required]],
       JcLastName: ['', [Validators.required]],
       Website: ['', [Validators.required]],
+      Company: ['', [Validators.required]],
       Image: [null, [Validators.required]],
       City: ['', [Validators.required]],
       Province: ['', [Validators.required]],
@@ -101,11 +102,14 @@ export class EditEmployerFormComponent {
 
     this.EnableForm();
     this.Uploading = true;
-    var myDownloadLink = await this.storageService.uploadToFirestore(
+    var result = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
+
+    var myValues = result.split(',');
+    var myDownloadLink = myValues[0];
 
     this.onEditPost("x2xrnxjw41", this.employerForm.value, myDownloadLink);
     this.Uploading = false;

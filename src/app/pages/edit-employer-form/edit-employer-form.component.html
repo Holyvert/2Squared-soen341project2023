@@ -397,17 +397,17 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="organization"
-                                formControlName="organization"
+                                ngModel name="Company"
+                                formControlName="Company"
                               >
                               <mat-icon
                                 matSuffix
                                 *ngIf="
-                                  employerForm.controls.organization.hasError('required') &&
-                                  employerForm.controls.organization.touched"
+                                  employerForm.controls.Company.hasError('required') &&
+                                  employerForm.controls.Company.touched"
                                   >error_outline</mat-icon>
                                 <mat-error
-                                  *ngIf="employerForm.controls.organization.hasError('required')"
+                                  *ngIf="employerForm.controls.Company.hasError('required')"
                                 >Enter the organization</mat-error>
                             </mat-form-field>
                             <br>

@@ -1,7 +1,6 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
-      <button class="apply" mat-button type="button" >Apply</button>
-  
+      <button *ngIf="authority=='Student'" class="apply" mat-button type="button" >Apply</button>
 
       <!-- second row -->
       <div class="row m-2 ">
