@@ -109,6 +109,7 @@ export class EmployerFormComponent {
       DocsRequired: value.DocsRequired,
       ApplicationMethod: value.ApplicationMethod,
       Company: this.myEmployer.Company,
+      Email: this.myEmployer.Email,
       JcFirstName: value.JcFirstName,
       JcLastName: value.JcLastName,
       Website: value.Website,
