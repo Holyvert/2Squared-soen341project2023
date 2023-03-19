@@ -23,7 +23,7 @@
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-interviews">Interviews</a></li>
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-form">Create New Posting</a></li>
                 <!-- This will take students to their "interviews" page -->
-                <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="#!">Interviews</a></li>
+                <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="/student-interviews">Interviews</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
                 <li *ngIf="authService.isLoggedIn" class="nav-item"><a class="nav-link" (click)="authService.SignOut()">Log Out</a></li>
             </ul>

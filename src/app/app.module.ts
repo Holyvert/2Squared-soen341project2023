@@ -53,6 +53,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmployerInterviewsComponent } from './pages/employer-interviews/employer-interviews.component';
 import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.component';
+import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
+import { StudentIntCardComponent } from './student-int-card/student-int-card.component';
 
 
 @NgModule({
@@ -70,6 +72,9 @@ import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.
     IndividualJobPostingComponent,
     EmployerInterviewsComponent,
     EmployerIntCardComponent,
+    StudentInterviewsComponent,
+    StudentIntCardComponent,
+
   ],
   imports: [
     BrowserModule,
