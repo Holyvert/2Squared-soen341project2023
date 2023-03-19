@@ -6,34 +6,34 @@
 // User gets redirected to the landing page and gets notification that their job-posting was added.
 import { login, enterValueInInputEmployerForm, enterValueInTextAreaEmployerForm, enterValueInMatSelectEmployerForm, enterValueInMatOptionEmployerForm } from './utils.cy'
 describe('Employer Logs In', () => {
-    // it('Enters Credentials of a Student', () => {
-    //   login('isaczu15@gmail.com', 'soen341')
-    //   })
+    it('Enters Credentials of a Student', () => {
+      login('isaczu15@gmail.com', 'soen341')
+      })
 
-    //   it('Redirects to Landing Page, checks if is Employer', () => {
-    //     login('isaczu15@gmail.com', 'soen341')
-    //     cy.url().should('eq', 'http://localhost:4200/') 
-    //     cy.get('nav')
-    //       .find('#myDIV')
-    //       .find('ul')
-    //       .find('li')
-    //       .eq(3)
-    //       .contains('Create New Posting')
-    //       cy.get('app-landing')
-    //       .should('exist')
-    //   })
-    //   it('Employer clicks on "Create New Posting"', () => {
-    //     login('isaczu15@gmail.com', 'soen341')
-    //     cy.url().should('eq', 'http://localhost:4200/') 
-    //     cy.get('nav')
-    //       .find('#myDIV')
-    //       .find('ul')
-    //       .find('li')
-    //       .eq(3)
-    //       .click()
-    //       cy.url().should('eq', 'http://localhost:4200/employer-form') 
+      it('Redirects to Landing Page, checks if is Employer', () => {
+        login('isaczu15@gmail.com', 'soen341')
+        cy.url().should('eq', 'http://localhost:4200/') 
+        cy.get('nav')
+          .find('#myDIV')
+          .find('ul')
+          .find('li')
+          .eq(3)
+          .contains('Create New Posting')
+          cy.get('app-landing')
+          .should('exist')
+      })
+      it('Employer clicks on "Create New Posting"', () => {
+        login('isaczu15@gmail.com', 'soen341')
+        cy.url().should('eq', 'http://localhost:4200/') 
+        cy.get('nav')
+          .find('#myDIV')
+          .find('ul')
+          .find('li')
+          .eq(3)
+          .click()
+          cy.url().should('eq', 'http://localhost:4200/employer-form') 
 
-    //   })
+      })
       it('Employer fills up form without Image"', () => {
         login('isaczu15@gmail.com', 'soen341')
         cy.url().should('eq', 'http://localhost:4200/') 
@@ -72,10 +72,10 @@ describe('Employer Logs In', () => {
         enterValueInInputEmployerForm(9, 'Montreal')
         enterValueInInputEmployerForm(10, 'Quebec')
         enterValueInInputEmployerForm(11, 'H9J 3B4')
-        const p = '/Users/ann-marieczuboka/Documents/SOEN 341/2Squared-soen341project2023/cypress/fixtures/Images/photo-1498050108023-c5249f4df085.png'
-        cy.get('input')
-            .eq(12)
-            .selectFile(p, {force:true})
+        // const p = '/Users/ann-marieczuboka/Documents/SOEN 341/2Squared-soen341project2023/cypress/fixtures/Images/photo-1498050108023-c5249f4df085.png'
+        // cy.get('input')
+        //     .eq(12)
+        //     .selectFile(p, {force:true})
         cy.get('app-employer-form')
             .find('button')
             .eq(1)
