@@ -6,6 +6,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { LoginComponent } from './pages/login/login.component';
 import { EmployerFormComponent } from './pages/employer-form/employer-form.component';
 import { IndividualJobPostingComponent } from './pages/individual-job-posting/individual-job-posting.component';
+import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
 import { AuthguardGuard} from './services/authguard.guard';
 
 
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthguardGuard] },
   { path: 'employer-form', component: EmployerFormComponent, canActivate: [AuthguardGuard] },
   { path: 'individual', component: IndividualJobPostingComponent, canActivate: [AuthguardGuard] },
-
+  { path: 'student-interviews', component: StudentInterviewsComponent, canActivate: [AuthguardGuard] },
 ];
 
 @NgModule({
