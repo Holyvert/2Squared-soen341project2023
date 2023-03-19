@@ -52,6 +52,7 @@ import { getAuth } from 'firebase/auth';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmployerInterviewsComponent } from './pages/employer-interviews/employer-interviews.component';
+import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { EmployerInterviewsComponent } from './pages/employer-interviews/employe
     EmployerFormComponent,
     IndividualJobPostingComponent,
     EmployerInterviewsComponent,
+    EmployerIntCardComponent,
   ],
   imports: [
     BrowserModule,
