@@ -52,6 +52,7 @@ import { getAuth } from 'firebase/auth';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
+import { StudentIntCardComponent } from './student-int-card/student-int-card.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { StudentInterviewsComponent } from './pages/student-interviews/student-i
     EmployerFormComponent,
     IndividualJobPostingComponent,
     StudentInterviewsComponent,
+    StudentIntCardComponent,
   ],
   imports: [
     BrowserModule,
