@@ -17,7 +17,9 @@ authority!: string;
     var myUser = this.authService.getUser();
     // console.log(myUser);
     //console.log(myUser.photoURL)
-    this.authority = myUser.photoURL;
+    if (myUser){
+      this.authority = myUser.photoURL;
+    }
   }
 
   
