@@ -12,6 +12,7 @@ import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fir
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
 import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employer-form',
@@ -38,6 +39,7 @@ export class EditEmployerFormComponent {
     public storageService: StorageService,
     private authService: AuthService,
     private router: Router,
+    private Acrouter: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class EditEmployerFormComponent {
     });
         
     // example using a hard coded id (reading user profile)
-    const studentRef = child(dbRef, 'job-postings/x2xrnxjw41');
+    const studentRef = child(dbRef, 'job-postings/bu6f89ea7eu');
     onValue(studentRef, (snapshot) => {
       const data = snapshot.val();
       const keys = Object.keys(data);
@@ -111,7 +113,7 @@ export class EditEmployerFormComponent {
     var myValues = result.split(',');
     var myDownloadLink = myValues[0];
 
-    this.onEditPost("x2xrnxjw41", this.employerForm.value, myDownloadLink);
+    this.onEditPost("bu6f89ea7eu", this.employerForm.value, myDownloadLink);
     this.Uploading = false;
   }
 
