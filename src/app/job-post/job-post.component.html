@@ -9,12 +9,15 @@
     data-aos-mirror=true
   >
     <a
-      href=""
+    
+      [routerLink]="['../individual']"
+      [queryParams]="item"
       *ngIf="
-        searchText === '' ||
+        searchText === '' || 
         item.Company.toLowerCase().includes(searchText.toLowerCase()) ||
         item.JobTitle.toLowerCase().includes(searchText.toLowerCase()) ||
         item.JobLocation.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.City.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Description.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Duration.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Image.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -22,16 +25,16 @@
         item.Salary.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Supervisor.toLowerCase().includes(searchText.toLowerCase())
       "
-      @fadeAnimation
+     
    
     >
       <div class="card">
-        <img src="{{item.Image}}" alt="This  doesnt work" class="cardimg" />
+        <img src="{{item.Image}}" alt="Image not found" class="cardimg" />
         <div class="card-content" value="">
           <div class="top-card">
             <h3>{{ item.Company }}</h3>
             <P>{{ item.JobTitle }}</P>
-            <h4>{{item.JobLocation}}</h4>
+            <h4>{{item.City}}</h4>
           </div>
 
           <div class="bottom-card">
@@ -45,3 +48,5 @@
     </a>
   </div>
 </div>
+
+
