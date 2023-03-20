@@ -73,7 +73,7 @@ export class JobPostComponent {
       }); 
       });  
     }
-    else {
+    if  (this.router.url === "/applications"){
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/JobsApplied/`
       );
