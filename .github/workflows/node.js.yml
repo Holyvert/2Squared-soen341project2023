@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
     - run: npm i
     - run: npm --prefix project-root run test-headless
