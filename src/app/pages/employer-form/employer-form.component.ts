@@ -101,11 +101,13 @@ export class EmployerFormComponent {
       return;
     }
     this.Uploading = true;
-    var myDownloadLink = await this.storageService.uploadToFirestore(
+    var result = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
+    var myValues = result.split(',');
+    var myDownloadLink = myValues[0];
     await this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
     // Navigate to the home page (can be changed to a different page)
@@ -134,6 +136,7 @@ export class EmployerFormComponent {
       Province: value.Province,
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
+      EmployerID: this.myEmployer.ID
     });
     this.Uploading = false;
     this.sendNotification('Job Created');
