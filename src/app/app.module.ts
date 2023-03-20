@@ -51,6 +51,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { getAuth } from 'firebase/auth';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MyPostingsComponent } from './pages/my-postings/my-postings.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
 import { EmployerInterviewsComponent } from './pages/employer-interviews/employer-interviews.component';
 import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.component';
@@ -71,6 +72,7 @@ import { StudentIntCardComponent } from './student-int-card/student-int-card.com
     SearchComponent,
     EmployerFormComponent,
     IndividualJobPostingComponent,
+    MyPostingsComponent,
     ApplicationsComponent,
     EmployerInterviewsComponent,
     EmployerIntCardComponent,

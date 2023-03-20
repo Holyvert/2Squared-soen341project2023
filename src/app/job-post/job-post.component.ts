@@ -25,11 +25,13 @@ export class JobPostComponent {
   myUser: any = {};
 
   jobsArray = [{} as JobPost];
+  myEmployerPostingsIDs: any = [];
 
   ngOnInit() {
     AOS.init();
     this.myUser = this.authService.getUser();  
     this.jobsArray = [];
+    this.myEmployerPostingsIDs = [];
     if (this.router.url === "/" || this.router.url === "/#!") {
       
       const starCountRef = ref(this.database, 'job-postings/');
@@ -40,7 +42,38 @@ export class JobPostComponent {
       });
 
     }
-    else {
+    if (this.router.url === "/my-postings") {
+      const dbRef = ref(this.database);
+      const starCountRef = child(dbRef,`job-postings/`);
+      onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      const keys =  Object.keys(data);
+      console.log("keys: "+ keys)
+
+      keys.forEach(element => {
+        const starCountRef = child(dbRef, `job-postings/${element}` );
+        onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log("employer ifd: " +this.myUser.uid)
+        console.log("employer :"+data.EmployerID)
+        if (data.EmployerID == this.myUser.uid) {
+          this.myEmployerPostingsIDs.push(element);
+        }
+        });
+      }); 
+
+      this.myEmployerPostingsIDs.forEach((element: any) => {
+        const starCountRef = child(dbRef, `job-postings/${element}` );
+        onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        this.jobsArray.push(data);
+        console.log("length: "+this.jobsArray.length)
+        console.log(this.jobsArray)
+        });
+      }); 
+      });  
+    }
+    else if (this.router.url === "/applications") {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/JobsApplied/`
       );
@@ -63,6 +96,7 @@ export class JobPostComponent {
       console.log(this.jobsArray)
       });  
     }
+
   }
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
