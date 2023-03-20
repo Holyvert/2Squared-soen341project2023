@@ -55,7 +55,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-To run all the cypress tests in terminal, run the command "ng s", then open another terminal and run "npm run cypress:run". Around 1 minute per test.
+To run all the cypress tests in terminal, run the command `ng s`, then open another terminal and run `npm run cypress:run`. Around 1 minute per test.
 
 ## Further help
 
