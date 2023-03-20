@@ -154,7 +154,7 @@ export class UserProfileComponent {
       this.Uploading = true;
 
       if (this.myStudent.CV != null || this.myStudent.CV != '') {
-        //detete old CV
+        //detete old CV from storage
         var path = 'curriculum_vitae/' + this.myStudent.CVName;
         const fileRef = ref_storage(this.storage, path);
         deleteObject(fileRef)
