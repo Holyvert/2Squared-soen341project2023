@@ -18,7 +18,7 @@
                 <li *ngIf="authority=='Student'" class="nav-item"><a class="nav-link" href="/applications">Applied To</a></li>
 
                 <!-- For when authentication is implemented -->
-                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="">My Postings</a></li>
+                <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/my-postings">My Postings</a></li>
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-form">Create New Posting</a></li>
                 <!-- This will take students to their "interviews" page -->
                 <li *ngIf="authority=='Employer'" class="nav-item"><a class="nav-link" href="/employer-interviews">Interviews</a></li>

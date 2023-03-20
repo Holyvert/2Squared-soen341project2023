@@ -10,6 +10,7 @@ import { EmployerInterviewsComponent } from './pages/employer-interviews/employe
 import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
 import { AuthguardGuard} from './services/authguard.guard';
 import { ApplicationsComponent } from './pages/applications/applications.component';
+import { MyPostingsComponent } from './pages/my-postings/my-postings.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'applications', component: ApplicationsComponent, canActivate: [AuthguardGuard] },
   { path: 'employer-interviews', component: EmployerInterviewsComponent, canActivate: [AuthguardGuard] },
   { path: 'student-interviews', component: StudentInterviewsComponent, canActivate: [AuthguardGuard] },
+  { path: 'my-postings', component: MyPostingsComponent, canActivate: [AuthguardGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
