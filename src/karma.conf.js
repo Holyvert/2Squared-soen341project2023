@@ -1,4 +1,6 @@
-module.exports = function (config) {
+process.env.CHROME_BIN = require('puppeteer').executablePath() // IMPORTANT!
+
+export default function (config) {
   config.set({
     browsers: ["Chrome", "ChromeHeadless", "MyHeadlessChrome"],
 
