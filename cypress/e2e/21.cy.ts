@@ -1,0 +1,96 @@
+// Student logs in.
+// Student clicks on Profile section in nav bar.
+// Student gets redirected to User Profile Page.
+// Student clicks "Edit".
+// Student can modify the different sections of their profile.
+// Student clicks "Save".
+// Student now sees their profile with the edited information.
+
+import { login } from './utils.cy'
+describe('Student Logs In', () => {
+    it('Enters Credentials of a Student', () => {
+      login('am.czuboka@gmail.com', 'soen341')
+      })
+
+    it('Redirects to Landing Page, Clicks on "Profile" and checks if it is their profile', () => {
+      login('am.czuboka@gmail.com', 'soen341')
+      cy.url().should('eq', 'http://localhost:4200/') 
+      cy.get('nav')
+        .find('#myDIV')
+        .find('ul')
+        .find('li')
+        .eq(3)
+        .contains('Profile')
+        .click( {force: true} )
+      cy.url().should('eq', 'http://localhost:4200/profile') 
+      cy.get('.col-md-4')
+        .find('.information')
+        .eq(0)
+        .should('contain', 'Ann-Marie')
+      cy.get('.col-md-4')
+        .find('.information')
+        .eq(1)
+        .should('contain', 'Czuboka')
+      cy.get('.col-md-4')
+        .find('.information')
+        .eq(2)
+        .should('contain', 'Software Engineering')
+    })
+
+    it('User Edits Info and Sees New info after Save action', () => {
+      login('am.czuboka@gmail.com', 'soen341')
+      cy.url().should('eq', 'http://localhost:4200/') 
+      cy.get('nav')
+        .find('#myDIV')
+        .find('ul')
+        .find('li')
+        .eq(3)
+        .contains('Profile')
+        .click( {force: true} )
+      cy.url().should('eq', 'http://localhost:4200/profile') 
+      cy.get('app-user-profile')
+          .find('section')
+          .find('button')
+          .click( {force: true})
+      cy.get('mat-label')
+          .eq(0)
+          .click( {force: true})
+          .type('Ann-Marie')
+      cy.get('mat-label')
+          .eq(1)
+          .click( {force: true})
+          .type('Czuboka')
+      cy.get('mat-label')
+          .eq(2)
+          .click( {force: true})
+          .type('Software Engineering')
+      cy.get('mat-label')
+          .eq(3)
+          .click( {force: true})
+          .type('5146199323')
+      cy.get('mat-label')
+          .eq(4)
+          .click( {force: true})
+          .type('French')
+      cy.get('mat-label')
+          .eq(5)
+          .click( {force: true})
+          .type('This is my new description from Cypress Tests')
+      const p = '/Users/ann-marieczuboka/Documents/SOEN 341/2Squared-soen341project2023/cypress/fixtures/CV/Ann-Marie_Czuboka_CV.pdf'
+      cy.get('input')
+          .eq(5)
+          .selectFile(p, {force:true})
+      cy.get('app-user-profile')
+          .find('section')
+          .find('button')
+          .eq(0)
+          .click( {force: true})
+        cy.wait(2000)
+     cy.get('.col-md-8')
+        .find('.information')
+        .eq(3)
+        .should('contain', 'This is my new description from Cypress Tests')
+      })
+  })
+
+  
