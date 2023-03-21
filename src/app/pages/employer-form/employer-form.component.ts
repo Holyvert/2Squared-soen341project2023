@@ -12,7 +12,22 @@ import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } fro
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
+import { ErrorStateMatcher } from '@angular/material/core';
 
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 @Component({
   selector: 'app-employer-form',
   templateUrl: './employer-form.component.html',
@@ -30,9 +45,10 @@ export class EmployerFormComponent {
   myUser: any = {};
   myEmployer = {} as Employer;
   public file: any = {};
+  matcher = new MyErrorStateMatcher();
 
   constructor(
-    private form_builder: FormBuilder,
+    private formBuilder: FormBuilder,
     public database: Database,
     public storage: Storage,
     public storageService: StorageService,
@@ -43,6 +59,7 @@ export class EmployerFormComponent {
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
+    if(this.myUser){
     if (this.myUser.photoURL == 'Student') {
       this.router.navigate([''])
     }
@@ -55,7 +72,7 @@ export class EmployerFormComponent {
         console.log(this.myEmployer.Company);
     });
 
-    this.employerForm = this.form_builder.group({
+    this.employerForm = this.formBuilder.group({
       JobTitle: ['', [Validators.required]],
       JobLocation: ['', [Validators.required]],
       JobLocationType: ['', [Validators.required]],
@@ -76,6 +93,7 @@ export class EmployerFormComponent {
       PostalCode: ['', [Validators.required]],
     });
   }
+  }
   async onSubmit() {
 
     if (this.employerForm.invalid) {
@@ -83,11 +101,13 @@ export class EmployerFormComponent {
       return;
     }
     this.Uploading = true;
-    var myDownloadLink = await this.storageService.uploadToFirestore(
+    var result = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
+    var myValues = result.split(',');
+    var myDownloadLink = myValues[0];
     await this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
     // Navigate to the home page (can be changed to a different page)
@@ -116,6 +136,7 @@ export class EmployerFormComponent {
       Province: value.Province,
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
+      EmployerID: this.myEmployer.ID
     });
     this.Uploading = false;
     this.sendNotification('Job Created');
