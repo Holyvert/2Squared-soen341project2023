@@ -29,11 +29,11 @@
                     <p>
                       <!-- first_name -->
                       <mat-form-field appearance="fill">
-                        <mat-label>{{ myStudent.FirstName }}</mat-label>
+                        <mat-label>First Name</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myStudent.FirstName"
                           name="first_name"
                           formControlName="first_name"
                           [errorStateMatcher]="matcher"
@@ -63,11 +63,11 @@
                         class="example-full-width"
                         id="last_name"
                       >
-                        <mat-label>{{ myStudent.LastName }}</mat-label>
+                        <mat-label>Last Name</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myStudent.LastName"
                           name="last_name"
                           formControlName="last_name"
                           [errorStateMatcher]="matcher"
@@ -95,11 +95,11 @@
                         class="example-full-width"
                         id="program"
                       >
-                        <mat-label>{{ myStudent.Program }}</mat-label>
+                        <mat-label>Program</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myStudent.Program"
                           name="program"
                           formControlName="program"
                           [errorStateMatcher]="matcher"
@@ -145,11 +145,11 @@
                         class="example-full-width"
                         id="tel"
                       >
-                        <mat-label>{{ myStudent.PhoneNumber }}</mat-label>
+                        <mat-label>Phone Number</mat-label>
                         <input
                           matInput
                           formControlName="tel"
-                          ngModel
+                          [(ngModel)]="myStudent.PhoneNumber"
                           name="tel"
                           [errorStateMatcher]="matcher"
                           pattern="[- +()0-9]{10,12}"
@@ -187,10 +187,11 @@
                       <br />
                       <!-- language -->
                       <mat-form-field appearance="fill">
-                        <mat-label>{{ myStudent.Language }}</mat-label>
+                        <mat-label>Language</mat-label>
                         <input
                           matInput
                           required
+                          [(ngModel)]="myStudent.Language"
                           name="language"
                           formControlName="language"
                           [errorStateMatcher]="matcher"
@@ -216,10 +217,11 @@
                       <h6></h6>
                       <!-- Personal Description -->
                       <mat-form-field appearance="fill">
-                        <mat-label>{{ myStudent.Description }}</mat-label>
+                        <mat-label>Description</mat-label>
                         <textarea
                           matInput
                           required
+                          [(ngModel)]="myStudent.Description"
                           name="personal_description"
                           formControlName="personal_description"
                           [errorStateMatcher]="matcher"
@@ -248,6 +250,7 @@
                         <p>Your CV</p>
                         <input
                           required
+                          [(ngModel)]="myStudent.CV"
                           name="CV"
                           type="file"
                           class="form-control"
@@ -436,11 +439,11 @@
                     <p>
                       <!-- first_name -->
                       <mat-form-field appearance="fill">
-                        <mat-label>{{ myEmployer.FirstName }}</mat-label>
+                        <mat-label>First Name</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myEmployer.FirstName"
                           name="first_name"
                           formControlName="first_name"
                           [errorStateMatcher]="matcher"
@@ -470,11 +473,11 @@
                         class="example-full-width"
                         id="last_name"
                       >
-                        <mat-label>{{ myEmployer.LastName }}</mat-label>
+                        <mat-label>Last Name</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myEmployer.LastName"
                           name="last_name"
                           formControlName="last_name"
                           [errorStateMatcher]="matcher"
@@ -502,11 +505,11 @@
                         class="example-full-width"
                         id="company"
                       >
-                        <mat-label>{{ myEmployer.Company }}</mat-label>
+                        <mat-label>Company</mat-label>
                         <input
                           matInput
                           required
-                          ngModel
+                          [(ngModel)]="myEmployer.Company"
                           name="company"
                           formControlName="company"
                           [errorStateMatcher]="matcher"
@@ -547,10 +550,11 @@
 
                       <!-- language -->
                       <mat-form-field appearance="fill">
-                        <mat-label>{{ myEmployer.Language }}</mat-label>
+                        <mat-label>Language</mat-label>
                         <input
                           matInput
                           required
+                          [(ngModel)]="myEmployer.Language"
                           name="language"
                           formControlName="language"
                           [errorStateMatcher]="matcher"

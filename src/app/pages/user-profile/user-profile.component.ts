@@ -92,6 +92,7 @@ export class UserProfileComponent {
   ngOnInit(): void {
     //example using a hard coded id (reading user profile)
     this.myUser = this.authService.getUser();
+    if (this.myUser){
     if (this.myUser.photoURL == 'Student') {
       this.path = 'students/' + this.myUser.uid;
       this.isStudent = true;
@@ -132,6 +133,7 @@ export class UserProfileComponent {
       language: ['', [Validators.required]],
       company: ['', [Validators.required]],
     });
+  }
 
     AOS.init();
   }
@@ -152,7 +154,7 @@ export class UserProfileComponent {
       this.Uploading = true;
 
       if (this.myStudent.CV != null || this.myStudent.CV != '') {
-        //detete old CV
+        //detete old CV from storage
         var path = 'curriculum_vitae/' + this.myStudent.CVName;
         const fileRef = ref_storage(this.storage, path);
         deleteObject(fileRef)

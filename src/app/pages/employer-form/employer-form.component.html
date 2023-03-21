@@ -1,4 +1,4 @@
-<form [formGroup]="employerForm" (ngSubmit)="onSubmit()">
+<form *ngIf="myUser" [formGroup]="employerForm" >
   <section class="h-100 h-custom" style="background-color: #93aff6">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -32,6 +32,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Job Title</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -66,6 +67,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Job Location</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -102,6 +104,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Job Location Type</mat-label>
                       <mat-select
+                      [errorStateMatcher]="matcher"
                         required
                         ngModel
                         name="JobLocationType"
@@ -143,6 +146,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Salary</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -178,6 +182,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Duration</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -213,6 +218,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Supervisor</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -330,6 +336,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Deadline: </mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         required
                         matInput
                         [matDatepicker]="datepicker"
@@ -382,6 +389,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Documents Required</mat-label>
                       <mat-select
+                      [errorStateMatcher]="matcher"
                         required
                         ngModel
                         name="DocsRequired"
@@ -422,6 +430,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Application Method</mat-label>
                       <mat-select
+                      [errorStateMatcher]="matcher"
                       required
                       ngModel
                       name="ApplicationMethod"
@@ -485,6 +494,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Job Contact First Name</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -521,6 +531,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Job Contact Last Name</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -557,6 +568,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Website</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -592,6 +604,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>City</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -625,6 +638,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Province</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -660,6 +674,7 @@
                     <mat-form-field appearance="outline" style="width: 100%">
                       <mat-label>Postal Code</mat-label>
                       <input
+                      [errorStateMatcher]="matcher"
                         matInput
                         required
                         ngModel
@@ -712,7 +727,7 @@
                 </div>
                 <br /><br />
                 <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
                 </div>
               </div>
             </div>
