@@ -1,7 +1,7 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
       <button class="apply" mat-button type="button" >Apply</button>
-  
+      <ng-container > *ngIf="myUser"
 
       <!-- second row -->
       <div class="row m-2 ">
@@ -63,9 +63,9 @@
            <button *ngIf="myUser.uid==posting.getAll('EmployerID')" type="delete" class="btn btn-primary mt-5" (click)="onDeleteJobPosting()" >Delete</button>
           </div>
         </div>
+      </div></ng-container>
       </div>
-      
-    </div>
+    
   </section>
 
 
