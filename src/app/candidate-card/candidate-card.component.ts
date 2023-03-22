@@ -20,17 +20,11 @@ export class CandidateCardComponent implements OnInit{
     public authService: AuthService
     ) {}
 
-    
-    studentArray = [{} as StudentProfile];  //All Students
-    //posting!: any;  //Getting job post object
-
-    @Input() posting!: any;
+    @Input() student!: any;
 
     ngOnInit() {
-      // this.posting = this.Acrouter.snapshot.queryParamMap;
-       console.log(this.posting[0].ID, JSON.parse(JSON.stringify(this.posting)));
-
-
+      // this.student = this.Acrouter.snapshot.queryParamMap;
+       console.log(this.student, JSON.parse(JSON.stringify(this.student)));
     }
       
     //Disables 'Select for Interview' and changes the text
@@ -41,4 +35,3 @@ export class CandidateCardComponent implements OnInit{
 
 
 }
-

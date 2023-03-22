@@ -1,14 +1,11 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
       <button class="apply" mat-button type="button" >Apply</button>
-<<<<<<< Updated upstream
       <ng-container >
-=======
 
       <!--Button for 'See Candidates'-->
       <button *ngIf="isEmployerWhoPosted" class="btn btn-primary mt-5" [routerLink]="['../candidates']"
-      [queryParams]="sendPosting" >See Candidates</button>
->>>>>>> Stashed changes
+      [fragment]="index.toString()" >See Candidates</button>
 
       <!-- second row -->
       <div class="row m-2 ">

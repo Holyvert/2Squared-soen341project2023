@@ -6,7 +6,7 @@
         <br>
         
         <!--CUSTOM COMPONENT!-->
-        <app-candidate-card [posting] = [posting]></app-candidate-card>
+        <app-candidate-card *ngFor="let item of studentArray" [student] = item></app-candidate-card>
         <!--<app-employer-int-card></app-employer-int-card>--> <!--We might be able to reuse one and get rid of the other-->
 
     </div>

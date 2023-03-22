@@ -13,22 +13,16 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './individual-job-posting.component.html',
   styleUrls: ['./individual-job-posting.component.scss'],
 })
-<<<<<<< Updated upstream
 export class IndividualJobPostingComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   posting!: ParamMap;
-=======
-
-export class IndividualJobPostingComponent implements OnInit {
-  posting!: ParamMap;
-  sendPosting:any;
->>>>>>> Stashed changes
-  myUser: any;
+  authority!: string;
+  myUser!: any;
+  index!: any;
   isEmployerWhoPosted: boolean = false;
 
   constructor(
-<<<<<<< Updated upstream
     private Acrouter: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -36,34 +30,17 @@ export class IndividualJobPostingComponent implements OnInit {
     public database: Database
   ) {}
 
-  ngOnInit(): void {
-    this.myUser = this.authService.getUser();
+  ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
-=======
-    private Acrouter: ActivatedRoute, 
-    private router: Router, 
-    private snackBar: MatSnackBar,
-    public authService: AuthService,
-    public database: Database) {}
-
-  ngOnInit(): void {
-    //Sending to candidates page
-    //this.posting = this.Acrouter.snapshot.queryParamMap;
-  
-
-    //Checking that employer that is the one who posted job
-    
     this.myUser = this.authService.getUser();
-    this.posting = this.Acrouter.snapshot.queryParamMap;
-    this.sendPosting = JSON.parse(JSON.stringify(this.posting)).params;
-      console.log(this.sendPosting);
->>>>>>> Stashed changes
+    this.authority = this.myUser.photoURL;
+    this.index = this.Acrouter.snapshot.fragment;
+
     if (this.myUser && this.posting) {
       console.log(this.Acrouter.snapshot.queryParamMap);
       if (this.myUser.uid == this.posting.get('EmployerID'))
         this.isEmployerWhoPosted = true;
     }
-<<<<<<< Updated upstream
   }
 
   onDeleteJobPosting() {
@@ -83,8 +60,6 @@ export class IndividualJobPostingComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
-=======
->>>>>>> Stashed changes
   }
 
   //Send to candidates page
