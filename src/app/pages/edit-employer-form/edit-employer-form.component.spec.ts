@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AppModule } from 'src/app/app.module';
 import { EditEmployerFormComponent } from './edit-employer-form.component';
 
 describe('EditEmployerFormComponent', () => {
@@ -8,6 +8,7 @@ describe('EditEmployerFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ AppModule ],
       declarations: [ EditEmployerFormComponent ]
     })
     .compileComponents();
