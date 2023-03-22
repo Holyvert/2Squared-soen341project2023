@@ -46,10 +46,11 @@ export class EditEmployerFormComponent {
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
     this.index= this.Acrouter.snapshot.fragment;
-    if (this.myUser.photoURL == 'Student') {
-      this.router.navigate([''])
-    }
-
+    if (this.myUser){
+      if (this.myUser.photoURL == 'Student') {
+        this.router.navigate([''])
+      }
+    
     const dbRef = ref(this.database);
 
     const userRef = child(dbRef, 'employers/' + this.myUser.uid);
@@ -58,7 +59,7 @@ export class EditEmployerFormComponent {
         this.myEmployer = data;
         console.log(this.myEmployer.Company);
     });
-        
+  
     // example using a hard coded id (reading user profile)
     console.log("INDEX:" + this.index)
     const studentRef = child(dbRef, `job-postings/${this.index}`);
@@ -91,7 +92,7 @@ export class EditEmployerFormComponent {
     });
 
     AOS.init();
-
+  }
   }
 
   async onSubmit() {

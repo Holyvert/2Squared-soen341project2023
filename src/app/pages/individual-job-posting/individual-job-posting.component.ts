@@ -23,9 +23,10 @@ export class IndividualJobPostingComponent implements OnInit {
     this.myUser = this.authService.getUser();
     // console.log(myUser);
     //console.log(myUser.photoURL)
-    this.authority = this.myUser.photoURL;
+    if(this.myUser) {
+      this.authority = this.myUser.photoURL;
+    }
     this.index = this.Acrouter.snapshot.fragment;
-console.log("INDX HECJSBFV:" +this.index)
 
     if (this.myUser && this.posting) {
       console.log(this.Acrouter.snapshot.queryParamMap);
