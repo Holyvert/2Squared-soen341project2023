@@ -1,7 +1,7 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
       <button class="apply" mat-button type="button" >Apply</button>
-  
+      <ng-container >
 
       <!-- second row -->
       <div class="row m-2 ">
@@ -59,12 +59,13 @@
             <b>Province / State: </b> {{posting.getAll('Province')}} <br/>
             <b>Postal Code / Zip Code: </b> {{posting.getAll('PostalCode')}} <br/>
            </div>
-           <button type="delete" class="btn btn-primary mt-5" (click)="onDeleteJobPosting()" >Delete</button>
+           
+           <button *ngIf="isEmployerWhoPosted" type="delete" class="btn btn-primary mt-5" (click)="onDeleteJobPosting()" >Delete</button>
           </div>
         </div>
+      </div></ng-container>
       </div>
-      
-    </div>
+    
   </section>
 
 

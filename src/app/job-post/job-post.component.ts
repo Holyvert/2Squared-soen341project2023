@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
 import { JobPost } from '../models/user.models';
-import { Database, set, ref, onValue, child } from '@angular/fire/database';
+import { Database, set, ref, onValue, child, remove } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -89,6 +89,11 @@ export class JobPostComponent {
         const starCountRef = child(dbRef, `job-postings/${element}` );
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
+        if(data != null){
+          this.jobsArray.push(data);
+        }else{
+          remove(child(dbRef,`students/${this.myUser.uid}/JobsApplied/${element}`));
+        }
         this.jobsArray.push(data);
         console.log("length: "+this.jobsArray.length)
         console.log(this.jobsArray)
