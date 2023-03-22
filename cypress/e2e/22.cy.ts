@@ -17,7 +17,7 @@ describe('Student Logs In', () => {
           .find('ul')
           .find('li')
           .eq(1)
-          .contains('Applications')
+          .contains('Applied To')
           cy.get('app-landing')
           .should('exist')
       })
