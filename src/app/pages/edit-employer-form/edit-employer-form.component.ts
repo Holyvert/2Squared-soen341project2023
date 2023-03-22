@@ -156,7 +156,7 @@ export class EditEmployerFormComponent {
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
     });
-    this.sendNotification(`post ${index} was updated!`);
+    this.sendNotification(`Post ${value.JobTitle} was updated!`);
   }
 
 } //end of EmployerFormComponent

@@ -626,7 +626,11 @@
                           <div class="col-md-12 ps-5">
                             <label class="image-upload-container btn btn-bwm">
                               <input #imageInput
+                                      required
+                                      [(ngModel)]="jobPost.Image"
+                                      name="image"
                                       type="file"
+                                      class="form-control"
                                       accept="image/*"
                                       (change)="handleFileInput($event)"
                               >
@@ -934,6 +938,9 @@
             </div>
           </div>
         </section>
+        <div class="loading-indicator" *ngIf="Uploading">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
 </div>
 
   
