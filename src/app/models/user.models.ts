@@ -31,6 +31,7 @@ export interface JobPost {
   Province: String;
   PostalCode: String;
   Email: String;
+  EmployerID: String;
 }
 
 export interface StudentProfile {

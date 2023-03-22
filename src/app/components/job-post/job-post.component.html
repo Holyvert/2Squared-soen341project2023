@@ -13,7 +13,7 @@
       [routerLink]="['../individual']"
       [queryParams]="item"
       *ngIf="
-        searchText === '' ||
+        searchText === '' || 
         item.Company.toLowerCase().includes(searchText.toLowerCase()) ||
         item.JobTitle.toLowerCase().includes(searchText.toLowerCase()) ||
         item.JobLocation.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -48,3 +48,5 @@
     </a>
   </div>
 </div>
+
+
