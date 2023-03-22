@@ -74,8 +74,11 @@ export class AuthService {
       // once we get user object then update user display name using following method
       await user!.updateProfile({photoURL: authority});
       return user!.uid;
-    } catch (error) {
-      window.alert(error);
+    } catch (error: Error | any) {
+      if(error.code == "auth/email-already-in-use"){
+        window.alert("Error: Email already in use");
+        return '';
+      }
     }
     return '';
   }
