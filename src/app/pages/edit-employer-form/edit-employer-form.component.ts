@@ -23,13 +23,14 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class EditEmployerFormComponent {
   employerForm!: FormGroup;
   canEdit: Boolean = false;
-  defaultJobPost = {} as JobPost;
+  jobPost = {} as JobPost;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   Uploading = false;
   public file: any = {};
   myUser: any = {};
   myEmployer = {} as Employer;
+  index!: any;
 
   constructor(
     private form_builder: FormBuilder,
@@ -44,6 +45,7 @@ export class EditEmployerFormComponent {
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
+    this.index= this.Acrouter.snapshot.fragment;
     if (this.myUser.photoURL == 'Student') {
       this.router.navigate([''])
     }
@@ -58,15 +60,12 @@ export class EditEmployerFormComponent {
     });
         
     // example using a hard coded id (reading user profile)
-    const studentRef = child(dbRef, 'job-postings/bu6f89ea7eu');
+    console.log("INDEX:" + this.index)
+    const studentRef = child(dbRef, `job-postings/${this.index}`);
     onValue(studentRef, (snapshot) => {
       const data = snapshot.val();
-      const keys = Object.keys(data);
-      const values = Object.values(data);
       console.log(data);
-      console.log(keys);
-      console.log(values);
-      this.defaultJobPost = data;
+      this.jobPost = data;
         });
 
     this.employerForm = this.form_builder.group({
@@ -113,7 +112,7 @@ export class EditEmployerFormComponent {
     var myValues = result.split(',');
     var myDownloadLink = myValues[0];
 
-    this.onEditPost("bu6f89ea7eu", this.employerForm.value, myDownloadLink);
+    this.onEditPost(this.index, this.employerForm.value, myDownloadLink);
     this.Uploading = false;
   }
 

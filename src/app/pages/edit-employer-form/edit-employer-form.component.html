@@ -28,7 +28,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="JobTitle"
+                                [(ngModel)]="jobPost.JobTitle"
                                 formControlName="JobTitle"
                               >
                               <mat-icon
@@ -60,7 +60,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="JobLocation"
+                                [(ngModel)]="jobPost.JobLocation"
                                 formControlName="JobLocation"
                               >
                               <mat-icon
@@ -94,7 +94,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="JobLocationType"
+                                [(ngModel)]="jobPost.JobLocationType"
                                 formControlName="JobLocationType"
                               >
                               <mat-icon
@@ -127,7 +127,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Salary"
+                                [(ngModel)]="jobPost.Salary"
                                 formControlName="Salary"
                               >
                               <mat-icon
@@ -160,7 +160,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Duration"
+                                [(ngModel)]="jobPost.Duration"
                                 formControlName="Duration"
                               >
                               <mat-icon
@@ -193,7 +193,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Supervisor"
+                                [(ngModel)]="jobPost.Supervisor"
                                 formControlName="Supervisor"
                               >
                               <mat-icon
@@ -226,7 +226,7 @@
                               <textarea
                                 matInput
                                 required
-                                ngModel name="Description"
+                                [(ngModel)]="jobPost.Description"
                                 formControlName="Description"
                               ></textarea>
                               <mat-icon
@@ -258,7 +258,7 @@
                               <textarea 
                                 matInput
                                 required
-                                ngModel name="Requirements"
+                                [(ngModel)]="jobPost.Requirements"
                                 formControlName="Requirements"
                               ></textarea>
                               <mat-icon
@@ -294,7 +294,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Deadline"
+                                [(ngModel)]="jobPost.Deadline"
                                 formControlName="Deadline"
                               >
                               <mat-icon
@@ -327,7 +327,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="DocsRequired"
+                                [(ngModel)]="jobPost.DocsRequired"
                                 formControlName="DocsRequired"
                               >
                               <mat-icon
@@ -360,7 +360,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="ApplicationMethod"
+                                [(ngModel)]="jobPost.ApplicationMethod"
                                 formControlName="ApplicationMethod"
                               >
                               <mat-icon
@@ -397,7 +397,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Company"
+                                [(ngModel)]="jobPost.Company"
                                 formControlName="Company"
                               >
                               <mat-icon
@@ -431,7 +431,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="JcFirstName"
+                                [(ngModel)]="jobPost.JcFirstName"
                                 formControlName="JcFirstName"
                               >
                               <mat-icon
@@ -464,7 +464,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="JcLastName"
+                                [(ngModel)]="jobPost.JcLastName"
                                 formControlName="JcLastName"
                               >
                               <mat-icon
@@ -496,7 +496,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Website"
+                                [(ngModel)]="jobPost.Website"
                                 formControlName="Website"
                               >
                               <mat-icon
@@ -529,7 +529,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="City"
+                                [(ngModel)]="jobPost.City"
                                 formControlName="City"
                               >
                               <mat-icon
@@ -563,7 +563,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="Province"
+                                [(ngModel)]="jobPost.Province"
                                 formControlName="Province"
                               >
                               <mat-icon
@@ -596,7 +596,7 @@
                               <input 
                                 matInput
                                 required
-                                ngModel name="PostalCode"
+                                [(ngModel)]="jobPost.PostalCode"
                                 formControlName="PostalCode"
                               >
                               <mat-icon
@@ -671,7 +671,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.JobTitle}}
+                            {{jobPost.JobTitle}}
                           </div>
                         </div>
                          <!--Job Location-->
@@ -683,7 +683,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.JobLocation}}
+                            {{jobPost.JobLocation}}
                           </div>
                         </div> 
                         
@@ -697,7 +697,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.JobLocationType}}
+                            {{jobPost.JobLocationType}}
                           </div>
                         </div>
       
@@ -710,7 +710,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Salary}}
+                            {{jobPost.Salary}}
                           </div>
                         </div>
       
@@ -723,7 +723,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Duration}}
+                            {{jobPost.Duration}}
                           </div>
                         </div>
       
@@ -736,7 +736,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Supervisor}}
+                            {{jobPost.Supervisor}}
                           </div>
                         </div>
                         
@@ -749,7 +749,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Description}}
+                            {{jobPost.Description}}
                           </div>
                         </div>
       
@@ -762,7 +762,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Requirements}}
+                            {{jobPost.Requirements}}
                           </div>
                         </div>
       
@@ -779,7 +779,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Deadline}}
+                            {{jobPost.Deadline}}
                           </div>
                         </div>
                         
@@ -792,7 +792,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.DocsRequired}}
+                            {{jobPost.DocsRequired}}
                           </div>
                         </div>
                         
@@ -805,7 +805,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.ApplicationMethod}}
+                            {{jobPost.ApplicationMethod}}
                           </div>
                         </div>
       
@@ -821,7 +821,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Company}}
+                            {{jobPost.Company}}
                           </div>
                         </div>
                         
@@ -835,7 +835,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.JcFirstName}}
+                            {{jobPost.JcFirstName}}
 
                           </div>
                         </div>
@@ -849,7 +849,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.JcLastName}}
+                            {{jobPost.JcLastName}}
                           </div>
                         </div>
                         
@@ -862,7 +862,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Website}}
+                            {{jobPost.Website}}
                           </div>
                         </div>
                       
@@ -875,7 +875,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.City}}
+                            {{jobPost.City}}
                           </div>
                         </div>
                         
@@ -889,7 +889,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.Province}}
+                            {{jobPost.Province}}
                           </div>
                         </div>
       
@@ -902,7 +902,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-                            {{defaultJobPost.PostalCode}}
+                            {{jobPost.PostalCode}}
                           </div>
                         </div>
                         
@@ -915,7 +915,7 @@
                             <p>This picture will appear on the page of your company's job posting when a student wants to learn more about the job opportunity!</p>
             
                           </div>
-                              <img src="{{defaultJobPost.Image}}" alt="This  doesnt work">
+                              <img src="{{jobPost.Image}}" alt="This  doesnt work">
                         </div> 
                         <br><br>
                         <div class="col-md-12 text-center">

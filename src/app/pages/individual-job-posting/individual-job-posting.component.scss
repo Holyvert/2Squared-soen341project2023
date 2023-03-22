@@ -35,7 +35,25 @@
     cursor: pointer;
     transition: all 300ms ease-in-out;
   }
+  .edit {
+    border-radius: 25px;
+    border: 2px solid #0048fd;
+    background-color: #4c7bf3;
+    color: white !important;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
   .apply:hover  {
+    border-radius: 25px;
+    border: 2px solid green;
+    background-color: lightgreen;
+    padding: 14px 28px;
+    font-size: 16px;
+    scale: 1 1.2;
+  }
+  .edit:hover  {
     border-radius: 25px;
     border: 2px solid green;
     background-color: lightgreen;

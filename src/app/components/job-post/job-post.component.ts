@@ -23,6 +23,7 @@ export class JobPostComponent {
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
+  keyloop: Object[]= [];
 
   jobsArray = [{} as JobPost];
   myEmployerPostingsIDs: any = [];
@@ -37,6 +38,7 @@ export class JobPostComponent {
       const starCountRef = ref(this.database, 'job-postings/');
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
+      this.keyloop = Object.keys(data);
       this.jobsArray = ((Object as any).values(data));
       console.log(this.jobsArray)
       });
