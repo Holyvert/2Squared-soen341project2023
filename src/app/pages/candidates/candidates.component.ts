@@ -12,7 +12,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class CandidatesComponent implements OnInit {
   posting!: any;
-  studentArray = [{} as StudentProfile];
+  studentArray! :any
   constructor(private Acrouter: ActivatedRoute,public database: Database,){}
   
   ngOnInit() {
@@ -32,9 +32,9 @@ export class CandidatesComponent implements OnInit {
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         this.studentArray.push(data)})
-    })
-  })
-    console.log("the student array",this.studentArray);
+    });
+  });
+    console.log("the student array",this.studentArray,);
 
 }
 }

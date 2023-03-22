@@ -8,12 +8,12 @@
                 *ngFor="let attr of studentArray"
             >-->
                 <!--Template of Card-->
-                <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                <div *ngFor="let item of student[0]" class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
                         <div class="card-body p-3" style="background-color: #393f81; color: white;">
                             <div class="mt-3">
                                 <!--<h2 class="text-center">{{  }}</h2>-->
-                                <p class="text-center" id="program">Software Engineering</p>
+                                <p class="text-center" id="program">{{item.CV}}</p>
                             </div>
                         </div>
                         <div class="card-body p-3">
