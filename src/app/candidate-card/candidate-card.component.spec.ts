@@ -21,3 +21,5 @@ describe('CandidateCardComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
