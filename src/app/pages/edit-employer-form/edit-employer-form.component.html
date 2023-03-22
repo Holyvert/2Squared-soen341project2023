@@ -91,12 +91,18 @@
             
                             <mat-form-field appearance="outline" style="width: 100%;">
                               <mat-label>Job Location Type</mat-label>
-                              <input 
-                                matInput
+                              <mat-select
                                 required
+                                ngModel
+                                name="JobLocationType"
                                 [(ngModel)]="jobPost.JobLocationType"
                                 formControlName="JobLocationType"
                               >
+                                <mat-option value="On-site">On-site</mat-option>
+                                <mat-option value="Hybrid">Hybrid</mat-option>
+                                <mat-option value="Remote">Remote</mat-option>
+                              </mat-select>
+                            
                               <mat-icon
                                 matSuffix
                                 *ngIf="
@@ -296,16 +302,39 @@
                                 required
                                 [(ngModel)]="jobPost.Deadline"
                                 formControlName="Deadline"
-                              >
+                                [matDatepicker]="datepicker"
+                              />
+                              <mat-hint>MM/DD/YYYY</mat-hint>
+                              <mat-datepicker-toggle
+                                matIconSuffix
+                                [for]="datepicker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker #datepicker>
+                                <mat-datepicker-actions>
+                                  <button mat-button matDatepickerCancel>Cancel</button>
+                                  <button
+                                    mat-raised-button
+                                    color="primary"
+                                    matDatepickerApply
+                                  >
+                                    Apply
+                                  </button>
+                                </mat-datepicker-actions>
+                              </mat-datepicker>
                               <mat-icon
                                 matSuffix
                                 *ngIf="
                                   employerForm.controls.Deadline.hasError('required') &&
-                                  employerForm.controls.Deadline.touched"
-                                  >error_outline</mat-icon>
-                                <mat-error
-                                  *ngIf="employerForm.controls.Deadline.hasError('required')"
-                                >Enter the application deadline</mat-error>
+                                  employerForm.controls.Deadline.touched
+                                "
+                                >error_outline</mat-icon
+                              >
+                              <mat-error
+                                *ngIf="
+                                  employerForm.controls.Deadline.hasError('required')
+                                "
+                                >Enter the application deadline</mat-error
+                              >
                             </mat-form-field>
                             <br>
             
@@ -324,12 +353,16 @@
             
                             <mat-form-field appearance="outline" style="width: 100%;">
                               <mat-label>Documents Required</mat-label>
-                              <input 
-                                matInput
+                              <mat-select
                                 required
+                                ngModel
+                                name="DocsRequired"
                                 [(ngModel)]="jobPost.DocsRequired"
                                 formControlName="DocsRequired"
                               >
+                              <mat-option value="No Documents">No Documents</mat-option>
+                              <mat-option value="CV">CV</mat-option>
+                            </mat-select>
                               <mat-icon
                                 matSuffix
                                 *ngIf="
@@ -357,12 +390,17 @@
             
                             <mat-form-field appearance="outline" style="width: 100%;">
                               <mat-label>Application Method</mat-label>
-                              <input 
-                                matInput
-                                required
-                                [(ngModel)]="jobPost.ApplicationMethod"
-                                formControlName="ApplicationMethod"
+                              <mat-select
+                              required
+                              ngModel
+                              name="ApplicationMethod"
+                              [(ngModel)]="jobPost.ApplicationMethod"
+                              formControlName="ApplicationMethod"
                               >
+                              <mat-option value="Square">Square</mat-option>
+                              <mat-option value="Apply by Website">Apply by Website</mat-option>
+                              <mat-option value="Email">Email</mat-option>
+                              </mat-select>
                               <mat-icon
                                 matSuffix
                                 *ngIf="
@@ -391,25 +429,7 @@
             
                           </div>
                           <div class="col-md-9 pe-5">
-            
-                            <mat-form-field appearance="outline" style="width: 100%;">
-                              <mat-label>Organization</mat-label>
-                              <input 
-                                matInput
-                                required
-                                [(ngModel)]="jobPost.Company"
-                                formControlName="Company"
-                              >
-                              <mat-icon
-                                matSuffix
-                                *ngIf="
-                                  employerForm.controls.Company.hasError('required') &&
-                                  employerForm.controls.Company.touched"
-                                  >error_outline</mat-icon>
-                                <mat-error
-                                  *ngIf="employerForm.controls.Company.hasError('required')"
-                                >Enter the organization</mat-error>
-                            </mat-form-field>
+                            {{jobPost.Company}}
                             <br>
             
                           </div>
