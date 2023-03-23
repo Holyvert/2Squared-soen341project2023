@@ -38,7 +38,7 @@ Applied: Boolean = false;
       this.Applied=true;
      }
    }); 
-   console.log("notApplied : " +this.Applied)
+   console.log("Applied : " +this.Applied)
   }
 
     //will perform to backend for when apply button is clicked
