@@ -1,7 +1,8 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
-      <button class="apply" mat-button type="button" >Apply</button>
-  
+
+      <!-- button apply will only show if you havent applied to specific posting -->
+      <button *ngIf="!Applied" class="apply" mat-button type="button" (click)="applyAftermath()">Apply</button>
 
       <!-- second row -->
       <div class="row m-2 ">

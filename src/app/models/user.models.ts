@@ -18,7 +18,7 @@ export interface JobPost {
   JobTitle: string;
   Salary: string;
   Supervisor: string;
-  StudentListIDs: any; // list vof ids
+  Candidates: any; // list vof ids
   ID: string; //its own id
   Requirements: String;
   Deadline: String;
