@@ -12,7 +12,6 @@
     
       [routerLink]="['../individual']"
       [queryParams]="item"
-      [fragment]="this.keyloop[i].toString()"
       *ngIf="
         searchText === '' || 
         item.Company.toLowerCase().includes(searchText.toLowerCase()) ||

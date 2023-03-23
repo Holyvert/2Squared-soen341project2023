@@ -102,12 +102,17 @@ async onSubmit(){
   var rid: string = '';
   //var rid = await this.storageService.IDgenerator(path, this.database);
   rid = await this.authService.SignUp(this.registerForm.value.Email, this.registerForm.value.Password, authority);
-  this.registerUser(this.registerForm.value, rid, path);
-  this.router.navigate(['']);
+  if(rid == ''){
+    this.Uploading = false;
+    return;
+  }
+  var res = await this.registerUser(this.registerForm.value, rid, path);
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  this.router.navigate(['/profile']);
   this.Uploading = false;
 }
 
-registerUser(value: any, id: string, path: string) {
+async registerUser(value: any, id: string, path: string) {
   if (path == 'students/') {
     set(ref(this.database, path + id), {
       FirstName: value.FirstName,
