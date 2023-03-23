@@ -647,7 +647,7 @@
                             <label class="image-upload-container btn btn-bwm">
                               <input #imageInput
                                       required
-                                      [(ngModel)]="jobPost.Image"
+
                                       name="image"
                                       type="file"
                                       class="form-control"
@@ -939,7 +939,7 @@
                             <p>This picture will appear on the page of your company's job posting when a student wants to learn more about the job opportunity!</p>
             
                           </div>
-                              <img src="{{jobPost.Image}}" alt="This  doesnt work">
+                              <img *ngIf="jobPost.Image" src="{{jobPost.Image}}" alt="This  doesnt work">
                         </div> 
                         <br><br>
                         <div class="col-md-12 text-center">

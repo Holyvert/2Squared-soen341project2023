@@ -137,7 +137,8 @@ export class EmployerFormComponent {
       Province: value.Province,
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
-      EmployerID: this.myEmployer.ID
+      EmployerID: this.myEmployer.ID,
+      ID: myId
     });
     this.Uploading = false;
     this.sendNotification('Job Created');

@@ -7,6 +7,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { JobPost } from 'src/app/models/user.models';
 
 @Component({
   selector: 'app-individual-job-posting',
@@ -19,13 +20,12 @@ export class IndividualJobPostingComponent {
   posting!: ParamMap;
   authority!: string;
   myUser!: any;
-  index!: any;
   isEmployerWhoPosted: boolean = false;
-
 
   constructor(
     private Acrouter: ActivatedRoute,
-    private router: Router, private authService: AuthService,
+    private router: Router,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     public database: Database
   ) {}
@@ -34,25 +34,25 @@ export class IndividualJobPostingComponent {
     this.myUser = this.authService.getUser();
     this.posting = this.Acrouter.snapshot.queryParamMap;
     if (this.myUser && this.posting) {
-      if (this.myUser.uid == this.posting.get('EmployerID'))
+      if (this.myUser.photoURL == 'Student') {
+        this.authority = 'Student';
+      } else if (this.myUser.photoURL == 'Employer') {
+        this.authority = 'Employer';
+        if (this.myUser.uid == this.posting.get('EmployerID'))
+          console.log(this.posting.keys);
         this.isEmployerWhoPosted = true;
+      }
     }
-
-    
-     // console.log(myUser);
-     //console.log(myUser.photoURL)
-
-     this.index = this.Acrouter.snapshot.fragment;
-
   }
 
   onDeleteJobPosting() {
     if (this.myUser) {
-      const index = this.Acrouter.snapshot.fragment;
       const dbRef = ref(this.database);
 
-      remove(child(dbRef, `job-postings/${index}`));
-      this.sendNotification(`user ${index} was deleted!`);
+      remove(child(dbRef, `job-postings/${this.posting.get('ID')}`));
+      this.sendNotification(
+        `Posting ${this.posting.get('JobTitle')} was deleted!`
+      );
       this.router.navigate(['']);
     }
   }
@@ -63,7 +63,5 @@ export class IndividualJobPostingComponent {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
-   
   }
-
 }
