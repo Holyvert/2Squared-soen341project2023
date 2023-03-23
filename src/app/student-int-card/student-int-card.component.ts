@@ -24,21 +24,23 @@ export class StudentIntCardComponent {
       this.myUser = this.authService.getUser();  
       this.selectedInterviewsArray = [];  
       const dbRef = ref(this.database);
-      const starCountRef = ref(this.database, `students/${this.myUser.uid}/SelectedInterviews`);
-      onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      const keys =  Object.keys(data);
-      this.selectedInterviewsIDs = ((Object as any).values(keys));
-      console.log(this.selectedInterviewsIDs)
-
-      this.selectedInterviewsIDs.forEach((element: any) => {
-        const starCountRef = child(dbRef, `job-postings/${element}` );
+      if(this.myUser) {
+        const starCountRef = ref(this.database, `students/${this.myUser.uid}/SelectedInterviews`);
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        this.selectedInterviewsArray.push(data);
+        const keys =  Object.keys(data);
+        this.selectedInterviewsIDs = ((Object as any).values(keys));
+        console.log(this.selectedInterviewsIDs)
+  
+        this.selectedInterviewsIDs.forEach((element: any) => {
+          const starCountRef = child(dbRef, `job-postings/${element}` );
+          onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          this.selectedInterviewsArray.push(data);
+          });
+        }); 
         });
-      }); 
-      });
+      }
     }
 
 }
