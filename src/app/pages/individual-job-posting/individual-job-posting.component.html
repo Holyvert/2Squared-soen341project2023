@@ -1,6 +1,7 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
-     
+      
+      <ng-container >
 
       <!-- second row -->
       <div class="row m-2 ">
@@ -58,6 +59,8 @@
             <b>Province / State: </b> {{posting.getAll('Province')}} <br/>
             <b>Postal Code / Zip Code: </b> {{posting.getAll('PostalCode')}} <br/>
            </div>
+           
+           <button *ngIf="isEmployerWhoPosted" type="delete" class="btn btn-primary mt-5" (click)="onDeleteJobPosting()" >Delete</button>
           </div>
 
              <div class="row my-2">
@@ -67,9 +70,9 @@
             <button *ngIf="isEmployerWhoPosted" class="edit" [routerLink]="['../edit-employer-form']" [fragment]="this.index.toString()">Edit</button>
           </div>
         </div>
+      </div></ng-container>
       </div>
-      
-    </div>
+    
   </section>
 
 
