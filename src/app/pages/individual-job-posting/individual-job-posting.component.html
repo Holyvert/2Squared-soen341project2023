@@ -1,6 +1,6 @@
 <section class="vh-200" style="background-color: #93aff6">
     <div class="container py-2 h-100 px-xs-0" >
-      <button class="apply" mat-button type="button" >Apply</button>
+      
       <ng-container >
 
       <!-- second row -->
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="row ml-2">
-            <div style="background-color:#CBC3E3; border-radius: 25px; padding: 15px;">
+            <div style="background-color:#cbc3e3; border-radius: 25px; padding: 15px;">
               <div class="center_title">
                 <b>Company Information</b> <br/><hr>
               </div>
@@ -61,6 +61,13 @@
            </div>
            
            <button *ngIf="isEmployerWhoPosted" type="delete" class="btn btn-primary mt-5" (click)="onDeleteJobPosting()" >Delete</button>
+          </div>
+
+             <div class="row my-2">
+               <button *ngIf="authority=='Student'" class="apply" mat-button type="button"  >Apply</button>
+          </div>
+          <div class="row my-2">
+            <button *ngIf="isEmployerWhoPosted" class="edit" [routerLink]="['../edit-employer-form']" [fragment]="this.index.toString()">Edit</button>
           </div>
         </div>
       </div></ng-container>
