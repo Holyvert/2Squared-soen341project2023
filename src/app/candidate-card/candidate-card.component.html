@@ -1,9 +1,13 @@
-<!--Beginning of Multiple Cards-->
-<div class="candidate-cards">
-
-    <!--This outer for-loop always only iterates once so it has no effect on time complexity-->
-    <div *ngFor="let thing of jobs[0]"> 
+<!--This outer for-loop always only iterates once so it has no effect on time complexity-->
+<div *ngFor="let thing of jobs[0]">
+    
+    <h1>Candidates</h1>
+    <p>See the students that have applied to your job post below!</p>
+    
+    <!--Beginning of Multiple Cards-->
+    <div class="candidate-cards">
         <div *ngFor="let item of student[0]">
+            
                 <!--Template of Card-->
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
@@ -27,6 +31,7 @@
                     </div>
                 </div>
                 <!--End of Template-->
+           
         </div>
     </div>
 </div>

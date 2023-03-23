@@ -1,13 +1,8 @@
-<!--This page is for employers to see their prending interviews with students-->
+<!--This page is for employers to see the students/candidates that have applied to their job-post-->
 <div class="container mt-3 pt-4">
     <div class="row">
-        <h2>Candidates</h2>
-        <p>See all the students that have applied to your job post below!</p>
-        <br>
-        
-        <!--CUSTOM COMPONENT!-->
+
         <app-candidate-card [student] = [studentArray] [jobs]=[jobInfo]></app-candidate-card>
-        <!--<app-employer-int-card></app-employer-int-card>--> <!--We might be able to reuse one and get rid of the other-->
 
     </div>
 </div>

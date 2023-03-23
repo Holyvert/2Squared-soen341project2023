@@ -14,43 +14,54 @@ export class CandidatesComponent implements OnInit {
   posting!: any;
   studentArray! :any
   jobInfo! : any;
-  constructor(private Acrouter: ActivatedRoute,public database: Database,){}
+  myUser: any={};
+  constructor(
+    private Acrouter: ActivatedRoute,
+    public database: Database,
+    public authService: AuthService)
+    {}
   
   ngOnInit() {
+
+    this.myUser = this.authService.getUser();
     this.studentArray= [];
     this.jobInfo = [];
     this.posting =this.Acrouter.snapshot.fragment;
      //console.log("this posting", this.posting);
     const dbRef = ref(this.database);
-    const starCountRef = child(dbRef,`job-postings/`+this.posting+'/StudentListIDs');
-    //Trying something
-    const trying = child(dbRef, 'job-postings/' + this.posting);
-   
-    onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val();
-    const keys =  Object.keys(data);
-    console.log(data);
-    //Beginning of for-each
-    keys.forEach(element =>{
-      const starCountRef = child(dbRef,'students/'+element);
 
+    //Adding this if-statement to see if it will fix build issue
+    if (this.myUser){
+      const starCountRef = child(dbRef,`job-postings/`+this.posting+'/StudentListIDs');
+      const dir_jobPost = child(dbRef, 'job-postings/' + this.posting);
+     
       onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        this.studentArray.push(data)})
-    });
-    //end of for-each
-  });
-  //console.log("the student array",this.studentArray,);
-
-  //Added this just now
-  onValue(trying, (snapshot) => {
-    const job_data = snapshot.val();
-    const keys = Object.keys(job_data);
-    console.log("job-info: ", job_data);
-    this.jobInfo.push(job_data);
-
-  });
+      const data = snapshot.val();
+      const keys =  Object.keys(data);
+      console.log(data);
+      //Beginning of for-each
+      keys.forEach(element =>{
+        const starCountRef = child(dbRef,'students/'+element);
+  
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          this.studentArray.push(data)})
+        });
+        //end of for-each
+      });
+      //console.log("the student array",this.studentArray,);
+  
+      //Added this just now
+      onValue(dir_jobPost, (snapshot) => {
+        const job_data = snapshot.val();
+        const keys = Object.keys(job_data);
+        console.log("job-info: ", job_data);
+        this.jobInfo.push(job_data);
+  
+      });
+    }
+   
     
 
-}
+  }
 }

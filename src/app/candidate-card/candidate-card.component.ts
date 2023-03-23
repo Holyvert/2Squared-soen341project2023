@@ -24,7 +24,7 @@ export class CandidateCardComponent implements OnInit{
     @Input() jobs!: any;
 
     ngOnInit() {
-      
+    
      // this.student = this.Acrouter.snapshot.queryParamMap;
      var sumeting = this.student[0];
       console.log('the students', sumeting, this.student[0].CV);
