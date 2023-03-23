@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-import { JobPost } from '../models/user.models';
-import { Database, set, ref, onValue, child } from '@angular/fire/database';
+import { JobPost } from '../../models/user.models';
+import { Database, set, ref, update, child, onValue, getDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
 
 @Component({
   selector: 'app-job-post',
@@ -23,6 +23,7 @@ export class JobPostComponent {
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
+  keyloop: Object[]= [];
 
   jobsArray = [{} as JobPost];
   myEmployerPostingsIDs: any = [];
@@ -37,6 +38,7 @@ export class JobPostComponent {
       const starCountRef = ref(this.database, 'job-postings/');
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
+      this.keyloop = Object.keys(data);
       this.jobsArray = ((Object as any).values(data));
       console.log(this.jobsArray)
       });

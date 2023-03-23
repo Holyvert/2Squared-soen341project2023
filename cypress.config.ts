@@ -16,6 +16,7 @@ export default defineConfig({
     specPattern: '**/*.cy.ts'
   },
 
-  "video": false
+  "video": false,
+  "screenshotOnRunFailure": false
   
 })

@@ -1,6 +1,7 @@
 import { onValue } from '@angular/fire/database';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-individual-job-posting',
@@ -9,10 +10,29 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class IndividualJobPostingComponent implements OnInit {
   posting!: ParamMap;
-  constructor(private Acrouter: ActivatedRoute, private router: Router) {}
+  authority!: string;
+  myUser!: any;
+  index!: any;
+  isEmployerWhoPosted: boolean = false;
+  constructor(private Acrouter: ActivatedRoute, private router: Router, private authService: AuthService,
+    ) {}
 
   ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
     console.log(this.posting.getAll('Deadline'));
+    this.myUser = this.authService.getUser();
+    // console.log(myUser);
+    //console.log(myUser.photoURL)
+    if(this.myUser) {
+      this.authority = this.myUser.photoURL;
+    }
+    this.index = this.Acrouter.snapshot.fragment;
+
+    if (this.myUser && this.posting) {
+      console.log(this.Acrouter.snapshot.queryParamMap);
+      if (this.myUser.uid == this.posting.get('EmployerID'))
+        this.isEmployerWhoPosted = true;
+    }
   }
+
 }
