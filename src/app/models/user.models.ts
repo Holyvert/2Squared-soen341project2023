@@ -46,6 +46,7 @@ export interface StudentProfile {
   CV: string;
   CVName: string;
   ID: string;
+  SelectedInterviews: any;
   
 }
 
@@ -53,4 +54,13 @@ export interface User {
   uid: string;
   email: string;
   photoURL: string;
+}
+
+export interface SelectedInterview {
+  CompanyName: string;
+  JobTitle: string;
+  Supervisor: string;
+  JcFirstName: string;
+  JcLastName: string;
+  Email: string;
 }
