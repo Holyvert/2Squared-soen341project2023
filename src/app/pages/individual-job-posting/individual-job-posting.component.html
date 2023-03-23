@@ -113,14 +113,15 @@
           <div class="row my-2">
             <button
               *ngIf="isEmployerWhoPosted"
+               mat-button
+               id ='delete'
               type="delete"
-              class="edit"
+              class="apply"
               (click)="onDeleteJobPosting()"
             >
               Delete
             </button>
           </div>
-
           <div class="row my-2">
             <button
               *ngIf="authority == 'Student'"
@@ -134,8 +135,10 @@
           <div class="row my-2">
             <button
               *ngIf="isEmployerWhoPosted"
-              class="edit"
+               mat-button
+              class="apply"
               [routerLink]="['../edit-employer-form', posting.get('ID')]"
+              id="edit"
             >
               Edit
             </button>
