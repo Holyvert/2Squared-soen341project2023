@@ -21,6 +21,7 @@ export class CandidateCardComponent implements OnInit{
     ) {}
 
     @Input() student!: any;
+    @Input() jobs!: any;
 
     ngOnInit() {
       
