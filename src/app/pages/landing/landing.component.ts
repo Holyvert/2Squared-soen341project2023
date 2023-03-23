@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-import { JobPostComponent } from 'src/app/job-post/job-post.component';
+import { JobPostComponent } from 'src/app/components/job-post/job-post.component';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
