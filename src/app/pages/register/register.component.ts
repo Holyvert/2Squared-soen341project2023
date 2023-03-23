@@ -126,6 +126,7 @@ async registerUser(value: any, id: string, path: string) {
       CV: '',
       CVName: '',
       JobsApplied: '', // list vof ids
+      SelectedInterviews:'',
       ID: id,
       //Password: value.Password
     });
