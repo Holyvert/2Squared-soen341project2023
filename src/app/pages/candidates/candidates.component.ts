@@ -23,7 +23,7 @@ export class CandidatesComponent implements OnInit {
   
   ngOnInit() {
 
-    this.myUser = this.authService.getUser();
+    //this.myUser = this.authService.getUser();
     this.studentArray= [];
     this.jobInfo = [];
     this.posting =this.Acrouter.snapshot.fragment;
@@ -31,7 +31,7 @@ export class CandidatesComponent implements OnInit {
     const dbRef = ref(this.database);
 
     //Adding this if-statement to see if it will fix build issue
-    if (this.myUser){
+    //if (this.myUser){
       const starCountRef = child(dbRef,`job-postings/`+this.posting+'/StudentListIDs');
       const dir_jobPost = child(dbRef, 'job-postings/' + this.posting);
      
@@ -59,7 +59,7 @@ export class CandidatesComponent implements OnInit {
         this.jobInfo.push(job_data);
   
       });
-    }
+    //}
    
     
 
