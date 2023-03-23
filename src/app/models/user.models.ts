@@ -45,7 +45,7 @@ export interface StudentProfile {
   CV: string;
   CVName: string;
   ID: string;
-  Password: string;
+  
 }
 
 export interface User {

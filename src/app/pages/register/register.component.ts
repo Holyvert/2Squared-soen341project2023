@@ -108,7 +108,8 @@ async onSubmit(){
     return;
   }
   var res = await this.registerUser(this.registerForm.value, rid, path);
-  this.router.navigate(['']);
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  this.router.navigate(['/profile']);
   this.Uploading = false;
 }
 

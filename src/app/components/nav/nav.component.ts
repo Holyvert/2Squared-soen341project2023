@@ -1,5 +1,7 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-nav',
@@ -8,18 +10,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavComponent implements OnInit, AfterViewChecked {
 authority!: string;
-  constructor(public authService: AuthService) { }
+myUser!: any;
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterViewChecked() {
-    var myUser = this.authService.getUser();
+     this.myUser = this.authService.getUser();
     // console.log(myUser);
     //console.log(myUser.photoURL)
-    if (myUser){
-      this.authority = myUser.photoURL;
+    if (this.myUser){
+      this.authority = this.myUser.photoURL;
     }
+   
   }
 
   
