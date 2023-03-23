@@ -38,9 +38,10 @@ export class IndividualJobPostingComponent {
         this.authority = 'Student';
       } else if (this.myUser.photoURL == 'Employer') {
         this.authority = 'Employer';
-        if (this.myUser.uid == this.posting.get('EmployerID'))
+        if (this.myUser.uid == this.posting.get('EmployerID')) {
           console.log(this.posting.keys);
-        this.isEmployerWhoPosted = true;
+          this.isEmployerWhoPosted = true;
+        }
       }
     }
   }
