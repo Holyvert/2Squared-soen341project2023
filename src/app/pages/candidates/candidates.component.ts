@@ -4,6 +4,7 @@ import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import { child, Database, onValue, ref} from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { RouterTestingModule } from "@angular/router/testing";
 
 @Component({
   selector: 'app-candidates',
