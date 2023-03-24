@@ -60,7 +60,6 @@ import { StudentIntCardComponent } from './student-int-card/student-int-card.com
 import { CandidatesComponent } from './pages/candidates/candidates.component';
 import { CandidateCardComponent } from './candidate-card/candidate-card.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

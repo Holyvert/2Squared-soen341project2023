@@ -5,7 +5,7 @@ import { Database, set, ref, onValue, child } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { JobPostComponent } from '../job-post/job-post.component';
-import { RouterTestingModule } from "@angular/router/testing";
+//import { RouterTestingModule } from "@angular/router/testing";
 
 @Component({
   selector: 'app-candidate-card',
