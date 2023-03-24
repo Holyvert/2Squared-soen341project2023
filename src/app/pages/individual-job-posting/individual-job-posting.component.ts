@@ -8,6 +8,7 @@ import {
 } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { JobPost } from 'src/app/models/user.models';
+import { update } from 'firebase/database';
 
 @Component({
   selector: 'app-individual-job-posting',
@@ -20,7 +21,8 @@ export class IndividualJobPostingComponent {
   posting!: ParamMap;
   authority!: string;
   myUser!: any;
-  isEmployerWhoPosted: boolean = false;
+  isEmployerWhoPosted: boolean = false;  
+  favorited: Boolean = false;
 
   constructor(
     private Acrouter: ActivatedRoute,
@@ -43,6 +45,16 @@ export class IndividualJobPostingComponent {
           this.isEmployerWhoPosted = true;
         }
       }
+      const dbRef= ref(this.database);
+      var id = this.myUser.uid;
+      const starCountRef = child(dbRef, `students/${id}/Favorites`)
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        if (keys.includes(this.posting.get('ID') as any)) {
+          this.favorited = true;
+        }
+      })
     }
   }
 
@@ -66,6 +78,19 @@ export class IndividualJobPostingComponent {
     });
   }
   addToFavorites()  {
-    
+    const dbRef= ref(this.database);
+     var id = this.myUser.uid;
+     if(this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`)
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        if (!keys.includes(this.posting.get('ID') as any)) {
+          var postingId = this.posting.get('ID') as any;
+          const userRef = child(dbRef, `students/${id}/Favorites`)
+          update(userRef, {[postingId]: ""});
+        }
+      })
+     }
   }
 }

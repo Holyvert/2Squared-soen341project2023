@@ -131,12 +131,13 @@
             >
               Apply
             </button>
+            <div class="pt-1"> </div>
             <button
-              *ngIf="authority == 'Student'"
+              *ngIf="authority == 'Student' && !favorited"
               class="apply"
               mat-button
               type="button"
-              (onclick) = "addToFavorites()"
+              (click) = addToFavorites()
             >
               Add To Favorites
             </button>
