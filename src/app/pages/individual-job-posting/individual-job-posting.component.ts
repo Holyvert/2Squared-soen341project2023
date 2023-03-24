@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Database, ref, child, remove, onValue } from '@angular/fire/database';
+import { Database, ref, child, remove, onValue, set } from '@angular/fire/database';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -54,6 +54,9 @@ export class IndividualJobPostingComponent {
         if (keys.includes(this.posting.get('ID') as any)) {
           this.favorited = true;
         }
+       else if (!keys.includes(this.posting.get('ID') as any)){
+          this.favorited = false;
+        }
       })
     }
   }
@@ -77,7 +80,7 @@ export class IndividualJobPostingComponent {
       verticalPosition: this.verticalPosition,
     });
   }
-  addToFavorites()  {
+  addToFavorites() {
     const dbRef= ref(this.database);
      var id = this.myUser.uid;
      if(this.myUser) {
@@ -85,10 +88,27 @@ export class IndividualJobPostingComponent {
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         const keys = Object.keys(data);
-        if (!keys.includes(this.posting.get('ID') as any)) {
+        if (!keys.includes(this.posting.get('ID') as any) || !keys) {
           var postingId = this.posting.get('ID') as any;
           const userRef = child(dbRef, `students/${id}/Favorites`)
           update(userRef, {[postingId]: ""});
+        }
+      })
+     }
+  }
+  deleteFromFavorites() {
+    const dbRef= ref(this.database);
+     var id = this.myUser.uid;
+     if(this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`)
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        if (keys.length == 1) {
+        }
+        if (keys.includes(this.posting.get('ID') as any)) {
+          var postingId = this.posting.get('ID') as any;
+          remove(child(dbRef, `students/${id}/Favorites/${postingId}`))
         }
       })
      }

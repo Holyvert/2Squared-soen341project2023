@@ -141,6 +141,16 @@
             >
               Add To Favorites
             </button>
+            <div class="pt-1"> </div>
+            <button
+              *ngIf="authority == 'Student' && favorited"
+              class="apply"
+              mat-button
+              type="button"
+              (click) = deleteFromFavorites()
+            >
+              UnFavorite
+            </button>
           </div>
           <div class="row my-2">
             <button

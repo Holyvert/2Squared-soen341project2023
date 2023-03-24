@@ -33,15 +33,14 @@ export class JobPostComponent {
     this.jobsArray = [];
     this.myEmployerPostingsIDs = [];
     if (this.router.url === "/" || this.router.url === "/#!") {
-      
       const starCountRef = ref(this.database, 'job-postings/');
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       this.jobsArray = ((Object as any).values(data));
       console.log(this.jobsArray)
       });
-
     }
+
     if (this.router.url === "/my-postings") {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`job-postings/`);
@@ -92,17 +91,12 @@ export class JobPostComponent {
         console.log(this.jobsArray)
         });
       }); 
-      console.log("length: "+this.jobsArray.length)
-      console.log(this.jobsArray)
       });  
     }
 
     else if (this.router.url === "/favorites") {
-      this.jobsArray = [];
-
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/Favorites/`);
-
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       console.log(data)
@@ -115,15 +109,15 @@ export class JobPostComponent {
         const starCountRef = child(dbRef, `job-postings/${element}`);
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        this.jobsArray.push(data);
         console.log("data: "+data)
+        this.jobsArray.push(data);
         console.log(this.jobsArray)
         });
       }); 
       });  
     }
-
   }
+
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
     console.log('a letter', this.searchText);
