@@ -1,70 +1,151 @@
 <section class="vh-200" style="background-color: #93aff6">
-    <div class="container py-2 h-100 px-xs-0" >
-
-      <!-- button apply will only show if you havent applied to specific posting -->
-      <button *ngIf="!Applied" class="apply" mat-button type="button" (click)="applyAftermath()">Apply</button>
-
+  <div class="container py-2 h-100 px-xs-0">
+   
       <!-- second row -->
-      <div class="row m-2 ">
+      <div class="row m-2">
         <!-- first column job decription -->
-        <div class="col-md-8 " style="background-color:#FFFFFF; border-radius: 25px; border: 2px solid black;">
-          <div style="padding-top: 15px; padding-bottom: 15px;">
-            <div class="center_title" style="background-color: lightgray; padding-top: 15px; border-radius: 5px;">
-               <p style="font-weight: bold; font-size:17px; display: inline; border-right: 1px solid gray; padding-right: 5px;">  Name of Organisation </p> 
-           <p class="company" style="display: inline; font-size:17px; " > {{posting.getAll('Company')}} </p><hr> 
+        <div
+          class="col-md-8"
+          style="
+            background-color: #ffffff;
+            border-radius: 25px;
+            border: 2px solid black;
+          "
+        >
+          <div style="padding-top: 15px; padding-bottom: 15px">
+            <div
+              class="center_title"
+              style="
+                background-color: lightgray;
+                padding-top: 15px;
+                border-radius: 5px;
+              "
+            >
+              <p
+                style="
+                  font-weight: bold;
+                  font-size: 17px;
+                  display: inline;
+                  border-right: 1px solid gray;
+                  padding-right: 5px;
+                "
+              >
+                Name of Organisation
+              </p>
+              <p class="company" style="display: inline; font-size: 17px">
+                {{ posting.getAll("Company") }}
+              </p>
+              <hr />
             </div>
             <div class="center_image">
-              <img src="{{posting.get('Image')}}" alt="Cannot get image">
+              <img src="{{ posting.get('Image') }}" alt="Cannot get image" />
             </div>
-            <br/>
-            <b>Job Title: </b> {{posting.getAll('JobTitle')}}<br/>
-            <b>Job Location Type: </b> {{posting.getAll('JobLocationType')}} <br/>
-            <b>Salary: </b>{{posting.getAll('Salary')}} <br/>
-            <b>Duration: </b>{{posting.getAll('Duration')}} <br/> 
-            <b>Supervisor: </b>{{posting.getAll('Supervisor')}} <br/> <br/>
-            <div class="center" style="text-decoration: underline;">
+            <br />
+            <b>Job Title: </b> {{ posting.getAll("JobTitle") }}<br />
+            <b>Job Location Type: </b> {{ posting.getAll("JobLocationType") }}
+            <br />
+            <b>Salary: </b>{{ posting.getAll("Salary") }} <br />
+            <b>Duration: </b>{{ posting.getAll("Duration") }} <br />
+            <b>Supervisor: </b>{{ posting.getAll("Supervisor") }} <br />
+            <br />
+            <div class="center" style="text-decoration: underline">
               <b>Job Description</b>
             </div>
-           {{posting.getAll('Description')}}
+            {{ posting.getAll("Description") }}
 
-            <div class="center" style="text-decoration: underline;">
-              <br/>
+            <div class="center" style="text-decoration: underline">
+              <br />
               <b>Job Requirements</b>
             </div>
-            {{posting.getAll('Requirements')}}
+            {{ posting.getAll("Requirements") }}
           </div>
-          
         </div>
 
         <!-- second column -->
-        <div class="col" >
+        <div class="col">
           <div class="row mb-2">
-            <div style="background-color:#CBC3E3; border-radius: 25px; padding: 15px;">
+            <div
+              style="
+                background-color: #cbc3e3;
+                border-radius: 25px;
+                padding: 15px;
+              "
+            >
               <div class="center_title">
-                <b>Application Information </b> <br/> <hr>
+                <b>Application Information </b> <br />
+                <hr />
               </div>
-            <b> Deadline: </b> {{posting.getAll('Deadline')}}<br/>
-            <b> Application method: </b> {{posting.getAll('ApplicationMethod')}}<br/>
-            <b> Documents Required: </b> {{posting.getAll('DocsRequired')}}<br/>
+              <b> Deadline: </b> {{ posting.getAll("Deadline") }}<br />
+              <b> Application method: </b>
+              {{ posting.getAll("ApplicationMethod") }}<br />
+              <b> Documents Required: </b> {{ posting.getAll("DocsRequired")
+              }}<br />
             </div>
           </div>
           <div class="row ml-2">
-            <div style="background-color:#CBC3E3; border-radius: 25px; padding: 15px;">
+            <div
+              style="
+                background-color: #cbc3e3;
+                border-radius: 25px;
+                padding: 15px;
+              "
+            >
               <div class="center_title">
-                <b>Company Information</b> <br/><hr>
+                <b>Company Information</b> <br />
+                <hr />
               </div>
-            <b>Job Contact Name: </b> {{posting.getAll('JcFirstName')}} {{posting.getAll('JcLastName')}} <br/>
-            <b>Website: </b> <a href="{{posting.getAll('Website')}}" target="_blank">{{posting.getAll('Website')}}</a><br/>
-            <b>Address Line One: </b> {{posting.getAll('JobLocation')}} <br/>
-            <b>City: </b> {{posting.getAll('City')}} <br/>
-            <b>Province / State: </b> {{posting.getAll('Province')}} <br/>
-            <b>Postal Code / Zip Code: </b> {{posting.getAll('PostalCode')}} <br/>
-           </div>
+              <b>Job Contact Name: </b> {{ posting.getAll("JcFirstName") }}
+              {{ posting.getAll("JcLastName") }} <br />
+              <b>Website: </b>
+              <a href="{{ posting.getAll('Website') }}" target="_blank">{{
+                posting.getAll("Website")
+              }}</a
+              ><br />
+              <b>Address Line One: </b> {{ posting.getAll("JobLocation") }}
+              <br />
+              <b>City: </b> {{ posting.getAll("City") }} <br />
+              <b>Province / State: </b> {{ posting.getAll("Province") }} <br />
+              <b>Postal Code / Zip Code: </b>
+              {{ posting.getAll("PostalCode") }} <br />
+            </div>
+          </div>
+
+          <div class="row my-2">
+            <button
+              *ngIf="isEmployerWhoPosted"
+               mat-button
+               id ='delete'
+              type="delete"
+              class="apply"
+              (click)="onDeleteJobPosting()"
+            >
+              Delete
+            </button>
+          </div>
+          <div class="row my-2">
+            <button
+              *ngIf="(authority == 'Student') && !Applied"
+                type="button" (click)="applyAftermath()"
+              class="apply"
+              mat-button
+              type="button"
+            >
+              Apply
+            </button>
+          </div>
+          <div class="row my-2">
+            <button
+              *ngIf="isEmployerWhoPosted"
+               mat-button
+              class="apply"
+              [routerLink]="['../edit-employer-form', posting.get('ID')]"
+              id="edit"
+            >
+              Edit
+            </button>
+            <!-- [fragment]="posting.get('ID')?.toString()" -->
           </div>
         </div>
       </div>
-      
-    </div>
-  </section>
-
-
+  </div>
+</section>

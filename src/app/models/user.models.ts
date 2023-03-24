@@ -30,6 +30,7 @@ export interface JobPost {
   City: String;
   Province: String;
   PostalCode: String;
+  Email: String;
   EmployerID: String;
 }
 

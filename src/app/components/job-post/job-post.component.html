@@ -2,7 +2,7 @@
 
 <div class="cardz" >
   <div
-    *ngFor="let item of jobsArray"
+    *ngFor="let item of jobsArray; let i = index"
     data-aos="fade-up"
     data-aos-duration="900"
     data-aos-easing="ease-in-out-back"
@@ -28,6 +28,7 @@
      
    
     >
+    
       <div class="card">
         <img src="{{item.Image}}" alt="Image not found" class="cardimg" />
         <div class="card-content" value="">

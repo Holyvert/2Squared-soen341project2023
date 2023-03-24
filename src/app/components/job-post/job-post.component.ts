@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-import { JobPost } from '../models/user.models';
-import { Database, set, ref, onValue, child } from '@angular/fire/database';
+import { JobPost } from '../../models/user.models';
+import { Database, set, ref, update, child, onValue, getDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
 
 @Component({
   selector: 'app-job-post',
