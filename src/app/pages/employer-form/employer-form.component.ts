@@ -138,7 +138,8 @@ export class EmployerFormComponent {
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
       EmployerID: this.myEmployer.ID,
-      ID: myId
+      ID: myId,
+      Candidates: ""
     });
     this.Uploading = false;
     this.sendNotification('Job Created');

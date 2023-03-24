@@ -126,6 +126,7 @@ async registerUser(value: any, id: string, path: string) {
       CVName: '',
       JobsApplied: '', // list vof ids
       ID: id,
+      Favorites: '',
       //Password: value.Password
     });
   }else if(path == 'employers/'){
