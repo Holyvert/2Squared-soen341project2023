@@ -25,7 +25,7 @@ This project revolves around building an application in which students can essen
 
 Languages: <br />
     ~Front-End: TypeScript, HTML, SCSS <br />
-    ~Back-End: TBD <br />
+    ~Back-End: Firebase Service <br />
 Frameworks: Angular, Bootstrap <br />
 Environment: Node.js <br />
 IDE: Visual Studio Code <br />
