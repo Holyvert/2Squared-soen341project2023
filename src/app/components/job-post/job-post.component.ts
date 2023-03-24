@@ -54,8 +54,8 @@ export class JobPostComponent {
         const starCountRef = child(dbRef, `job-postings/${element}` );
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        console.log("employer ifd: " +this.myUser.uid)
-        console.log("employer :"+data.EmployerID)
+        console.log("employer id: " + this.myUser.uid)
+        console.log("employer :" + data.EmployerID)
         if (data.EmployerID == this.myUser.uid) {
           this.myEmployerPostingsIDs.push(element);
         }
