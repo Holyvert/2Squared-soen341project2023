@@ -97,7 +97,8 @@ describe('Employer Logs In', () => {
       .find('li')
       .eq(1)
       .click()
-      // cy.pause()
+      // Added this to make sure the page is loaded
+      cy.wait(500)
       cy.url().should('eq','http://localhost:4200/my-postings')
       cy.get('div.cardz').contains('Cypress Tester88').click() //this works
       cy.contains('Delete').click()
