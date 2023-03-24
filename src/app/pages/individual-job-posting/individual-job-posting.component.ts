@@ -168,12 +168,14 @@ export class IndividualJobPostingComponent {
   }
   deleteFromFavorites() {
     const dbRef= ref(this.database);
+    var keys: any;
      var id = this.myUser.uid;
      if(this.myUser) {
       const starCountRef = child(dbRef, `students/${id}/Favorites`)
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        const keys = Object.keys(data);
+        keys = Object.keys(data);
+      });
         if (keys.length == 1) { //need to fix
           const userRef = child(dbRef, `students/${id}`)
           update(userRef, {Favorites: ""});
@@ -181,13 +183,15 @@ export class IndividualJobPostingComponent {
           this.sendNotification("Post has been removed from Favorites")
           return;
         }
-        if (keys.includes(this.posting.get('ID') as any)) {
+        else if (keys.includes(this.posting.get('ID') as any)) {
           var postingId = this.posting.get('ID') as any;
           remove(child(dbRef, `students/${id}/Favorites/${postingId}`))
           this.favorited = false;
           this.sendNotification("Post has been removed from Favorites")
+          return;
         }
-      })
+      
+      return;
      }
   }
 }
