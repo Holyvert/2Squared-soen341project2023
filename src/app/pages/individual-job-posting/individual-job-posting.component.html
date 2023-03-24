@@ -1,7 +1,6 @@
-<section class="vh-200">
-    <div class="container py-2 h-100 px-xs-0" >
-      <ng-container >
-
+<section class="vh-200" style="background-color: #93aff6">
+  <div class="container py-2 h-100 px-xs-0">
+   
       <!-- second row -->
       <div class="row m-2">
         <!-- first column job decription -->
@@ -125,7 +124,8 @@
           </div>
           <div class="row my-2">
             <button
-              *ngIf="authority == 'Student'"
+              *ngIf="(authority == 'Student') && !Applied"
+                type="button" (click)="applyAftermath()"
               class="apply"
               mat-button
               type="button"
@@ -150,7 +150,6 @@
       <button *ngIf="isEmployerWhoPosted" class="btn btn-primary mt-5" [routerLink]="['../candidates', posting.get('ID')]">See Candidates</button>
       </div>
         </div>
-      </div></ng-container
-    >
+      </div>
   </div>
 </section>
