@@ -27,8 +27,8 @@ export class CandidateCardComponent implements OnInit{
     ngOnInit() {
     
      // this.student = this.Acrouter.snapshot.queryParamMap;
-     var sumeting = this.student[0];
-      console.log('the students', sumeting, this.student[0].CV);
+     //var sumeting = this.student[0];
+     // console.log('the students', sumeting, this.student[0].CV);
     }
       
     //Disables 'Select for Interview' and changes the text
