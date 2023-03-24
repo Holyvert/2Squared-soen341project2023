@@ -1,3 +1,9 @@
 #select-int-button{
     align-content:center;
 }
+
+.candidate-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}

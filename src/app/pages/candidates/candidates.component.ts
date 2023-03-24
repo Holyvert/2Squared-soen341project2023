@@ -32,7 +32,7 @@ export class CandidatesComponent implements OnInit {
 
     //Adding this if-statement to see if it will fix build issue
     //if (this.myUser){
-      const starCountRef = child(dbRef,`job-postings/`+this.posting+'/StudentListIDs');
+      const starCountRef = child(dbRef,`job-postings/`+this.posting+'/Candidates');
       const dir_jobPost = child(dbRef, 'job-postings/' + this.posting);
      
       onValue(starCountRef, (snapshot) => {
