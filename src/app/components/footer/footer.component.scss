@@ -1,12 +1,11 @@
 .foot{
-    position: absolute;
     margin-bottom: 0;
 }
 
-.input {
-    color: white !important;
-   }
-
-.input::placeholder {
-    color: white !important;
+.myFooty{
+    // padding-top: 200px !important;
+    position: relative;
+    width: 100%;
+    padding-top: 400px;
+    margin-bottom: 0;
 }

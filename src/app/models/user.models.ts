@@ -18,7 +18,7 @@ export interface JobPost {
   JobTitle: string;
   Salary: string;
   Supervisor: string;
-  StudentListIDs: any; // list vof ids
+  Candidates: any; // list vof ids
   ID: string; //its own id
   Requirements: String;
   Deadline: String;
@@ -32,6 +32,7 @@ export interface JobPost {
   PostalCode: String;
   Email: String;
   EmployerID: String;
+  SelectedInterviews: any;
 }
 
 export interface StudentProfile {
@@ -47,7 +48,8 @@ export interface StudentProfile {
   CVName: string;
   ID: string;
   SelectedInterviews: any;
-  
+  Password: string;
+  Favorites: any; // list of ids
 }
 
 export interface User {

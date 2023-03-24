@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import AOS from 'aos';
 import {
   MatSnackBar,
@@ -8,18 +15,31 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import {
+  Database,
+  set,
+  ref,
+  update,
+  onValue,
+  get,
+  child,
+  remove,
+} from '@angular/fire/database';
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
-import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import {
+  Storage,
+  ref as ref_storage,
+  uploadBytesResumable,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employer-form',
   templateUrl: './edit-employer-form.component.html',
-  styleUrls: ['./edit-employer-form.component.scss']
+  styleUrls: ['./edit-employer-form.component.scss'],
 })
-
 export class EditEmployerFormComponent {
   employerForm!: FormGroup;
   canEdit: Boolean = false;
@@ -31,6 +51,7 @@ export class EditEmployerFormComponent {
   myUser: any = {};
   myEmployer = {} as Employer;
   index!: any;
+  posting!: ParamMap;
 
   constructor(
     private form_builder: FormBuilder,
@@ -45,58 +66,62 @@ export class EditEmployerFormComponent {
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
-    this.index= this.Acrouter.snapshot.fragment;
-    if (this.myUser){
+    //this.posting = this.Acrouter.snapshot.queryParamMap;
+    //this.index= this.posting.get('ID');
+    // this.index = this.Acrouter.snapshot.fragment;
+    this.index = this.Acrouter.snapshot.params['id'];
+    console.log(this.posting);
+    console.log(this.index);
+    if (this.myUser) {
       if (this.myUser.photoURL == 'Student') {
-        this.router.navigate([''])
+        this.router.navigate(['']);
       }
-    
-    const dbRef = ref(this.database);
 
-    const userRef = child(dbRef, 'employers/' + this.myUser.uid);
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
+      const dbRef = ref(this.database);
+
+      const userRef = child(dbRef, 'employers/' + this.myUser.uid);
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
         this.myEmployer = data;
         console.log(this.myEmployer.Company);
-    });
-  
-    // example using a hard coded id (reading user profile)
-    console.log("INDEX:" + this.index)
-    const studentRef = child(dbRef, `job-postings/${this.index}`);
-    onValue(studentRef, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-      this.jobPost = data;
-        });
+      });
 
-    this.employerForm = this.form_builder.group({
-      JobTitle: ['', [Validators.required]],
-      JobLocation: ['', [Validators.required]],
-      JobLocationType: ['', [Validators.required]],
-      Salary: ['', [Validators.required]],
-      Duration: ['', [Validators.required]],
-      Supervisor: ['', [Validators.required]],
-      Description: ['', [Validators.required]],
-      Requirements: ['', [Validators.required]],
-      Deadline: ['', [Validators.required]],
-      DocsRequired: ['', [Validators.required]],
-      ApplicationMethod: ['', [Validators.required]],
-      JcFirstName: ['', [Validators.required]],
-      JcLastName: ['', [Validators.required]],
-      Website: ['', [Validators.required]],
-      Company: ['', [Validators.required]],
-      Image: [null, [Validators.required]],
-      City: ['', [Validators.required]],
-      Province: ['', [Validators.required]],
-      PostalCode: ['', [Validators.required]],
-    });
+      console.log('INDEX:' + this.index);
+      const studentRef = child(dbRef, `job-postings/${this.index}`);
+      onValue(studentRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        this.jobPost = data;
+      });
 
-    AOS.init();
-  }
+      this.employerForm = this.form_builder.group({
+        JobTitle: ['', [Validators.required]],
+        JobLocation: ['', [Validators.required]],
+        JobLocationType: ['', [Validators.required]],
+        Salary: ['', [Validators.required]],
+        Duration: ['', [Validators.required]],
+        Supervisor: ['', [Validators.required]],
+        Description: ['', [Validators.required]],
+        Requirements: ['', [Validators.required]],
+        Deadline: ['', [Validators.required]],
+        DocsRequired: ['', [Validators.required]],
+        ApplicationMethod: ['', [Validators.required]],
+        JcFirstName: ['', [Validators.required]],
+        JcLastName: ['', [Validators.required]],
+        Website: ['', [Validators.required]],
+        Company: ['', [Validators.required]],
+        Image: [null, [Validators.required]],
+        City: ['', [Validators.required]],
+        Province: ['', [Validators.required]],
+        PostalCode: ['', [Validators.required]],
+      });
+
+      AOS.init();
+    }
   }
 
   async onSubmit() {
-    // console.log(this.employerForm.value);
+    // console.log(this.file.name);
     // if (this.employerForm.invalid) {
     //   this.sendNotification('make sure to answer all required fields');
     //   return;
@@ -104,17 +129,29 @@ export class EditEmployerFormComponent {
 
     this.EnableForm();
     this.Uploading = true;
-    var result = await this.storageService.uploadToFirestore(
-      this.file,
-      'images/',
-      this.storage
-    );
+    console.log(this.file.name);
+    if (this.file.name == undefined) {
+      
+      const dbRef = ref(this.database);
+      const userRef = child(dbRef, `job-postings/${this.index}`);
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
+        this.onEditPost(this.index, this.employerForm.value, data.Image);
+      });
+      this.Uploading = false;
+    } else {
+      var result = await this.storageService.uploadToFirestore(
+        this.file,
+        'images/',
+        this.storage
+      );
 
-    var myValues = result.split(',');
-    var myDownloadLink = myValues[0];
+      var myValues = result.split(',');
+      var myDownloadLink = myValues[0];
 
-    this.onEditPost(this.index, this.employerForm.value, myDownloadLink);
-    this.Uploading = false;
+      this.onEditPost(this.index, this.employerForm.value, myDownloadLink);
+      this.Uploading = false;
+    }
   }
 
   EnableForm() {
@@ -144,7 +181,7 @@ export class EditEmployerFormComponent {
       Supervisor: value.Supervisor,
       Description: value.Description,
       Requirements: value.Requirements,
-      Deadline: JSON.stringify(value.Deadline).substring(1,11),
+      Deadline: JSON.stringify(value.Deadline).substring(1, 11),
       DocsRequired: value.DocsRequired,
       ApplicationMethod: value.ApplicationMethod,
       Company: this.myEmployer.Company,
@@ -158,6 +195,4 @@ export class EditEmployerFormComponent {
     });
     this.sendNotification(`Post ${value.JobTitle} was updated!`);
   }
-
 } //end of EmployerFormComponent
-

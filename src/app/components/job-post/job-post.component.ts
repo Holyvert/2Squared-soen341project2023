@@ -23,7 +23,6 @@ export class JobPostComponent {
   jobDescription: String = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
-  keyloop: Object[]= [];
 
   jobsArray = [{} as JobPost];
   myEmployerPostingsIDs: any = [];
@@ -34,30 +33,28 @@ export class JobPostComponent {
     this.jobsArray = [];
     this.myEmployerPostingsIDs = [];
     if (this.router.url === "/" || this.router.url === "/#!") {
-      
       const starCountRef = ref(this.database, 'job-postings/');
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      this.keyloop = Object.keys(data);
       this.jobsArray = ((Object as any).values(data));
       console.log(this.jobsArray)
       });
-
     }
+
     if (this.router.url === "/my-postings") {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`job-postings/`);
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const keys =  Object.keys(data);
-      console.log("keys: "+ keys)
+      // console.log("keys: "+ keys)
 
       keys.forEach(element => {
         const starCountRef = child(dbRef, `job-postings/${element}` );
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        console.log("employer ifd: " +this.myUser.uid)
-        console.log("employer :"+data.EmployerID)
+        // console.log("employer ifd: " +this.myUser.uid)
+        // console.log("employer :"+data.EmployerID)
         if (data.EmployerID == this.myUser.uid) {
           this.myEmployerPostingsIDs.push(element);
         }
@@ -75,7 +72,7 @@ export class JobPostComponent {
       }); 
       });  
     }
-    else if (this.router.url === "/applications") {
+    if (this.router.url === "/applications") {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/JobsApplied/`
       );
@@ -94,12 +91,33 @@ export class JobPostComponent {
         console.log(this.jobsArray)
         });
       }); 
-      console.log("length: "+this.jobsArray.length)
-      console.log(this.jobsArray)
       });  
     }
 
+    else if (this.router.url === "/favorites") {
+      const dbRef = ref(this.database);
+      const starCountRef = child(dbRef,`students/${this.myUser.uid}/Favorites/`);
+      onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data)
+      const keys =  Object.keys(data);
+      console.log("keys: "+ keys)
+
+     keys.forEach((element: any)  => {
+      const dbRef = ref(this.database);
+      console.log("element: "+element)
+        const starCountRef = child(dbRef, `job-postings/${element}`);
+        onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log("data: "+data)
+        this.jobsArray.push(data);
+        console.log(this.jobsArray)
+        });
+      }); 
+      });  
+    }
   }
+
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
     console.log('a letter', this.searchText);
