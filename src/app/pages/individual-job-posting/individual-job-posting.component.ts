@@ -28,9 +28,10 @@ export class IndividualJobPostingComponent {
   authority!: string;
   myUser!: any;
   index!: any;
-  isEmployerWhoPosted: boolean = false;  
+  isEmployerWhoPosted: boolean = false;
   Applied: Boolean = false;
   favorited: Boolean = false;
+  Uploading = false;
 
   constructor(
     private Acrouter: ActivatedRoute,
@@ -53,34 +54,32 @@ export class IndividualJobPostingComponent {
           this.isEmployerWhoPosted = true;
         }
       }
-       const dbRef = ref(this.database);
-       var id = this.myUser.uid;
-       const starCountRef = child(dbRef, `students/${id}/Favorites`);
-       onValue(starCountRef, (snapshot) => {
-         const data = snapshot.val();
-         const keys = Object.keys(data);
-         if (keys.includes(this.posting.get('ID') as any)) {
-           this.favorited = true;
-         } else if (!keys.includes(this.posting.get('ID') as any)) {
-           this.favorited = false;
-         }
-       });
-    const starCountRef1 = child(
-      dbRef,
-      `job-postings/${this.posting.get('ID')}/Candidates`
-    );
-    onValue(starCountRef1, (snapshot) => {
-      const data = snapshot.val();
-      const keys = Object.keys(data);
-      console.log('keys: ' + keys);
-      if (keys.includes(this.myUser.uid)) {
-        this.Applied = true;
-      }
-    });
-    console.log('Applied : ' + this.Applied);
-       
+      const dbRef = ref(this.database);
+      var id = this.myUser.uid;
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        if (keys.includes(this.posting.get('ID') as any)) {
+          this.favorited = true;
+        } else if (!keys.includes(this.posting.get('ID') as any)) {
+          this.favorited = false;
+        }
+      });
+      const starCountRef1 = child(
+        dbRef,
+        `job-postings/${this.posting.get('ID')}/Candidates`
+      );
+      onValue(starCountRef1, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        console.log('keys: ' + keys);
+        if (keys.includes(this.myUser.uid)) {
+          this.Applied = true;
+        }
+      });
+      console.log('Applied : ' + this.Applied);
     }
-    
   }
 
   onDeleteJobPosting() {
@@ -148,50 +147,59 @@ export class IndividualJobPostingComponent {
       this.posting = this.Acrouter.snapshot.queryParamMap;
     }
   }
-  addToFavorites() {
-    const dbRef= ref(this.database);
-     var id = this.myUser.uid;
-     if(this.myUser) {
-      const starCountRef = child(dbRef, `students/${id}/Favorites`)
-      onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        const keys = Object.keys(data);
-        if (!keys.includes(this.posting.get('ID') as any) || !keys) {
-          var postingId = this.posting.get('ID') as any;
-          const userRef = child(dbRef, `students/${id}/Favorites`)
-          update(userRef, {[postingId]: ""});
-        }
-      })
-      this.favorited= true;
-      this.sendNotification("Post has been added to Favorites")
-     }
-  }
-  deleteFromFavorites() {
-    const dbRef= ref(this.database);
-    var keys: any;
-     var id = this.myUser.uid;
-     if(this.myUser) {
-      const starCountRef = child(dbRef, `students/${id}/Favorites`)
+  async addToFavorites() {
+    this.Uploading = true;
+    var keys:any
+    const dbRef = ref(this.database);
+    var id = this.myUser.uid;
+    if (this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         keys = Object.keys(data);
       });
-        if (keys.length == 1) { //need to fix
-          const userRef = child(dbRef, `students/${id}`)
-          update(userRef, {Favorites: ""});
-          this.favorited = false;
-          this.sendNotification("Post has been removed from Favorites")
-          return;
-        }
-        else if (keys.includes(this.posting.get('ID') as any)) {
+        if (!keys.includes(this.posting.get('ID') as any) || !keys) {
           var postingId = this.posting.get('ID') as any;
-          remove(child(dbRef, `students/${id}/Favorites/${postingId}`))
-          this.favorited = false;
-          this.sendNotification("Post has been removed from Favorites")
-          return;
+          const userRef = child(dbRef, `students/${id}/Favorites`);
+          update(userRef, { [postingId]: '' });
         }
       
+           this.favorited = true;
+           this.sendNotification('Post has been added to Favorites');
+           this.Uploading = false;
       return;
-     }
+    }
+  }
+   deleteFromFavorites() {
+    this.Uploading = true;
+    const dbRef = ref(this.database);
+    var keys: any;
+    var id = this.myUser.uid;
+    if (this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        keys = Object.keys(data);
+      });
+      if (keys.length == 1) {
+        //need to fix
+        const userRef = child(dbRef, `students/${id}`);
+        update(userRef, { Favorites: '' });
+        remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
+        this.favorited = false;
+        this.sendNotification('Post has been removed from Favorites');
+        this.Uploading = false;
+        return;
+      } else if (keys.includes(this.posting.get('ID') as any)) {
+        var postingId = this.posting.get('ID') as any;
+        remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
+        this.favorited = false;
+        this.sendNotification('Post has been removed from Favorites');
+        this.Uploading = false;
+        return;
+      }
+
+      return;
+    }
   }
 }

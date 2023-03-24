@@ -138,7 +138,7 @@
               class="apply"
               mat-button
               type="button"
-              (click) = addToFavorites()
+              (click) = "addToFavorites()"
             >
               Add To Favorites
             </button>
@@ -148,7 +148,7 @@
               class="apply"
               mat-button
               type="button"
-              (click) = deleteFromFavorites()
+              (click) = "deleteFromFavorites()"
             >
               UnFavorite
             </button>
@@ -173,3 +173,7 @@
       </div>
   </div>
 </section>
+
+<div class="loading-indicator" *ngIf="Uploading">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
