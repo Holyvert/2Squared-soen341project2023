@@ -59,7 +59,8 @@ import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.
 import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
 import { StudentIntCardComponent } from './student-int-card/student-int-card.component';
 import { CandidatesComponent } from './pages/candidates/candidates.component';
-import { CandidateCardComponent } from './candidate-card/candidate-card.component';
+import { CandidateCardComponent } from './candidate-card/candidate-card.component';import { FavoritesComponent } from './pages/favorites/favorites.component';
+
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { CandidateCardComponent } from './candidate-card/candidate-card.componen
     StudentIntCardComponent,
     CandidatesComponent,
     CandidateCardComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,

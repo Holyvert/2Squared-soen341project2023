@@ -30,6 +30,8 @@ export class IndividualJobPostingComponent {
   index!: any;
   isEmployerWhoPosted: boolean = false;
   Applied: Boolean = false;
+  favorited: Boolean = false;
+  Uploading = false;
 
   constructor(
     private Acrouter: ActivatedRoute,
@@ -42,28 +44,33 @@ export class IndividualJobPostingComponent {
   ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
     this.myUser = this.authService.getUser();
-    if (this.myUser) {
-      this.authority = this.myUser.photoURL;
-      this.index = this.Acrouter.snapshot.fragment;
-
-      if (this.myUser && this.posting) {
-        if (this.myUser.photoURL == 'Student') {
-          this.authority = 'Student';
-        } else if (this.myUser.photoURL == 'Employer') {
-          this.authority = 'Employer';
-          if (this.myUser.uid == this.posting.get('EmployerID')) {
-            console.log(this.posting.keys);
-            this.isEmployerWhoPosted = true;
-          }
+    if (this.myUser && this.posting) {
+      if (this.myUser.photoURL == 'Student') {
+        this.authority = 'Student';
+      } else if (this.myUser.photoURL == 'Employer') {
+        this.authority = 'Employer';
+        if (this.myUser.uid == this.posting.get('EmployerID')) {
+          console.log(this.posting.keys);
+          this.isEmployerWhoPosted = true;
         }
       }
-
       const dbRef = ref(this.database);
-      const starCountRef = child(
+      var id = this.myUser.uid;
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        if (keys.includes(this.posting.get('ID') as any)) {
+          this.favorited = true;
+        } else if (!keys.includes(this.posting.get('ID') as any)) {
+          this.favorited = false;
+        }
+      });
+      const starCountRef1 = child(
         dbRef,
         `job-postings/${this.posting.get('ID')}/Candidates`
       );
-      onValue(starCountRef, (snapshot) => {
+      onValue(starCountRef1, (snapshot) => {
         const data = snapshot.val();
         const keys = Object.keys(data);
         console.log('keys: ' + keys);
@@ -138,6 +145,61 @@ export class IndividualJobPostingComponent {
   seeCandidates() {
     if (this.myUser) {
       this.posting = this.Acrouter.snapshot.queryParamMap;
+    }
+  }
+  async addToFavorites() {
+    this.Uploading = true;
+    var keys:any
+    const dbRef = ref(this.database);
+    var id = this.myUser.uid;
+    if (this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        keys = Object.keys(data);
+      });
+        if (!keys.includes(this.posting.get('ID') as any) || !keys) {
+          var postingId = this.posting.get('ID') as any;
+          const userRef = child(dbRef, `students/${id}/Favorites`);
+          update(userRef, { [postingId]: '' });
+        }
+      
+           this.favorited = true;
+           this.sendNotification('Post has been added to Favorites');
+           this.Uploading = false;
+      return;
+    }
+  }
+   deleteFromFavorites() {
+    this.Uploading = true;
+    const dbRef = ref(this.database);
+    var keys: any;
+    var id = this.myUser.uid;
+    if (this.myUser) {
+      const starCountRef = child(dbRef, `students/${id}/Favorites`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        keys = Object.keys(data);
+      });
+      if (keys.length == 1) {
+        //need to fix
+        const userRef = child(dbRef, `students/${id}`);
+        update(userRef, { Favorites: '' });
+        remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
+        this.favorited = false;
+        this.sendNotification('Post has been removed from Favorites');
+        this.Uploading = false;
+        return;
+      } else if (keys.includes(this.posting.get('ID') as any)) {
+        var postingId = this.posting.get('ID') as any;
+        remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
+        this.favorited = false;
+        this.sendNotification('Post has been removed from Favorites');
+        this.Uploading = false;
+        return;
+      }
+
+      return;
     }
   }
 }
