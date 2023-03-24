@@ -7,7 +7,7 @@
         <div
           class="col-md-8"
           style="
-            background-color: #ffffff;
+            background-color: white;
             border-radius: 25px;
             border: 2px solid black;
           "
@@ -66,7 +66,7 @@
           <div class="row mb-2">
             <div
               style="
-                background-color: #cbc3e3;
+                background-color: #4c7bf380;
                 border-radius: 25px;
                 padding: 15px;
               "
@@ -85,7 +85,7 @@
           <div class="row ml-2">
             <div
               style="
-                background-color: #cbc3e3;
+                background-color: #4c7bf380;
                 border-radius: 25px;
                 padding: 15px;
               "
@@ -145,6 +145,10 @@
             </button>
             <!-- [fragment]="posting.get('ID')?.toString()" -->
           </div>
+      <!--Button for 'See Candidates'-->
+      <div>
+      <button *ngIf="isEmployerWhoPosted" class="btn btn-primary mt-5" [routerLink]="['../candidates', posting.get('ID')]">See Candidates</button>
+      </div>
         </div>
       </div>
   </div>

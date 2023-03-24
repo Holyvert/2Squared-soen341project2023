@@ -1,6 +1,6 @@
 <div *ngIf="canEdit">
     <form [formGroup]="employerForm" (ngSubmit)="onSubmit()">
-        <section class="h-100 h-custom" style="background-color: #93aff6;">
+        <section class="h-100 h-custom">
           <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col-lg-8 col-xl-10">
@@ -673,7 +673,7 @@
 </div>
 
 <div *ngIf="!canEdit">
-        <section class="h-100 h-custom" style="background-color: #93aff6;">
+        <section class="h-100 h-custom">
           <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col-lg-8 col-xl-10">

@@ -6,7 +6,7 @@ import {
   child,
   remove,
   onValue,
-  update
+  update,
 } from '@angular/fire/database';
 import {
   MatSnackBar,
@@ -27,6 +27,7 @@ export class IndividualJobPostingComponent {
   posting!: ParamMap;
   authority!: string;
   myUser!: any;
+  index!: any;
   isEmployerWhoPosted: boolean = false;
   Applied: Boolean = false;
 
@@ -38,35 +39,40 @@ export class IndividualJobPostingComponent {
     public database: Database
   ) {}
 
-  ngOnInit(): void {
-    this.myUser = this.authService.getUser();
+  ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
-    if (this.myUser && this.posting) {
-      if (this.myUser.photoURL == 'Student') {
-        this.authority = 'Student';
-      } else if (this.myUser.photoURL == 'Employer') {
-        this.authority = 'Employer';
-        if (this.myUser.uid == this.posting.get('EmployerID')) {
-          console.log(this.posting.keys);
-          this.isEmployerWhoPosted = true;
+    this.myUser = this.authService.getUser();
+    if (this.myUser) {
+      this.authority = this.myUser.photoURL;
+      this.index = this.Acrouter.snapshot.fragment;
+
+      if (this.myUser && this.posting) {
+        if (this.myUser.photoURL == 'Student') {
+          this.authority = 'Student';
+        } else if (this.myUser.photoURL == 'Employer') {
+          this.authority = 'Employer';
+          if (this.myUser.uid == this.posting.get('EmployerID')) {
+            console.log(this.posting.keys);
+            this.isEmployerWhoPosted = true;
+          }
         }
       }
-    }
 
-    const dbRef = ref(this.database);
-    const starCountRef = child(
-      dbRef,
-      `job-postings/${this.posting.get('ID')}/Candidates`
-    );
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      const keys = Object.keys(data);
-      console.log('keys: ' + keys);
-      if (keys.includes(this.myUser.uid)) {
-        this.Applied = true;
-      }
-    });
-    console.log('Applied : ' + this.Applied);
+      const dbRef = ref(this.database);
+      const starCountRef = child(
+        dbRef,
+        `job-postings/${this.posting.get('ID')}/Candidates`
+      );
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        console.log('keys: ' + keys);
+        if (keys.includes(this.myUser.uid)) {
+          this.Applied = true;
+        }
+      });
+      console.log('Applied : ' + this.Applied);
+    }
   }
 
   onDeleteJobPosting() {
@@ -123,7 +129,15 @@ export class IndividualJobPostingComponent {
         }
       });
     }
+    this.sendNotification(
+      'You have sucessfully applied to ' + this.posting.get('JobTitle')
+    );
+  }
 
-    this.sendNotification('You have sucessfully applied to ' + this.posting.get('JobTitle'))
+  //Send to candidates page
+  seeCandidates() {
+    if (this.myUser) {
+      this.posting = this.Acrouter.snapshot.queryParamMap;
+    }
   }
 }

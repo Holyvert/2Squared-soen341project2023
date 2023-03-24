@@ -1,7 +1,7 @@
 <div *ngIf="isStudent">
   <div *ngIf="canEdit">
     <form [formGroup]="registerForm">
-      <section class="vh-200" style="background-color: #93aff6">
+      <section class="vh-200">
         <div class="container py-5 h-100">
           <div
             class="row d-flex justify-content-center align-items-center h-100"
@@ -28,7 +28,7 @@
                     />
                     <p>
                       <!-- first_name -->
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
                         <input
                           matInput
@@ -59,7 +59,7 @@
                       <br />
                       <!-- last name -->
                       <mat-form-field
-                        appearance="fill"
+                        appearance="outline"
                         class="example-full-width"
                         id="last_name"
                       >
@@ -91,7 +91,7 @@
                       <br />
                       <!--Program-->
                       <mat-form-field
-                        appearance="fill"
+                        appearance="outline"
                         class="example-full-width"
                         id="program"
                       >
@@ -140,7 +140,7 @@
                       <h6></h6>
                       <!-- phone number -->
                       <mat-form-field
-                        appearance="fill"
+                        appearance="outline"
                         id="spacetop"
                         class="example-full-width"
                         id="tel"
@@ -186,7 +186,7 @@
                       </mat-form-field>
                       <br />
                       <!-- language -->
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>Language</mat-label>
                         <input
                           matInput
@@ -216,7 +216,7 @@
 
                       <h6></h6>
                       <!-- Personal Description -->
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>Description</mat-label>
                         <textarea
                           matInput
@@ -288,7 +288,7 @@
   </div>
 
   <div *ngIf="!canEdit">
-    <section class="vh-200" style="background-color: #93aff6">
+    <section class="vh-200">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-9 mb-4 mb-lg-0">
@@ -411,7 +411,7 @@
 <div *ngIf="isEmployer">
   <div *ngIf="canEdit">
     <form [formGroup]="registerFormEmployer">
-      <section class="vh-200" style="background-color: #93aff6">
+      <section class="vh-200">
         <div class="container py-5 h-100">
           <div
             class="row d-flex justify-content-center align-items-center h-100"
@@ -438,7 +438,7 @@
                     />
                     <p>
                       <!-- first_name -->
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
                         <input
                           matInput
@@ -469,7 +469,7 @@
                       <br />
                       <!-- last name -->
                       <mat-form-field
-                        appearance="fill"
+                        appearance="outline"
                         class="example-full-width"
                         id="last_name"
                       >
@@ -501,7 +501,7 @@
                       <br />
                       <!--Company-->
                       <mat-form-field
-                        appearance="fill"
+                        appearance="outline"
                         class="example-full-width"
                         id="company"
                       >
@@ -549,7 +549,7 @@
                       <h6></h6>
 
                       <!-- language -->
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>Language</mat-label>
                         <input
                           matInput
@@ -597,7 +597,7 @@
   </div>
 
   <div *ngIf="!canEdit">
-    <section class="vh-200" style="background-color: #93aff6">
+    <section class="vh-200">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-9 mb-4 mb-lg-0">
