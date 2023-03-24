@@ -33,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { faCoffee, fas } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { JobPostComponent } from './job-post/job-post.component';
+import { JobPostComponent } from './components/job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -43,6 +43,7 @@ import { IndividualJobPostingComponent } from './pages/individual-job-posting/in
 import { RouterModule } from '@angular/router';
 import {provideFirestore,getFirestore} from '@angular/fire/firestore';
 import {provideStorage,getStorage} from '@angular/fire/storage';
+import { EditEmployerFormComponent } from './pages/edit-employer-form/edit-employer-form.component';
 import {provideAuth} from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -69,19 +70,19 @@ import { CandidateCardComponent } from './candidate-card/candidate-card.componen
     RegisterComponent,
     LoginComponent,
     UserProfileComponent,
-    JobPostComponent,
     SearchComponent,
+    JobPostComponent,
     EmployerFormComponent,
     IndividualJobPostingComponent,
+    EditEmployerFormComponent,
     MyPostingsComponent,
     ApplicationsComponent,
     EmployerInterviewsComponent,
     EmployerIntCardComponent,
     StudentInterviewsComponent,
     StudentIntCardComponent,
-
     CandidatesComponent,
-      CandidateCardComponent,
+    CandidateCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -129,6 +129,7 @@ export class EmployerFormComponent {
       DocsRequired: value.DocsRequired,
       ApplicationMethod: value.ApplicationMethod,
       Company: this.myEmployer.Company,
+      Email: this.myEmployer.Email,
       JcFirstName: value.JcFirstName,
       JcLastName: value.JcLastName,
       Website: value.Website,
@@ -136,7 +137,8 @@ export class EmployerFormComponent {
       Province: value.Province,
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
-      EmployerID: this.myEmployer.ID
+      EmployerID: this.myEmployer.ID,
+      ID: myId
     });
     this.Uploading = false;
     this.sendNotification('Job Created');

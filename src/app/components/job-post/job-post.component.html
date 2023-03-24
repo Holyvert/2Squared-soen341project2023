@@ -10,10 +10,9 @@
   >
     <a
     
-      [routerLink]="['individual']"
+      [routerLink]="['../individual']"
       [queryParams]="item"
-      [fragment]="this.keyloop[i].toString()"
-       *ngIf="
+      *ngIf="
         searchText === '' || 
         item.Company.toLowerCase().includes(searchText.toLowerCase()) ||
         item.JobTitle.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -26,7 +25,10 @@
         item.Salary.toLowerCase().includes(searchText.toLowerCase()) ||
         item.Supervisor.toLowerCase().includes(searchText.toLowerCase())
       "
+     
+   
     >
+    
       <div class="card">
         <img src="{{item.Image}}" alt="Image not found" class="cardimg" />
         <div class="card-content" value="">
