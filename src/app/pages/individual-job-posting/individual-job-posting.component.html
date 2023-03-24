@@ -131,6 +131,15 @@
             >
               Apply
             </button>
+            <button
+              *ngIf="authority == 'Student'"
+              class="apply"
+              mat-button
+              type="button"
+              (onclick) = "addToFavorites()"
+            >
+              Add To Favorites
+            </button>
           </div>
           <div class="row my-2">
             <button

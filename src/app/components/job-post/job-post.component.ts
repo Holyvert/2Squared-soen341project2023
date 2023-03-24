@@ -73,7 +73,7 @@ export class JobPostComponent {
       }); 
       });  
     }
-    else if (this.router.url === "/applications") {
+    if (this.router.url === "/applications") {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/JobsApplied/`
       );
@@ -94,6 +94,32 @@ export class JobPostComponent {
       }); 
       console.log("length: "+this.jobsArray.length)
       console.log(this.jobsArray)
+      });  
+    }
+
+    else if (this.router.url === "/favorites") {
+      this.jobsArray = [];
+
+      const dbRef = ref(this.database);
+      const starCountRef = child(dbRef,`students/${this.myUser.uid}/Favorites/`);
+
+      onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data)
+      const keys =  Object.keys(data);
+      console.log("keys: "+ keys)
+
+     keys.forEach((element: any)  => {
+      const dbRef = ref(this.database);
+      console.log("element: "+element)
+        const starCountRef = child(dbRef, `job-postings/${element}`);
+        onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        this.jobsArray.push(data);
+        console.log("data: "+data)
+        console.log(this.jobsArray)
+        });
+      }); 
       });  
     }
 

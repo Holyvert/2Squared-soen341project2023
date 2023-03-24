@@ -47,6 +47,7 @@ export interface StudentProfile {
   CVName: string;
   ID: string;
   Password: string;
+  Favorites: any; // list of ids
 }
 
 export interface User {

@@ -65,4 +65,7 @@ export class IndividualJobPostingComponent {
       verticalPosition: this.verticalPosition,
     });
   }
+  addToFavorites()  {
+    
+  }
 }
