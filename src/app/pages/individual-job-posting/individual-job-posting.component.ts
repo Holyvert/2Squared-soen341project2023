@@ -34,6 +34,7 @@ export class IndividualJobPostingComponent {
   ngOnInit() {
     this.posting = this.Acrouter.snapshot.queryParamMap;
     this.myUser = this.authService.getUser();
+    if(this.myUser){
     this.authority = this.myUser.photoURL;
     this.index = this.Acrouter.snapshot.fragment;
 
@@ -48,6 +49,7 @@ export class IndividualJobPostingComponent {
         }
       }
     }
+  }
   }
 
   onDeleteJobPosting() {

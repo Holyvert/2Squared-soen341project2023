@@ -1,6 +1,5 @@
-<section class="vh-200" style="background-color: #93aff6">
+<section class="vh-200">
     <div class="container py-2 h-100 px-xs-0" >
-      <button class="apply" mat-button type="button" >Apply</button>
       <ng-container >
 
       <!-- second row -->
@@ -9,7 +8,7 @@
         <div
           class="col-md-8"
           style="
-            background-color: #ffffff;
+            background-color: white;
             border-radius: 25px;
             border: 2px solid black;
           "
@@ -68,7 +67,7 @@
           <div class="row mb-2">
             <div
               style="
-                background-color: #cbc3e3;
+                background-color: #4c7bf380;
                 border-radius: 25px;
                 padding: 15px;
               "
@@ -87,7 +86,7 @@
           <div class="row ml-2">
             <div
               style="
-                background-color: #cbc3e3;
+                background-color: #4c7bf380;
                 border-radius: 25px;
                 padding: 15px;
               "
@@ -148,8 +147,7 @@
           </div>
       <!--Button for 'See Candidates'-->
       <div>
-      <button *ngIf="isEmployerWhoPosted" class="btn btn-primary mt-5" [routerLink]="['../candidates']"
-      [fragment]="index.toString()" >See Candidates</button>
+      <button *ngIf="isEmployerWhoPosted" class="btn btn-primary mt-5" [routerLink]="['../candidates', posting.get('ID')]">See Candidates</button>
       </div>
         </div>
       </div></ng-container

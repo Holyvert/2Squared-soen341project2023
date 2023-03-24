@@ -1,35 +1,35 @@
-<!--This outer for-loop always only iterates once so it has no effect on time complexity-->
-<div *ngFor="let el of jobs[0]"> 
-    <div *ngFor="let item of student[0]" >
-            
-            
-        
-        <!--Beginning of Multiple Cards-->
-        <div class="candidate-cards">
-            <!--Template of Card-->
-            <div class="col-lg-4 col-md-12 col-6 mt-4 pt-2">
-                <div class="card border-0 bg-light rounded shadow">
-                    <div class="card-body p-3" style="background-color: #393f81; color: white;">
-                        <div class="mt-3">
-                            <h2 class="text-center">{{ item.FirstName }} {{item.LastName}}</h2>
-                            <p class="text-center" id="program">{{item.Program}}</p>
-                        </div>
-                    </div>
-                <div class="card-body p-3">
-                    <div class="mt-3">
-                        <p>Position: {{el.JobTitle}} </p>
-                        <p>Student Phone Number: {{ item.PhoneNumber }}</p>
-                        <p>Student e-mail: {{ item.Email }}</p>
-                        <p class="CV"><a href={{item.CV}}>Click to view CV</a></p>
-                        <br>
-                        <button id="select-int-button" type="button" class="btn btn-dark btn-sm" (click)="disableButton($event.target, 'Selected for Interview')">Select for Interview</button>
-                    </div>
-                </div>
-            </div>
+  <!--Beginning of Multiple Cards-->
+  <div class="candidate-cards">
+    <!--Template of Card-->
+      <div *ngFor="let item of myStudent" class="card border-0 bg-light rounded shadow">
+        <div
+          class="card-body p-3"
+          style="background-color: #393f81; color: white"
+        >
+          <div class="mt-3">
+            <h2 class="text-center">
+              {{ item.FirstName }} {{ item.LastName }}
+            </h2>
+            <p class="text-center" id="program">{{ item.Program }}</p>
+          </div>
         </div>
-        <!--End of Template-->
+        <div class="card-body p-3">
+          <div class="mt-3">
+            <p>Position: {{ posting.JobTitle }}</p>
+            <p>Student Phone Number: {{ item.PhoneNumber }}</p>
+            <p>Student e-mail: {{ item.Email }}</p>
+            <p class="CV"><a href="{{ item.CV }}">Click to view CV</a></p>
+            <br />
+            <button
+              id="select-int-button"
+              type="button"
+              class="btn btn-dark btn-sm"
+              (click)="disableButton($event.target, 'Selected for Interview')"
+            >
+              Select for Interview
+            </button>
+          </div>
         </div>
-        
-        
-    </div>
-</div>
+      </div>
+    <!--End of Template-->
+  </div>

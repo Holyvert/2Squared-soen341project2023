@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'employer-interviews', component: EmployerInterviewsComponent, canActivate: [AuthguardGuard] },
   { path: 'student-interviews', component: StudentInterviewsComponent, canActivate: [AuthguardGuard] },
   { path: 'my-postings', component: MyPostingsComponent, canActivate: [AuthguardGuard] },
-  { path: 'candidates', component: CandidatesComponent, canActivate: [AuthguardGuard] },
+  { path: 'candidates/:id', component: CandidatesComponent, canActivate: [AuthguardGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
