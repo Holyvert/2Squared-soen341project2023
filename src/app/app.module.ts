@@ -33,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { faCoffee, fas } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { JobPostComponent } from './job-post/job-post.component';
+import { JobPostComponent } from './components/job-post/job-post.component';
 import { SearchComponent } from './components/search/search.component';
 import { environment } from 'src/environments/environment';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -43,6 +43,23 @@ import { IndividualJobPostingComponent } from './pages/individual-job-posting/in
 import { RouterModule } from '@angular/router';
 import {provideFirestore,getFirestore} from '@angular/fire/firestore';
 import {provideStorage,getStorage} from '@angular/fire/storage';
+import { EditEmployerFormComponent } from './pages/edit-employer-form/edit-employer-form.component';
+import {provideAuth} from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { getAuth } from 'firebase/auth';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MyPostingsComponent } from './pages/my-postings/my-postings.component';
+import { ApplicationsComponent } from './pages/applications/applications.component';
+import { EmployerInterviewsComponent } from './pages/employer-interviews/employer-interviews.component';
+import { EmployerIntCardComponent } from './employer-int-card/employer-int-card.component';
+import { StudentInterviewsComponent } from './pages/student-interviews/student-interviews.component';
+import { StudentIntCardComponent } from './student-int-card/student-int-card.component';
+import { CandidatesComponent } from './pages/candidates/candidates.component';
+import { CandidateCardComponent } from './candidate-card/candidate-card.component';import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 
 @NgModule({
@@ -54,10 +71,20 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     RegisterComponent,
     LoginComponent,
     UserProfileComponent,
-    JobPostComponent,
     SearchComponent,
+    JobPostComponent,
     EmployerFormComponent,
     IndividualJobPostingComponent,
+    EditEmployerFormComponent,
+    MyPostingsComponent,
+    ApplicationsComponent,
+    EmployerInterviewsComponent,
+    EmployerIntCardComponent,
+    StudentInterviewsComponent,
+    StudentIntCardComponent,
+    CandidatesComponent,
+    CandidateCardComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +94,10 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     MatMenuModule,
     MatSelectModule,
     HttpClientModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     FontAwesomeModule,
     FormsModule,
     MatCardModule,
@@ -77,10 +108,14 @@ import {provideStorage,getStorage} from '@angular/fire/storage';
     ReactiveFormsModule,
     RouterModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideDatabase(()=>getDatabase()),
     provideFirestore(()=>getFirestore()),
     provideStorage(()=>getStorage()),
+    provideAuth(()=>getAuth()),
     MatProgressSpinnerModule,
   ],
   providers: [CookieService, StorageService, AuthService, AuthguardGuard],
