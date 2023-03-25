@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit, AfterContentChecked } from '@angular/core';
 import AOS from 'aos';
 import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import { Database, set, ref, onValue, child } from '@angular/fire/database';
@@ -11,7 +11,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   templateUrl: './candidate-card.component.html',
   styleUrls: ['./candidate-card.component.scss'],
 })
-export class CandidateCardComponent implements OnInit, AfterViewChecked {
+export class CandidateCardComponent implements OnInit, AfterContentChecked {
   posting: any;
   myStudent: any;
   SomeoneHere = true;
@@ -36,15 +36,19 @@ export class CandidateCardComponent implements OnInit, AfterViewChecked {
     if (this.student && this.student[0]) {
       this.myStudent = this.student[0];
     }
+
+    this.SomeoneHere = true;
   }
 
-  ngAfterViewChecked() {
-    if (this.myStudent.length == 0) {
-      this.SomeoneHere = false;
-    } else {
-      this.SomeoneHere = true;
+  ngAfterContentChecked() {
+    if (this.myStudent) {
+      if (this.myStudent.length == 0) {
+        this.SomeoneHere = false;
+      } else {
+        this.SomeoneHere = true;
+      }
+      console.log('this si my student ', this.myStudent.length, this.myStudent);
     }
-    console.log('this si my student ', this.myStudent.length, this.myStudent);
   }
 
   //Disables 'Select for Interview' and changes the text
