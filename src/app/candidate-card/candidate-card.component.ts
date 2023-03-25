@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
 import AOS from 'aos';
 import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import { Database, set, ref, onValue, child } from '@angular/fire/database';
@@ -9,39 +9,47 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 @Component({
   selector: 'app-candidate-card',
   templateUrl: './candidate-card.component.html',
-  styleUrls: ['./candidate-card.component.scss']
+  styleUrls: ['./candidate-card.component.scss'],
 })
-export class CandidateCardComponent implements OnInit{
+export class CandidateCardComponent implements OnInit, AfterViewChecked {
   posting: any;
   myStudent: any;
+  SomeoneHere = true;
 
   constructor(
-    private Acrouter: ActivatedRoute, 
+    private Acrouter: ActivatedRoute,
     private router: Router,
-    public database: Database, 
+    public database: Database,
     public authService: AuthService
-    ) {}
+  ) {}
 
-    @Input() student: any;
-    @Input() job: any;
+  @Input() student: any;
+  @Input() job: any;
 
-    ngOnInit() {
-      if(this.job && this.job[0]){
-        this.posting = this.job[0];
-      }
-      if(this.student && this.student[0]){
-        this.myStudent = this.student[0];
-      }
-     /*this.student = this.Acrouter.snapshot.queryParamMap;
-     var sumeting = this.student[0];
-      console.log('the students', sumeting, this.student[0].CV);*/
+  ngOnInit() {
+    this.myStudent = [];
+    this.posting = [];
+
+    if (this.job && this.job[0]) {
+      this.posting = this.job[0];
     }
-      
-    //Disables 'Select for Interview' and changes the text
-    disableButton(element:any, text:any) {
-      element.textContent = text;
-      element.disabled = true;
+    if (this.student && this.student[0]) {
+      this.myStudent = this.student[0];
     }
+  }
 
+  ngAfterViewChecked() {
+    if (this.myStudent.length == 0) {
+      this.SomeoneHere = false;
+    } else {
+      this.SomeoneHere = true;
+    }
+    console.log('this si my student ', this.myStudent.length, this.myStudent);
+  }
 
+  //Disables 'Select for Interview' and changes the text
+  disableButton(element: any, text: any) {
+    element.textContent = text;
+    element.disabled = true;
+  }
 }

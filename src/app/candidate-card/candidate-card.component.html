@@ -1,5 +1,9 @@
   <!--Beginning of Multiple Cards-->
+   
   <div class="candidate-cards">
+   <div *ngIf="!SomeoneHere">
+      <p class="text-center" id="program">There are no Candidates</p>
+    </div>
     <!--Template of Card-->
       <div *ngFor="let item of myStudent" class="card border-0 bg-light rounded shadow">
         <div
@@ -18,7 +22,7 @@
             <p>Position: {{ posting.JobTitle }}</p>
             <p>Student Phone Number: {{ item.PhoneNumber }}</p>
             <p>Student e-mail: {{ item.Email }}</p>
-            <p class="CV"><a href="{{ item.CV }}">Click to view CV</a></p>
+           <a href="{{ item.CV }}" target="_blank"> <p class="CV">Click to view CV</p></a>
             <br />
             <button
               id="select-int-button"
