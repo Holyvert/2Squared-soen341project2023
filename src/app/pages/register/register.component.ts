@@ -101,6 +101,7 @@ async onSubmit(){
   }
   var rid: string = '';
   //var rid = await this.storageService.IDgenerator(path, this.database);
+  
   rid = await this.authService.SignUp(this.registerForm.value.Email, this.registerForm.value.Password, authority);
   if(rid == ''){
     this.Uploading = false;
@@ -125,6 +126,7 @@ async registerUser(value: any, id: string, path: string) {
       CV: '',
       CVName: '',
       JobsApplied: '', // list vof ids
+      SelectedInterviews:'',
       ID: id,
       Favorites: '',
       //Password: value.Password

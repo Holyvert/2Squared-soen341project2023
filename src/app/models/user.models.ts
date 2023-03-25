@@ -32,6 +32,7 @@ export interface JobPost {
   PostalCode: String;
   Email: String;
   EmployerID: String;
+  SelectedInterviews: any;
 }
 
 export interface StudentProfile {
@@ -46,6 +47,7 @@ export interface StudentProfile {
   CV: string;
   CVName: string;
   ID: string;
+  SelectedInterviews: any;
   Password: string;
   Favorites: any; // list of ids
 }
@@ -54,4 +56,13 @@ export interface User {
   uid: string;
   email: string;
   photoURL: string;
+}
+
+export interface SelectedInterview {
+  CompanyName: string;
+  JobTitle: string;
+  Supervisor: string;
+  JcFirstName: string;
+  JcLastName: string;
+  Email: string;
 }
