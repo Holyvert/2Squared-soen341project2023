@@ -16,19 +16,60 @@ import { MyPostingsComponent } from './pages/my-postings/my-postings.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, canActivate: [AuthguardGuard]},
+  { path: '', component: LandingComponent, canActivate: [AuthguardGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: UserProfileComponent, canActivate: [AuthguardGuard] },
-  { path: 'employer-form', component: EmployerFormComponent, canActivate: [AuthguardGuard] },
-  { path: 'individual', component: IndividualJobPostingComponent, canActivate: [AuthguardGuard] },
-  { path: 'edit-employer-form/:id', component: EditEmployerFormComponent},
-  { path: 'applications', component: ApplicationsComponent, canActivate: [AuthguardGuard] },
-  { path: 'employer-interviews', component: EmployerInterviewsComponent, canActivate: [AuthguardGuard] },
-  { path: 'student-interviews', component: StudentInterviewsComponent, canActivate: [AuthguardGuard] },
-  { path: 'my-postings', component: MyPostingsComponent, canActivate: [AuthguardGuard] },
-  { path: 'candidates/:id', component: CandidatesComponent, canActivate: [AuthguardGuard] },
-  { path: 'favorites', component: FavoritesComponent, canActivate: [AuthguardGuard] },
+  {
+    path: 'profile/:id/:type',
+    component: UserProfileComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'employer-form',
+    component: EmployerFormComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'individual',
+    component: IndividualJobPostingComponent,
+    canActivate: [AuthguardGuard],
+  },
+  { path: 'edit-employer-form/:id', component: EditEmployerFormComponent },
+  {
+    path: 'applications',
+    component: ApplicationsComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'employer-interviews',
+    component: EmployerInterviewsComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'student-interviews',
+    component: StudentInterviewsComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'my-postings',
+    component: MyPostingsComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'candidates/:id',
+    component: CandidatesComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
+    canActivate: [AuthguardGuard],
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
