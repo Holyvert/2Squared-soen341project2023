@@ -139,7 +139,8 @@ export class EmployerFormComponent {
       Image: myDownloadLink,
       EmployerID: this.myEmployer.ID,
       ID: myId,
-      Candidates: ""
+      Candidates: '',
+      SelectedInterviews: '',
     });
     this.Uploading = false;
     this.sendNotification('Job Created');

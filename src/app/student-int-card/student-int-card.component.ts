@@ -11,7 +11,7 @@ import { SelectedInterview } from '../models/user.models';
 })
 export class StudentIntCardComponent {
     myUser: any = {};
-    selectedInterviewsArray= [{} as SelectedInterview];
+    selectedInterviewsArray: any = [];
     selectedInterviewsIDs: any =[];
   
     constructor(
@@ -41,6 +41,7 @@ export class StudentIntCardComponent {
         }); 
         });
       }
+      console.log(this.selectedInterviewsArray)
     }
 
 }

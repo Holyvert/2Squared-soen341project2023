@@ -149,7 +149,7 @@ export class IndividualJobPostingComponent {
   }
   async addToFavorites() {
     this.Uploading = true;
-    var keys:any
+    var keys:any;
     const dbRef = ref(this.database);
     var id = this.myUser.uid;
     if (this.myUser) {
