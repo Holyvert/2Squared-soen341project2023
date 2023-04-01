@@ -31,6 +31,7 @@ export class EmployerIntCardComponent {
     this.myStudentArray = [];
     this.myUser = this.authService.getUser();
 
+    if(this.myUser){
     const dbRef = ref(this.database);
     const starCountRef = child(dbRef, `job-postings/`);
     onValue(starCountRef, (snapshot) => {
@@ -83,6 +84,7 @@ export class EmployerIntCardComponent {
       // console.log(Object.keys(this.jobsArray[0].SelectedInterviews));
       // console.log(length);
     });
+  }
   }
 
   unselectForInterview(postingID: any, studentID: any) {
