@@ -70,8 +70,6 @@ export class EditEmployerFormComponent {
     //this.index= this.posting.get('ID');
     // this.index = this.Acrouter.snapshot.fragment;
     this.index = this.Acrouter.snapshot.params['id'];
-    console.log(this.posting);
-    console.log(this.index);
     if (this.myUser) {
       if (this.myUser.photoURL == 'Student') {
         this.router.navigate(['']);
@@ -83,14 +81,11 @@ export class EditEmployerFormComponent {
       onValue(userRef, (snapshot) => {
         const data = snapshot.val();
         this.myEmployer = data;
-        console.log(this.myEmployer.Company);
       });
 
-      console.log('INDEX:' + this.index);
       const studentRef = child(dbRef, `job-postings/${this.index}`);
       onValue(studentRef, (snapshot) => {
         const data = snapshot.val();
-        console.log(data);
         this.jobPost = data;
       });
 
@@ -121,15 +116,9 @@ export class EditEmployerFormComponent {
   }
 
   async onSubmit() {
-    // console.log(this.file.name);
-    // if (this.employerForm.invalid) {
-    //   this.sendNotification('make sure to answer all required fields');
-    //   return;
-    // }
 
     this.EnableForm();
     this.Uploading = true;
-    console.log(this.file.name);
     if (this.file.name == undefined) {
       
       const dbRef = ref(this.database);

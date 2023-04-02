@@ -69,7 +69,6 @@ export class EmployerFormComponent {
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
         this.myEmployer = data;
-        console.log(this.myEmployer.Company);
     });
 
     this.employerForm = this.formBuilder.group({
@@ -139,7 +138,8 @@ export class EmployerFormComponent {
       Image: myDownloadLink,
       EmployerID: this.myEmployer.ID,
       ID: myId,
-      Candidates: ""
+      Candidates: '',
+      SelectedInterviews: '',
     });
     this.Uploading = false;
     this.sendNotification('Job Created');

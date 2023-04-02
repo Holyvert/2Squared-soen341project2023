@@ -120,11 +120,6 @@ export class UserProfileComponent {
       const userRef = child(dbRef, this.path);
       onValue(userRef, (snapshot) => {
         const data = snapshot.val();
-        // const keys = Object.keys(data);
-        // const values = Object.values(data);
-        // console.log(data);
-        // console.log(keys);
-        // console.log(values);
         if (this.myUser.photoURL == 'Student') {
           this.myStudent = data;
         } else if (this.myUser.photoURL == 'Employer') {
