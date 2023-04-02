@@ -136,6 +136,7 @@ export class IndividualJobPostingComponent {
     this.sendNotification(
       'You have sucessfully applied to ' + this.posting.get('JobTitle')
     );
+    return;
   }
 
   //Send to candidates page

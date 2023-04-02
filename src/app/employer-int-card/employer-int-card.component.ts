@@ -98,7 +98,7 @@ export class EmployerIntCardComponent {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(postingID as any) || !keys) {
+    if (!keys.includes(studentID as any) || !keys) {
       const userRef = child(
         dbRef,
         `job-postings/${postingID}/Candidates`
@@ -112,12 +112,8 @@ export class EmployerIntCardComponent {
       keys = Object.keys(data);
     });
     if (keys.length == 1) {
-      //need to fix
       const userRef = child(dbRef, `students/${studentID}`);
-      update(userRef, { JobsApplied: '' });
-      remove(
-        child(dbRef, `students/${studentID}/SelectedInterviews/${postingID}`)
-      );
+      update(userRef, { 'SelectedInterviews' : '' });
     } else if (keys.includes(postingID as any)) {
       remove(
         child(dbRef, `students/${studentID}/SelectedInterviews/${postingID}`)
@@ -133,12 +129,8 @@ export class EmployerIntCardComponent {
       keys = Object.keys(data);
     });
     if (keys.length == 1) {
-      //need to fix
       const userRef = child(dbRef, `job-postings/${postingID}`);
-      update(userRef, { Candidates: '' });
-      remove(
-        child(dbRef, `job-postings/${postingID}/SelectedInterviews/${studentID}`)
-      );
+      update(userRef, { 'SelectedInterviews': '' });
     } else if (keys.includes(studentID as any)) {
       remove(
         child(dbRef, `job-postings/${postingID}/SelectedInterviews/${studentID}`)
