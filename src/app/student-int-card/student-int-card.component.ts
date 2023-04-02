@@ -35,7 +35,9 @@ export class StudentIntCardComponent {
           const starCountRef = child(dbRef, `job-postings/${element}` );
           onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
-          this.selectedInterviewsArray.push(data);
+          if(data != undefined){
+            this.selectedInterviewsArray.push(data);
+          }
           });
         }); 
         });
