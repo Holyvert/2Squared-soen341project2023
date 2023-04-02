@@ -77,9 +77,11 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
     );
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      keys = Object.keys(data);
+      if (keys){
+        keys = Object.keys(data);
+      }
     });
-    if (!keys.includes(this.posting.ID as any) || !keys) {
+    if (keys && (!keys.includes(this.posting.ID as any) || !keys)) {
       const userRef = child(dbRef, `students/${studentID}/SelectedInterviews`);
       update(userRef, { [this.posting.ID]: '' });
     }
