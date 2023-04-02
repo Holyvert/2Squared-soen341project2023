@@ -81,16 +81,16 @@ describe('Employer Logs In', () => {
             .find('button')
             .eq(1)
             .click( { force: true} ) 
-        // cy.get('.mat-mdc-snack-bar-label')
-        // .should('exist')  
+        cy.get('.mat-mdc-snack-bar-label')
+        .should('exist')  
        
       })
 
       it('employer navigates back to home, redirect to "my postings"',()=>{    
         
-        cy.visit('http://localhost:4200/')
-        login('isaczu15@gmail.com', 'soen341')
-        cy.url().should('eq', 'http://localhost:4200/')   
+      cy.visit('http://localhost:4200/')
+      login('isaczu15@gmail.com', 'soen341')
+      cy.url().should('eq', 'http://localhost:4200/')   
       cy.get('nav') 
       .find('#myDIV')
       .find('ul')
