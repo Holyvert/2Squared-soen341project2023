@@ -1,0 +1,19 @@
+.logo {
+   
+        height: 100%;
+        object-fit: contain;
+        
+        display: none;
+  
+}
+
+.container {
+    height: 100%;
+}
+
+.navbar-brand{
+    background-image: url("../../../assets/images/image-removebg-preview.png");
+    background-size:contain ;
+    background-repeat: no-repeat;
+    padding-left: 32px;
+}
