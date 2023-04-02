@@ -9,7 +9,7 @@
 
 import { login } from './utils.cy'
 describe('Student Logs In', () => {
-    it('Enters Credentials of a Student', () => {
+    it('Enters Credentials of an Employer', () => {
       login('isaczu15@gmail.com', 'soen341')
       })
 
