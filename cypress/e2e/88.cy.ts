@@ -35,7 +35,7 @@ describe('Employer Logs In', () => {
           cy.url().should('eq', 'http://localhost:4200/employer-form') 
 
       })
-      it('Employer fills up form without Image"', () => {
+      it('Employer fills up form with Image"', () => {
         login('isaczu15@gmail.com', 'soen341')
         cy.url().should('eq', 'http://localhost:4200/') 
         cy.get('nav')
