@@ -50,7 +50,6 @@ export class IndividualJobPostingComponent {
       } else if (this.myUser.photoURL == 'Employer') {
         this.authority = 'Employer';
         if (this.myUser.uid == this.posting.get('EmployerID')) {
-          console.log(this.posting.keys);
           this.isEmployerWhoPosted = true;
         }
       }
@@ -73,7 +72,6 @@ export class IndividualJobPostingComponent {
       onValue(starCountRef1, (snapshot) => {
         const data = snapshot.val();
         const keys = Object.keys(data);
-        console.log('keys: ' + keys);
         if (keys.includes(this.myUser.uid)) {
           this.Applied = true;
         }
@@ -115,7 +113,6 @@ export class IndividualJobPostingComponent {
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         const keys = Object.keys(data);
-        console.log('keys: ' + keys);
         if (!keys.includes(this.myUser.uid)) {
           //send user id to job posting in candidates attribute
           var id1 = this.myUser.uid;

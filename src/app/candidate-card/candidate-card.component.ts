@@ -64,12 +64,10 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       } else {
         this.SomeoneHere = true;
       }
-      // console.log('this is my student ', this.myStudent.length, this.myStudent);
     }
   }
 
   selectForInterview(studentID: any) {
-    console.log(studentID);
     this.Uploading = true;
     var keys: any;
     const dbRef = ref(this.database);
@@ -107,7 +105,6 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    console.log(keys.length);
     if (keys.length == 1) {
       //need to fix
       const userRef = child(dbRef, `students/${studentID}`);
@@ -129,7 +126,6 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    console.log(keys.length);
     if (keys.length == 1) {
       //need to fix
       const userRef = child(dbRef, `job-postings/${this.posting.ID}`);

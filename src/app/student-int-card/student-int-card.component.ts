@@ -30,7 +30,6 @@ export class StudentIntCardComponent {
         const data = snapshot.val();
         const keys =  Object.keys(data);
         this.selectedInterviewsIDs = ((Object as any).values(keys));
-        console.log(this.selectedInterviewsIDs)
   
         this.selectedInterviewsIDs.forEach((element: any) => {
           const starCountRef = child(dbRef, `job-postings/${element}` );
@@ -41,7 +40,6 @@ export class StudentIntCardComponent {
         }); 
         });
       }
-      console.log(this.selectedInterviewsArray)
     }
 
 }

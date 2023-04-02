@@ -62,7 +62,6 @@ export class RegisterComponent implements OnInit{
     const password = form.get('Password')!.value;
     const confirm = form.get('ConfirmPassword')!.value;
 
-    // console.log('password : ', password, '\nconfrim : ', confirm);
     if (password !== confirm) {
       form.controls['ConfirmPassword'].setErrors({ incorrect: true });
     } else {
@@ -75,7 +74,6 @@ export class RegisterComponent implements OnInit{
     const email = form.get('Email')!.value;
     const confirm = form.get('ConfirmEmail')!.value;
 
-    // console.log('email : ', email, '\nconfrim : ', confirm);
     if (email !== confirm) {
       form.controls['ConfirmEmail'].setErrors({ incorrect: true });
     } else {

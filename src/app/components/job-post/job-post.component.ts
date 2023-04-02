@@ -37,7 +37,6 @@ export class JobPostComponent {
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       this.jobsArray = ((Object as any).values(data));
-      console.log(this.jobsArray)
       });
     }
 
@@ -47,14 +46,11 @@ export class JobPostComponent {
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const keys =  Object.keys(data);
-      // console.log("keys: "+ keys)
 
       keys.forEach(element => {
         const starCountRef = child(dbRef, `job-postings/${element}` );
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        // console.log("employer ifd: " +this.myUser.uid)
-        // console.log("employer :"+data.EmployerID)
         if (data.EmployerID == this.myUser.uid) {
           this.myEmployerPostingsIDs.push(element);
         }
@@ -66,8 +62,6 @@ export class JobPostComponent {
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         this.jobsArray.push(data);
-        console.log("length: "+this.jobsArray.length)
-        console.log(this.jobsArray)
         });
       }); 
       });  
@@ -78,17 +72,13 @@ export class JobPostComponent {
       );
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data)
       const keys =  Object.keys(data);
-        console.log("keys: "+ keys)
       const dbRef = ref(this.database);
       keys.forEach(element => {
         const starCountRef = child(dbRef, `job-postings/${element}` );
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         this.jobsArray.push(data);
-        console.log("length: "+this.jobsArray.length)
-        console.log(this.jobsArray)
         });
       }); 
       });  
@@ -99,19 +89,14 @@ export class JobPostComponent {
       const starCountRef = child(dbRef,`students/${this.myUser.uid}/Favorites/`);
       onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data)
       const keys =  Object.keys(data);
-      console.log("keys: "+ keys)
 
      keys.forEach((element: any)  => {
       const dbRef = ref(this.database);
-      console.log("element: "+element)
         const starCountRef = child(dbRef, `job-postings/${element}`);
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        console.log("data: "+data)
         this.jobsArray.push(data);
-        console.log(this.jobsArray)
         });
       }); 
       });  
@@ -128,7 +113,6 @@ export class JobPostComponent {
     const starCountRef = child(dbRef, `job-postings/${id}` );
     onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
     return data;
     });
   }

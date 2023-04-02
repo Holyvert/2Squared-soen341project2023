@@ -5,7 +5,6 @@ export interface Employer{
   LastName: string;
   Email: string;
   Language: string;
-  Password: string;
 }
 
 export interface JobPost {
@@ -48,7 +47,6 @@ export interface StudentProfile {
   CVName: string;
   ID: string;
   SelectedInterviews: any;
-  Password: string;
   Favorites: any; // list of ids
 }
 

@@ -37,17 +37,13 @@ export class EmployerIntCardComponent {
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       const keys = Object.keys(data);
-      // console.log("keys: "+ keys)
 
       keys.forEach((element) => {
         const starCountRef = child(dbRef, `job-postings/${element}`);
         onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
-          // console.log('employer id: ' + this.myUser.uid);
-          // console.log('employer :' + data.EmployerID);
           if (data.EmployerID == this.myUser.uid) {
             this.myEmployerPostingsIDs.push(element);
-            // console.log('myEmployerPostingsIDs: ' + this.myEmployerPostingsIDs);
           }
         });
       });
@@ -59,13 +55,10 @@ export class EmployerIntCardComponent {
           const keys = Object.keys(data.SelectedInterviews);
           this.myKeysArray.push(keys);
           this.jobsArray.push(data);
-          // console.log("length: "+this.jobsArray.length)
-          // console.log(this.jobsArray)
           var length = keys.length;
           this.numberOfStudentsArray.push(length);
         });
       });
-      console.log(this.myKeysArray);
 
       this.myKeysArray.forEach((element: any) => {
         element.forEach((key: any) => {
@@ -73,22 +66,14 @@ export class EmployerIntCardComponent {
           onValue(starCountRef, (snapshot) => {
             const data = snapshot.val();
             this.myStudentArray.push(data);
-            // console.log("length: "+this.jobsArray.length)
-            // console.log(this.jobsArray)
           });
         });
       });
-      console.log(this.myStudentArray);
-      console.log(this.numberOfStudentsArray);
-      // const length = Object.keys(this.jobsArray[0].SelectedInterviews).length;
-      // console.log(Object.keys(this.jobsArray[0].SelectedInterviews));
-      // console.log(length);
     });
   }
   }
 
   unselectForInterview(postingID: any, studentID: any) {
-    console.log(studentID);
     this.Uploading = true;
     var keys: any;
     const dbRef = ref(this.database);
@@ -126,7 +111,6 @@ export class EmployerIntCardComponent {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    console.log(keys.length);
     if (keys.length == 1) {
       //need to fix
       const userRef = child(dbRef, `students/${studentID}`);
@@ -148,7 +132,6 @@ export class EmployerIntCardComponent {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    console.log(keys.length);
     if (keys.length == 1) {
       //need to fix
       const userRef = child(dbRef, `job-postings/${postingID}`);

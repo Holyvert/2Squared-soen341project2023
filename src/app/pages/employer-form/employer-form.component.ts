@@ -69,7 +69,6 @@ export class EmployerFormComponent {
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
         this.myEmployer = data;
-        console.log(this.myEmployer.Company);
     });
 
     this.employerForm = this.formBuilder.group({
