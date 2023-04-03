@@ -3,7 +3,9 @@
 //Employer clicks on one of their postings
 //Employer clicks on 'See candidates'
 //Employer checks on potential student and selects them for interview
-//Check to see if the student(s) have that specific posting in their attribute interview in database
+//Check to see if the student(s) have that specific posting in their attribute interview in database -- TO DO!!!
+//Employer sees that selected student is in 'Interviews' section
+//Employer unselects student from 'Interviews'
 
 import { login } from './utils.cy'
 describe('Employer Logs In', () => {
@@ -73,7 +75,7 @@ describe('Employer Logs In', () => {
   })
 
   //Employer selects candidate to interview
-  it('Employer selects candidate', () => {
+  it('Employer selects candidate for interview', () => {
     login('karinasd07@hotmail.com', 'testing')
     cy.url().should('eq', 'http://localhost:4200/') 
     cy.get('nav')
@@ -89,6 +91,7 @@ describe('Employer Logs In', () => {
       cy.contains('Select for Interview').click()
   })
 
+  //Employer sees candidate in "Interviews" section
   it('Employer sees candidate in "Interviews" section', () => {
     login('karinasd07@hotmail.com', 'testing')
     cy.url().should('eq', 'http://localhost:4200/') 
@@ -99,6 +102,21 @@ describe('Employer Logs In', () => {
       .eq(3)
       .click()
       cy.url().should('eq', 'http://localhost:4200/employer-interviews')
+  })
+
+  //Employer unselects candidate from "Interviews" section
+  it('Employer unselects candidate for interview in "Interviews"', () => {
+    login('karinasd07@hotmail.com', 'testing')
+    cy.url().should('eq', 'http://localhost:4200/') 
+    cy.get('nav')
+      .find('#myDIV')
+      .find('ul')
+      .find('li')
+      .eq(3)
+      .click()
+      cy.url().should('eq', 'http://localhost:4200/employer-interviews')
+      cy.get('div.employer-int-cards').contains('Kari Duran')
+      cy.contains('Unselect from Interview').click()
   })
 
 
