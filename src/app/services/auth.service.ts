@@ -101,9 +101,6 @@ export class AuthService {
       email: user.email,
       photoURL: authority ? authority : user.photoURL,
     };
-    console.log(userData.uid);
-    console.log(userData.email);
-    console.log(userData.photoURL);
     return userRef.set(userData, {
       merge: true,
     });

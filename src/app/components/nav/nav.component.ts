@@ -21,8 +21,6 @@ export class NavComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.myUser = this.authService.getUser();
-    // console.log(myUser);
-    //console.log(myUser.photoURL)
     const type = this.Acrouter.snapshot.params['type'];
      if (type!= undefined) {
        this.authority = type;

@@ -48,7 +48,6 @@ export class FooterComponent {
 
   onSubmit() {
    
-    console.log(this.registerForm.value);
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
       this.sendNotification('make sure to answer all required fields');
