@@ -8,7 +8,7 @@
 
 
 import { login } from './utils.cy'
-describe('Student Logs In', () => {
+describe('Employer Logs In', () => {
     it('Enters Credentials of an Employer', () => {
       login('isaczu15@gmail.com', 'soen341')
       })
