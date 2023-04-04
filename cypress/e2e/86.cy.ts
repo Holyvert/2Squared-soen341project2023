@@ -1,11 +1,11 @@
 //Employer logs in
 //Employer goes to 'My Postings'
 //Employer clicks on one of their postings
-//Employer clicks on 'See candidates'
+//Employer clicks on 'See Candidates'
 //Employer checks on potential student and selects them for interview
-//Check to see if the student(s) have that specific posting in their attribute interview in database -- TO DO!!!
 //Employer sees that selected student is in 'Interviews' section
-//Employer unselects student from 'Interviews'
+//Check to see if the student(s) have that specific posting in their attribute interview in database -- TO DO!!!
+//Employer goes to'Interviews' section and unselects student from interview
 
 import { login } from './utils.cy'
 describe('Employer Logs In', () => {
@@ -54,7 +54,9 @@ describe('Employer Logs In', () => {
       .eq(1)
       .click()
       cy.url().should('eq', 'http://localhost:4200/my-postings')
-      cy.get('div.cardz').contains('Project Management Intern').click()
+      cy.get('div.cardz')
+        .contains('Project Management Intern')
+        .click()
   })
 
   //Employer clicks on 'See Candidates'
@@ -85,7 +87,9 @@ describe('Employer Logs In', () => {
       .eq(1)
       .click()
       cy.url().should('eq', 'http://localhost:4200/my-postings')
-      cy.get('div.cardz').contains('Project Management Intern').click()
+      cy.get('div.cardz')
+        .contains('Project Management Intern')
+        .click()
       cy.contains('See Candidates').click()
       cy.get('div.candidate-cards').contains('Kari Duran')
       cy.contains('Select for Interview').click()
