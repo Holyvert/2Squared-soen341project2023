@@ -126,7 +126,7 @@ describe('Employer Logs In', () => {
     cy.get('div.cardz').contains('Edit Tester88').click(); //this works
     cy.contains('Delete').click();
     cy.get('.mat-mdc-snack-bar-label')
-      .contains('Posting Edit Tester88')
+      .contains('Edit Tester88')
       .should('exist');
   });
 });
