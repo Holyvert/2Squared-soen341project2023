@@ -258,6 +258,27 @@ describe('Employer Logs In Again', () => {
         .should('exist')
   })
 
+  it('Employer deletes job post "Cypress Tester86"',()=>{    
+        
+    cy.visit('http://localhost:4200/')
+    login('karinasd07@hotmail.com', 'testing')
+    cy.url().should('eq', 'http://localhost:4200/')   
+    cy.get('nav') 
+      .find('#myDIV')
+      .find('ul')
+      .find('li')
+      .eq(1)
+      .click()
+    cy.wait(1000)
+    cy.url().should('eq','http://localhost:4200/my-postings')
+    cy.get('div.cardz').contains('Cypress Tester86').click() //this works
+    cy.contains('Delete').click()
+    cy.get('.mat-mdc-snack-bar-label')
+      .contains('Posting Cypress Tester88')
+      .should('exist')  
+    cy.wait(4000)
+})
+
 
 }) //end of 'Employer Logs In Again'
 
