@@ -11,14 +11,7 @@ import {
   enterValueInMatSelectEmployerForm,
   enterValueInMatOptionEmployerForm,
 } from './utils.cy';
-describe('Search for job posting using search bar', () => {
-  it('Create a new posting to execute on test', () => {
-    login('isaczu15@gmail.com', 'soen341');
-    cy.url().should('eq', 'http://localhost:4200/');
-    cy.get('nav').find('#myDIV').find('ul').find('li').eq(2).click();
-    cy.url().should('eq', 'http://localhost:4200/employer-form');
-  });
-
+describe('Create job post to search for', () => {
   it('Employer fills up form with Image"', () => {
     login('isaczu15@gmail.com', 'soen341');
     cy.url().should('eq', 'http://localhost:4200/');
@@ -55,8 +48,10 @@ describe('Search for job posting using search bar', () => {
     const p = './cypress/fixtures/Images/2023-03-19_13h43_24.jpg';
     cy.get('input').eq(12).selectFile(p, { force: true });
     cy.get('app-employer-form').find('button').eq(1).click({ force: true });
-    cy.get('.mat-mdc-snack-bar-label').should('exist');
+    cy.wait(4000).get('.mat-mdc-snack-bar-label').should('exist');
   });
+});
+describe('Search for job posting using search bar with both student and employer', () => {
   it("Student Search For Keyword 'Cypress Tester114' in Search Bar", () => {
     cy.wait(4000);
     login('am.czuboka@gmail.com', 'soen341');
@@ -70,6 +65,19 @@ describe('Search for job posting using search bar', () => {
       .should('contain', 'Cypress Tester114')
       .log('Cypress tester 114 found');
   });
+  it("Employer Search for KeyWord 'Cypress Tester114' in Search Bar then delete's it to clean test", () => {
+    cy.wait(4000);
+    login('isaczu15@gmail.com', 'soen341');
+    cy.get('app-landing')
+      .find('app-job-post')
+      .find('app-search')
+      .find('mat-label')
+      .should('contain', 'Search by position, title or company');
+    cy.get('app-search').click().type('Cypress Tester114');
+    cy.get('.top-card > p').should('contain', 'Cypress Tester114');
+  });
+});
+describe('Clean up test by deleting post', () => {
   it("Employer Search for KeyWord 'Cypress Tester114' in Search Bar then delete's it to clean test", () => {
     login('isaczu15@gmail.com', 'soen341');
     cy.get('app-landing')
