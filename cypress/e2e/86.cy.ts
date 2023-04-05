@@ -3,9 +3,9 @@
 //Employer clicks on one of their postings
 //Employer clicks on 'See Candidates'
 //Employer checks on potential student and selects them for interview
-//Employer sees that selected student is in 'Interviews' section
-//Check to see if the student(s) have that specific posting in their attribute interview in database -- TO DO!!!
-//Employer goes to'Interviews' section and unselects student from interview
+//Employer sees that selected student is in 'Interviews' section, is no longer in "See Candidates"
+//Employer goes to 'Interviews' section and unselects student from interview
+//Employer sees that unselected candidate in no longer in "Interviews", appears in "See Candidates again"
 
 import { login } from './utils.cy'
 describe('Employer Logs In', () => {
@@ -39,6 +39,7 @@ describe('Employer Logs In', () => {
       .find('li')
       .eq(1)
       .click()
+      cy.wait(1000) //for page to load
       cy.url().should('eq', 'http://localhost:4200/my-postings') 
 
   })
@@ -53,6 +54,7 @@ describe('Employer Logs In', () => {
       .find('li')
       .eq(1)
       .click()
+      cy.wait(1000) //for page to load
       cy.url().should('eq', 'http://localhost:4200/my-postings')
       cy.get('div.cardz')
         .contains('Project Management Intern')
@@ -86,6 +88,7 @@ describe('Employer Logs In', () => {
       .find('li')
       .eq(1)
       .click()
+      cy.wait(1000) //for page to load
       cy.url().should('eq', 'http://localhost:4200/my-postings')
       cy.get('div.cardz')
         .contains('Project Management Intern')
@@ -95,17 +98,38 @@ describe('Employer Logs In', () => {
       cy.contains('Select for Interview').click()
   })
 
-  //Employer sees candidate in "Interviews" section
-  it('Employer sees candidate in "Interviews" section', () => {
+  //Employer sees candidate in "Interviews" section and is no longer in "See Candidates"
+  it('Employer sees candidate in "Interviews" section and is no longer in candidates page', () => {
     login('karinasd07@hotmail.com', 'testing')
-    cy.url().should('eq', 'http://localhost:4200/') 
+    cy.url().should('eq', 'http://localhost:4200/')
+    //Employer goes to interviews section 
     cy.get('nav')
       .find('#myDIV')
       .find('ul')
       .find('li')
       .eq(3)
       .click()
+      cy.wait(1000) //for page to load
       cy.url().should('eq', 'http://localhost:4200/employer-interviews')
+      cy.get('div.employer-int-cards')
+        .contains('Kari Duran')
+        .should('exist')
+    //Employer sees candidates for specific post
+    cy.get('nav')
+      .find('#myDIV')
+      .find('ul')
+      .find('li')
+      .eq(1)
+      .click()
+      cy.wait(1000) //for page to load
+      cy.url().should('eq', 'http://localhost:4200/my-postings')
+      cy.get('div.cardz')
+        .contains('Project Management Intern')
+        .click()
+      cy.contains('See Candidates').click()
+      cy.get('div.candidate-cards')
+        .contains('Kari Duran')
+        .should('not.exist')
   })
 
   //Employer unselects candidate from "Interviews" section
@@ -118,10 +142,46 @@ describe('Employer Logs In', () => {
       .find('li')
       .eq(3)
       .click()
+      cy.wait(1000) //for page to load
       cy.url().should('eq', 'http://localhost:4200/employer-interviews')
       cy.get('div.employer-int-cards').contains('Kari Duran')
       cy.contains('Unselect from Interview').click()
   })
+
+  //Employer no longer sees unselected candidate in "Interviews", appears once again in "See Candidates"
+  it('Student unselected for interview is no longer in "Interviews", appears as candidate again', () => {
+    login('karinasd07@hotmail.com', 'testing')
+    cy.url().should('eq', 'http://localhost:4200/')
+    //Goes to interviews page 
+    cy.get('nav')
+      .find('#myDIV')
+      .find('ul')
+      .find('li')
+      .eq(3)
+      .click()
+      cy.wait(1000) //for page to load
+      cy.url().should('eq', 'http://localhost:4200/employer-interviews')
+      cy.get('div.employer-int-cards')
+        .contains('Kari Duran')
+        .should('not.exist')
+    //Goes to candidate page
+    cy.get('nav')
+      .find('#myDIV')
+      .find('ul')
+      .find('li')
+      .eq(1)
+      .click()
+      cy.wait(1000) //for page to load
+      cy.url().should('eq', 'http://localhost:4200/my-postings')
+      cy.get('div.cardz')
+        .contains('Project Management Intern')
+        .click()
+      cy.contains('See Candidates').click()
+      cy.get('div.candidate-cards')
+        .contains('Kari Duran')
+        .should('exist')
+  })
+
 
 
 }) 
