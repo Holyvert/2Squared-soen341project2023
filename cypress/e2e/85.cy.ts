@@ -53,7 +53,7 @@ describe('Create job post to favorite', () => {
     cy.wait(4000).get('.mat-mdc-snack-bar-label').should('exist');
   });
 });
-describe('Student favorites job post', () => {
+describe('Student applies to job post', () => {
   it("Student Search For Keyword 'Cypress Tester85' in Search Bar", () => {
     cy.wait(4000);
     login('am.czuboka@gmail.com', 'soen341');
@@ -67,29 +67,34 @@ describe('Student favorites job post', () => {
       .should('contain', 'Cypress Tester85')
       .click()
       .log('Cypress tester 85 found');
-
-    cy.contains('Add To Favorites').wait(1500).click();
+    cy.get(':nth-child(1) > .mdc-button__label')
+      .contains('Apply')
+      .wait(1500)
+      .click();
+    // cy.contains('Apply').wait(1500).click();
     cy.get('.mat-mdc-snack-bar-label')
-      .contains('Post has been added to Favorites')
+      .contains('You have sucessfully applied to Cypress Tester85')
       .wait(1500)
       .should('exist')
       .log('Snack bar was found and eaten');
   });
 
-  it("Student Navigates to favorites and unfavorites 'Cypress Tester85'", () => {
+  it("Student Navigates to 'Applied to' and checks 'Cypress Tester85' is there", () => {
     cy.wait(4000);
     login('am.czuboka@gmail.com', 'soen341');
-    cy.get(':nth-child(4) > .nav-link')
-      .contains('Favorites')
+    cy.get(':nth-child(2) > .nav-link')
+      .contains('Applied To')
       .click()
       .wait(4000);
-    cy.contains('Cypress Tester85').click();
-    cy.contains('UnFavorite').click();
-    cy.get('.mat-mdc-snack-bar-label')
-      .contains('Post has been removed from Favorites')
-      .wait(1500)
-      .should('exist')
-      .log('Snack bar was found and eaten');
+    cy.contains('Cypress Tester85')
+      .click()
+      .log('Cypress Tester85 found in favorites');
+    // cy.contains('UnFavorite').click();
+    // cy.get('.mat-mdc-snack-bar-label')
+    //   .contains('Post has been removed from Favorites')
+    //   .wait(1500)
+    //   .should('exist')
+    //   .log('Snack bar was found and eaten');
   });
 });
 
