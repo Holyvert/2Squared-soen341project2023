@@ -1,29 +1,35 @@
 <!--Beginning of Multiple Cards-->
-<div *ngFor="let item of jobsArray, let j = index" class="employer-int-cards">
-    <!--Template of Card-->
+<div *ngFor="let item of jobsArray; let j = index" class="employer-int-cards">
+  <!--Template of Card-->
+  <ng-container *ngFor="let student of myStudentArray[j]; let i = index">
     <div
-    *ngFor="let student of myStudentArray, let i = index"
-      class="col-lg-4 col-md-6 col-12 mt-4 pt-2"
+      class="col-lg-3 col-md-6 col-12 mt-4 pt-2"
     >
-      <div *ngIf="(i + 1) <= numberOfStudentsArray[j]" class="card border-0 bg-light rounded shadow">
+      <div class="card border-0 bg-light rounded shadow">
         <div
           class="card-body p-3"
           style="background-color: #393f81; color: white"
         >
           <div class="mt-3">
-            <h2 class="text-center">{{student.FirstName}} {{student.LastName}}</h2>
+            <h2 class="text-center">
+              {{ student.FirstName }} {{ student.LastName }}
+            </h2>
           </div>
         </div>
         <div class="card-body p-4">
           <div class="mt-3">
-            <p>Position: <b>{{ item.JobTitle }}</b></p>
-            <p>Program: {{student.Program}}</p>
-            <p>Student e-mail: {{student.Email}}</p>
-            <p><a href="{{student.CV}}" target="_blank">
+            <p>
+              Position: <b>{{ item.JobTitle }}</b>
+            </p>
+            <p>Program: {{ student.Program }}</p>
+            <p>Student e-mail: {{ student.Email }}</p>
+            <p>
+              <a href="{{ student.CV }}" target="_blank">
                 <span class="title">Download Student CV&nbsp;</span
                 ><fa-icon [icon]="faDownload"></fa-icon
-              ></a></p>
-              <button
+              ></a>
+            </p>
+            <button
               id="select-int-button"
               type="button"
               class="btn btn-dark btn-sm"
@@ -35,4 +41,5 @@
         </div>
       </div>
     </div>
+  </ng-container>
 </div>
