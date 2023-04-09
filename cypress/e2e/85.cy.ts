@@ -88,13 +88,7 @@ describe('Student applies to job post', () => {
       .wait(4000);
     cy.contains('Cypress Tester85')
       .click()
-      .log('Cypress Tester85 found in favorites');
-    // cy.contains('UnFavorite').click();
-    // cy.get('.mat-mdc-snack-bar-label')
-    //   .contains('Post has been removed from Favorites')
-    //   .wait(1500)
-    //   .should('exist')
-    //   .log('Snack bar was found and eaten');
+      .log('Cypress Tester85 found in "Applied To"');
   });
 });
 
