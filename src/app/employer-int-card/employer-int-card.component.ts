@@ -30,10 +30,7 @@ export class EmployerIntCardComponent {
   myEmployerPostingsIDs: any = [];
   myKeysArray: any = [];
   myStudentArray: any = [];
-  //create an array of numbers
-  numberOfStudentsArray: any = [];
   Uploading = false;
-  limitArray: any = [0];
 
   constructor(
     private database: Database,
@@ -72,23 +69,11 @@ export class EmployerIntCardComponent {
             const keys = Object.keys(data.SelectedInterviews);
             this.myKeysArray.push(keys);
             this.jobsArray.push(data);
-            console.log(this.myKeysArray);
-            console.log(this.jobsArray);
-            var length = keys.length;
-            this.numberOfStudentsArray.push(length);
           });
-          console.log(this.numberOfStudentsArray);
         });
 
-        if (this.numberOfStudentsArray.length > 1) {
-          for (let i = 0; i < this.numberOfStudentsArray.length; i++) {
-            this.limitArray.push(
-              this.limitArray[i] + this.numberOfStudentsArray[i]
-            );
-          }
-        }
-        console.log(this.limitArray);
-        console.log(this.myKeysArray);
+        // console.log(this.myKeysArray);
+        // console.log(this.jobsArray);
 
         for (let i = 0; i < this.myKeysArray.length; i++) {
           const promiseArray: Promise<any>[] = [];
@@ -108,7 +93,7 @@ export class EmployerIntCardComponent {
           this.myStudentArray.push(dataArray);
         }
 
-        console.log(this.myStudentArray);
+        // console.log(this.myStudentArray);
       });
     }
   }
