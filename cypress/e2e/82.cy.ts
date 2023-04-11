@@ -76,7 +76,7 @@ describe('Employer Create posts, Student Logs In and applies to post, Employer s
       .find('button')
       .eq(1)
       .click({ force: true });
-    cy.wait(5000)
+    cy.wait(3000)
       .get('.mat-mdc-snack-bar-label')
       .should('exist');
        
