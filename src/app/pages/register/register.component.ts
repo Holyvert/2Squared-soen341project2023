@@ -99,14 +99,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.Uploading = true;
-    var authority = this.registerForm.value.Authority;
-    var path = '';
+    let authority = this.registerForm.value.Authority;
+    let path = '';
     if (authority == 'Student') {
       path = 'students/';
     } else if (authority == 'Employer') {
       path = 'employers/';
     }
-    var rid: string = '';
+    let rid: string = '';
 
     rid = await this.authService.SignUp(
       this.registerForm.value.Email,

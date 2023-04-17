@@ -68,15 +68,15 @@ export class UserProfileComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
-  canEdit: Boolean = false;
+  canEdit: boolean = false;
   Uploading = false;
   public file: any = {};
   myStudent = {} as StudentProfile;
   myEmployer = {} as Employer;
   path!: string;
   myUser: any = {};
-  isStudent: Boolean = false;
-  isEmployer: Boolean = false;
+  isStudent: boolean = false;
+  isEmployer: boolean = false;
   registerid!: any;
   canCancel: boolean = true;
 
@@ -165,21 +165,21 @@ export class UserProfileComponent {
 
       if (this.myStudent.CV != null || this.myStudent.CV != '') {
         //detete old CV from storage
-        var path = 'curriculum_vitae/' + this.myStudent.CVName;
+        let path = 'curriculum_vitae/' + this.myStudent.CVName;
         const fileRef = ref_storage(this.storage, path);
         deleteObject(fileRef)
           .then(() => {})
           .catch((error) => {});
       }
 
-      var result = await this.storageService.uploadToFirestore(
+      let result = await this.storageService.uploadToFirestore(
         this.file,
         'curriculum_vitae/',
         this.storage
       );
-      var myValues = result.split(',');
-      var myDownloadLink = myValues[0];
-      var myFileName = myValues[1] + this.file.name;
+      let myValues = result.split(',');
+      let myDownloadLink = myValues[0];
+      let myFileName = myValues[1] + this.file.name;
 
       this.onEditUser(
         this.myUser.uid,

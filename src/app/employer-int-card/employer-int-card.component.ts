@@ -72,10 +72,10 @@ export class EmployerIntCardComponent {
           });
         });
 
-        for (let i = 0; i < this.myKeysArray.length; i++) {
+        for (const element of this.myKeysArray) {
           const promiseArray: Promise<any>[] = [];
 
-          this.myKeysArray[i].forEach((key: any) => {
+          element.forEach((key: any) => {
             const starCountRef = child(dbRef, `students/${key}`);
             const promise = new Promise((resolve) => {
               onValue(starCountRef, (snapshot) => {
@@ -96,14 +96,14 @@ export class EmployerIntCardComponent {
 
   unselectForInterview(postingID: any, studentID: any) {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
     const starCountRef = child(dbRef, `students/${studentID}/JobsApplied`);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(postingID as any) || !keys) {
+    if (!keys.includes(postingID) || !keys) {
       const userRef = child(dbRef, `students/${studentID}/JobsApplied`);
       update(userRef, { [postingID]: '' });
     }
@@ -113,7 +113,7 @@ export class EmployerIntCardComponent {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(studentID as any) || !keys) {
+    if (!keys.includes(studentID) || !keys) {
       const userRef = child(dbRef, `job-postings/${postingID}/Candidates`);
       update(userRef, { [studentID]: '' });
     }
@@ -129,7 +129,7 @@ export class EmployerIntCardComponent {
     if (keys.length == 1) {
       const userRef = child(dbRef, `students/${studentID}`);
       update(userRef, { SelectedInterviews: '' });
-    } else if (keys.includes(postingID as any)) {
+    } else if (keys.includes(postingID)) {
       remove(
         child(dbRef, `students/${studentID}/SelectedInterviews/${postingID}`)
       );
@@ -146,7 +146,7 @@ export class EmployerIntCardComponent {
     if (keys.length == 1) {
       const userRef = child(dbRef, `job-postings/${postingID}`);
       update(userRef, { SelectedInterviews: '' });
-    } else if (keys.includes(studentID as any)) {
+    } else if (keys.includes(studentID)) {
       remove(
         child(
           dbRef,

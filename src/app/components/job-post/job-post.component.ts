@@ -43,9 +43,7 @@ export class JobPostComponent {
         const data = snapshot.val();
         this.jobsArray = (Object as any).values(data);
       });
-    }
-
-    if (this.router.url === '/my-postings') {
+    } else if (this.router.url === '/my-postings') {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef, `job-postings/`);
       onValue(starCountRef, (snapshot) => {
@@ -70,8 +68,7 @@ export class JobPostComponent {
           });
         });
       });
-    }
-    if (this.router.url === '/applications') {
+    } else if (this.router.url === '/applications') {
       const dbRef = ref(this.database);
       const starCountRef = child(
         dbRef,
