@@ -1,4 +1,3 @@
-import { User } from './../../models/user.models';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -17,7 +16,6 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { Database, set, ref } from '@angular/fire/database';
-import { doc } from 'firebase/firestore';
 import { Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -109,7 +107,6 @@ export class RegisterComponent implements OnInit {
       path = 'employers/';
     }
     var rid: string = '';
-    //var rid = await this.storageService.IDgenerator(path, this.database);
 
     rid = await this.authService.SignUp(
       this.registerForm.value.Email,
@@ -120,7 +117,7 @@ export class RegisterComponent implements OnInit {
       this.Uploading = false;
       return;
     }
-    var res = await this.registerUser(this.registerForm.value, rid, path);
+    await this.registerUser(this.registerForm.value, rid, path);
     await new Promise((resolve) => setTimeout(resolve, 3000));
     this.router.navigate(['/profile', rid, authority]);
     this.Uploading = false;

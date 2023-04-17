@@ -7,9 +7,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
-import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
-import { Employer, JobPost } from 'src/app/models/user.models';
+import {Database,set,ref, onValue, child} from '@angular/fire/database'
+import { Storage, ref as ref_storage} from '@angular/fire/storage';
+import { Employer} from 'src/app/models/user.models';
 import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
 import { ErrorStateMatcher } from '@angular/material/core';

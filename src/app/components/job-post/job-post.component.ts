@@ -3,15 +3,12 @@ import AOS from 'aos';
 import { JobPost } from '../../models/user.models';
 import {
   Database,
-  set,
   ref,
   update,
   child,
   onValue,
-  getDatabase,
   remove,
 } from '@angular/fire/database';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 

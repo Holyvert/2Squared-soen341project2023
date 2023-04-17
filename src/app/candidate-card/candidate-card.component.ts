@@ -1,9 +1,6 @@
 import { Component, Input, OnInit, AfterContentChecked } from '@angular/core';
-import AOS from 'aos';
-import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import {
   Database,
-  set,
   ref,
   onValue,
   child,
@@ -11,13 +8,12 @@ import {
   remove,
 } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-//import { RouterTestingModule } from "@angular/router/testing";
 
 @Component({
   selector: 'app-candidate-card',

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit, AfterViewChecked {
+export class NavComponent implements AfterViewChecked {
   authority!: string;
   myUser!: any;
   constructor(
@@ -16,8 +16,6 @@ export class NavComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private Acrouter: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewChecked() {
     this.myUser = this.authService.getUser();

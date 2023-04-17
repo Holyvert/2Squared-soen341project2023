@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const error = await this.authService.SignIn(this.loginForm.value.Email, this.loginForm.value.Password);
+    await this.authService.SignIn(this.loginForm.value.Email, this.loginForm.value.Password);
     window.open('', '_self');
   }
 

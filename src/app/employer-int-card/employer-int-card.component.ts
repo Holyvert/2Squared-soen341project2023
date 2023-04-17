@@ -72,9 +72,6 @@ export class EmployerIntCardComponent {
           });
         });
 
-        // console.log(this.myKeysArray);
-        // console.log(this.jobsArray);
-
         for (let i = 0; i < this.myKeysArray.length; i++) {
           const promiseArray: Promise<any>[] = [];
 
@@ -93,7 +90,6 @@ export class EmployerIntCardComponent {
           this.myStudentArray.push(dataArray);
         }
 
-        // console.log(this.myStudentArray);
       });
     }
   }

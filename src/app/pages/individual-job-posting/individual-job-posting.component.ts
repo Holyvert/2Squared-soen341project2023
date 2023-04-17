@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   Database,
@@ -13,14 +13,11 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { JobPost } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/services/auth.service';
 import firebase from 'firebase/compat/app';
 import {
   Storage,
   ref as ref_storage,
-  uploadBytesResumable,
-  getDownloadURL,
   deleteObject,
 } from '@angular/fire/storage';
 
@@ -185,9 +182,7 @@ export class IndividualJobPostingComponent {
 
   //will perform to backend for when apply button is clicked
   applyAftermath() {
-    const firebase = this.database;
     const dbRef = ref(this.database);
-    var id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(
         dbRef,
@@ -219,7 +214,6 @@ export class IndividualJobPostingComponent {
     this.sendNotification(
       'You have sucessfully applied to ' + this.posting.get('JobTitle')
     );
-    return;
   }
 
   //Send to candidates page
@@ -248,7 +242,6 @@ export class IndividualJobPostingComponent {
       this.favorited = true;
       this.sendNotification('Post has been added to Favorites');
       this.Uploading = false;
-      return;
     }
   }
   deleteFromFavorites() {
@@ -280,7 +273,6 @@ export class IndividualJobPostingComponent {
         return;
       }
 
-      return;
     }
   }
 }

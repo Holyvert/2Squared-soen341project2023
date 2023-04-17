@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import AOS from 'aos';
-import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import { child, Database, onValue, ref } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-candidates',
@@ -22,7 +20,6 @@ export class CandidatesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.myUser = this.authService.getUser();
     this.studentArray = [];
     this.jobInfo = null;
     this.posting = this.Acrouter.snapshot.params['id'];
@@ -57,7 +54,6 @@ export class CandidatesComponent implements OnInit {
     //Added this just now
     onValue(dir_jobPost, (snapshot) => {
       const job_data = snapshot.val();
-      // const keys = Object.keys(job_data);
       this.jobInfo = job_data;
     });
     //}

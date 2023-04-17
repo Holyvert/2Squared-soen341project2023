@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
-  FormGroupDirective,
-  NgForm,
   Validators,
 } from '@angular/forms';
 import AOS from 'aos';
@@ -14,26 +11,20 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {
   Database,
-  set,
   ref,
   update,
   onValue,
-  get,
   child,
-  remove,
 } from '@angular/fire/database';
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
 import {
   Storage,
   ref as ref_storage,
-  uploadBytesResumable,
-  getDownloadURL,
 } from '@angular/fire/storage';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employer-form',
@@ -66,9 +57,6 @@ export class EditEmployerFormComponent {
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
-    //this.posting = this.Acrouter.snapshot.queryParamMap;
-    //this.index= this.posting.get('ID');
-    // this.index = this.Acrouter.snapshot.fragment;
     this.index = this.Acrouter.snapshot.params['id'];
     if (this.myUser) {
       if (this.myUser.photoURL == 'Student') {

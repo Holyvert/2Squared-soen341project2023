@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -16,7 +16,6 @@ import {
 } from '@angular/material/snack-bar';
 import {
   Database,
-  set,
   ref,
   update,
   onValue,
@@ -27,8 +26,6 @@ import {
 import {
   Storage,
   ref as ref_storage,
-  uploadBytesResumable,
-  getDownloadURL,
   deleteObject,
 } from '@angular/fire/storage';
 import { Employer, StudentProfile } from 'src/app/models/user.models';
