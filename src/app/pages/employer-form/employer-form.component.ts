@@ -7,8 +7,8 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {Database,set,ref, onValue, child} from '@angular/fire/database'
-import { Storage, ref as ref_storage} from '@angular/fire/storage';
+import {Database, set, ref, onValue, child} from '@angular/fire/database'
+import { Storage } from '@angular/fire/storage';
 import { Employer} from 'src/app/models/user.models';
 import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
@@ -37,7 +37,7 @@ export class EmployerFormComponent {
   employerForm!: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  canEdit: Boolean = false;
+  canEdit: boolean = false;
   faFilePdf = faFilePdf;
   faFilePowerpoint = faFilePowerpoint;
   faDownload = faDownload;
@@ -100,13 +100,13 @@ export class EmployerFormComponent {
       return;
     }
     this.Uploading = true;
-    var result = await this.storageService.uploadToFirestore(
+    let result = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
-    var myValues = result.split(',');
-    var myDownloadLink = myValues[0];
+    let myValues = result.split(',');
+    let myDownloadLink = myValues[0];
     await this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
     // Navigate to the home page (can be changed to a different page)
@@ -114,7 +114,7 @@ export class EmployerFormComponent {
   }
 
   async registerJobPosting(value: any, myDownloadLink: string) {
-    var myId = await this.storageService.IDgenerator('job-postings/', this.database)
+    let myId = await this.storageService.IDgenerator('job-postings/', this.database)
     set(ref(this.database, 'job-postings/' + myId), {
       JobTitle: value.JobTitle,
       JobLocation: value.JobLocation,

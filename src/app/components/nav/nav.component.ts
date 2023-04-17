@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -29,13 +29,13 @@ export class NavComponent implements AfterViewChecked {
   }
 
   myFunction() {
-    var x = document.getElementById('myDIV');
-
-    if (x != null)
-      if (x.style.display === 'none') {
-        x.style.display = 'block';
-      } else {
-        x.style.display = 'none';
-      }
+    let x = document.getElementById("myDIV");
+    
+    if(x!=null)
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
 }

@@ -24,8 +24,8 @@ export class JobPostComponent {
     public authService: AuthService
   ) {}
 
-  jobTitle: String = 'Software Developer';
-  jobDescription: String = 'Knowledge of Angular and TypeScript...';
+  jobTitle: string = 'Software Developer';
+  jobDescription: string = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
 
@@ -111,7 +111,7 @@ export class JobPostComponent {
                 dbRef,
                 `students/${this.myUser.uid}/Favorites`
               );
-              var mykeys: any;
+              let mykeys: any;
               onValue(starCountRef2, (snapshot) => {
                 const data = snapshot.val();
                 mykeys = Object.keys(data);
@@ -120,7 +120,7 @@ export class JobPostComponent {
               if (mykeys.length == 1) {
                 const userRef = child(dbRef, `students/${this.myUser.uid}`);
                 update(userRef, { Favorites: '' });
-              } else if (mykeys.includes(element as any)) {
+              } else if (mykeys.includes(element)) {
                 remove(
                   child(
                     dbRef,

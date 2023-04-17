@@ -23,7 +23,6 @@ import { Employer, JobPost } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
 import {
   Storage,
-  ref as ref_storage,
 } from '@angular/fire/storage';
 
 @Component({
@@ -33,7 +32,7 @@ import {
 })
 export class EditEmployerFormComponent {
   employerForm!: FormGroup;
-  canEdit: Boolean = false;
+  canEdit: boolean = false;
   jobPost = {} as JobPost;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -117,14 +116,14 @@ export class EditEmployerFormComponent {
       });
       this.Uploading = false;
     } else {
-      var result = await this.storageService.uploadToFirestore(
+      let result = await this.storageService.uploadToFirestore(
         this.file,
         'images/',
         this.storage
       );
 
-      var myValues = result.split(',');
-      var myDownloadLink = myValues[0];
+      let myValues = result.split(',');
+      let myDownloadLink = myValues[0];
 
       this.onEditPost(this.index, this.employerForm.value, myDownloadLink);
       this.Uploading = false;

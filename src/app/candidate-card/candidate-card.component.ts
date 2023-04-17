@@ -65,7 +65,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
 
   selectForInterview(studentID: any) {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
     const starCountRef = child(
       dbRef,
@@ -75,7 +75,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
         keys = Object.keys(data);
     });
-    if ((!keys.includes(this.posting.ID as any) || !keys)) {
+    if ((!keys.includes(this.posting.ID) || !keys)) {
       const userRef = child(dbRef, `students/${studentID}/SelectedInterviews`);
       update(userRef, { [this.posting.ID]: '' });
     }
@@ -88,7 +88,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(this.posting.ID as any) || !keys) {
+    if (!keys.includes(this.posting.ID ) || !keys) {
       const userRef = child(
         dbRef,
         `job-postings/${this.posting.ID}/SelectedInterviews`
@@ -108,7 +108,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       remove(
         child(dbRef, `students/${studentID}/JobsApplied/${this.posting.ID}`)
       );
-    } else if (keys.includes(this.posting.ID as any)) {
+    } else if (keys.includes(this.posting.ID)) {
       remove(
         child(dbRef, `students/${studentID}/JobsApplied/${this.posting.ID}`)
       );
@@ -129,7 +129,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       remove(
         child(dbRef, `job-postings/${this.posting.ID}/Candidates/${studentID}`)
       );
-    } else if (keys.includes(studentID as any)) {
+    } else if (keys.includes(studentID)) {
       remove(
         child(dbRef, `job-postings/${this.posting.ID}/Candidates/${studentID}`)
       );

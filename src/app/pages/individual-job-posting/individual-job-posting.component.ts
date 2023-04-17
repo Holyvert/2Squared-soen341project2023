@@ -34,8 +34,8 @@ export class IndividualJobPostingComponent {
   myUser!: any;
   index!: any;
   isEmployerWhoPosted: boolean = false;
-  Applied: Boolean = false;
-  favorited: Boolean = false;
+  Applied: boolean = false;
+  favorited: boolean = false;
   Uploading = false;
 
   constructor(
@@ -60,7 +60,7 @@ export class IndividualJobPostingComponent {
         }
       }
       const dbRef = ref(this.database);
-      var id = this.myUser.uid;
+      let id = this.myUser.uid;
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -89,7 +89,7 @@ export class IndividualJobPostingComponent {
   onDeleteJobPosting() {
     if (this.myUser) {
       const dbRef = ref(this.database);
-      var keys: any;
+      let keys: any;
 
       //Remove the job posting's id from the student's JobsApplied
       const starCountRef = child(
@@ -157,7 +157,7 @@ export class IndividualJobPostingComponent {
       const httpsReference = firebase
         .storage()
         .refFromURL(this.posting.get('Image')!);
-      var path = 'images/' + httpsReference.name;
+      let path = 'images/' + httpsReference.name;
       const fileRef = ref_storage(this.storage, path);
       deleteObject(fileRef)
         .then(() => {})
@@ -193,7 +193,7 @@ export class IndividualJobPostingComponent {
         const keys = Object.keys(data);
         if (!keys.includes(this.myUser.uid)) {
           //send user id to job posting in candidates attribute
-          var id1 = this.myUser.uid;
+          let id1 = this.myUser.uid;
           const dbRef = ref(this.database);
           const userRef1 = child(
             dbRef,
@@ -202,7 +202,7 @@ export class IndividualJobPostingComponent {
           update(userRef1, { [id1]: '' });
 
           //send job posting to user student in appliedto attribute
-          var id2 = this.posting.get('ID') as string;
+          let id2 = this.posting.get('ID') as string;
           const userRef2 = child(
             dbRef,
             `students/${this.myUser.uid}/JobsApplied`
@@ -224,9 +224,9 @@ export class IndividualJobPostingComponent {
   }
   async addToFavorites() {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
-    var id = this.myUser.uid;
+    let id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
@@ -234,7 +234,7 @@ export class IndividualJobPostingComponent {
         keys = Object.keys(data);
       });
       if (!keys.includes(this.posting.get('ID') as any) || !keys) {
-        var postingId = this.posting.get('ID') as any;
+        let postingId = this.posting.get('ID') as any;
         const userRef = child(dbRef, `students/${id}/Favorites`);
         update(userRef, { [postingId]: '' });
       }
@@ -247,8 +247,8 @@ export class IndividualJobPostingComponent {
   deleteFromFavorites() {
     this.Uploading = true;
     const dbRef = ref(this.database);
-    var keys: any;
-    var id = this.myUser.uid;
+    let keys: any;
+    let id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
@@ -259,13 +259,14 @@ export class IndividualJobPostingComponent {
         //need to fix
         const userRef = child(dbRef, `students/${id}`);
         update(userRef, { Favorites: '' });
+        let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
         this.sendNotification('Post has been removed from Favorites');
         this.Uploading = false;
         return;
       } else if (keys.includes(this.posting.get('ID') as any)) {
-        var postingId = this.posting.get('ID') as any;
+        let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
         this.sendNotification('Post has been removed from Favorites');

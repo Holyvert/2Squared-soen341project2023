@@ -56,6 +56,5 @@ export class CandidatesComponent implements OnInit {
       const job_data = snapshot.val();
       this.jobInfo = job_data;
     });
-    //}
   }
 }
