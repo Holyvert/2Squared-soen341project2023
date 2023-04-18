@@ -259,22 +259,17 @@
                         />
                       </label>
                       <br />
-
-                      <!-- <div class="d-flex justify-content-start">
-                        <a href="#!"
-                          ><i class="fab fa-facebook-f fa-lg me-3"></i
-                        ></a>
-                        <a href="#!"
-                          ><i class="fab fa-twitter fa-lg me-3"></i
-                        ></a>
-                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                      </div> -->
                     </div>
 
                     <button mat-button type="submit" (click)="onSubmit()">
                       SAVE
                     </button>
-                    <button mat-button type="button" (click)="EnableForm()">
+                    <button
+                      mat-button
+                      type="button"
+                      *ngIf="canCancel"
+                      (click)="EnableForm()"
+                    >
                       CANCEL
                     </button>
                   </div>
@@ -381,14 +376,6 @@
                       </div>
                     </div>
                     <br />
-
-                    <!-- <div class="d-flex justify-content-start">
-                      <a href="#!"
-                        ><i class="fab fa-facebook-f fa-lg me-3"></i
-                      ></a>
-                      <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                      <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                    </div> -->
                   </div>
 
                   <button (click)="EnableForm()" mat-button type="submit">
@@ -453,7 +440,8 @@
                           *ngIf="
                             registerFormEmployer.controls.first_name.hasError(
                               'required'
-                            ) && registerFormEmployer.controls.first_name.touched
+                            ) &&
+                            registerFormEmployer.controls.first_name.touched
                           "
                           >error_outline
                         </mat-icon>
@@ -493,7 +481,9 @@
                         >
                         <mat-error
                           *ngIf="
-                            registerFormEmployer.controls.last_name.hasError('required')
+                            registerFormEmployer.controls.last_name.hasError(
+                              'required'
+                            )
                           "
                           >Enter your last name</mat-error
                         >
@@ -525,7 +515,9 @@
                         >
                         <mat-error
                           *ngIf="
-                            registerFormEmployer.controls.company.hasError('required')
+                            registerFormEmployer.controls.company.hasError(
+                              'required'
+                            )
                           "
                           >Enter your company of study</mat-error
                         >
@@ -570,7 +562,9 @@
                         >
                         <mat-error
                           *ngIf="
-                            registerFormEmployer.controls.language.hasError('required')
+                            registerFormEmployer.controls.language.hasError(
+                              'required'
+                            )
                           "
                           >Enter your language</mat-error
                         >
@@ -583,7 +577,12 @@
                     <button mat-button type="submit" (click)="onSubmit()">
                       SAVE
                     </button>
-                    <button mat-button type="button" (click)="EnableForm()">
+                    <button
+                      mat-button
+                      type="button"
+                      *ngIf="canCancel"
+                      (click)="EnableForm()"
+                    >
                       CANCEL
                     </button>
                   </div>
@@ -669,14 +668,6 @@
 
                     <h6></h6>
                     <br />
-
-                    <!-- <div class="d-flex justify-content-start">
-                      <a href="#!"
-                        ><i class="fab fa-facebook-f fa-lg me-3"></i
-                      ></a>
-                      <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                      <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                    </div> -->
                   </div>
 
                   <button (click)="EnableForm()" mat-button type="submit">

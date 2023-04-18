@@ -12,24 +12,40 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  sendNotification(text: string) {
+    this.snackBar.open(text, '', {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
 
   async uploadToFirestore(
     file: any,
     path: string,
-    storage: Storage,
+    storage: Storage
   ): Promise<string> {
-    var url = '';
-    var tempName = ''
-    var storageRef = ref_storage(storage, path + file.name);
+    let url = '';
+    let tempName = '';
+    let storageRef = ref_storage(storage, path + file.name);
 
     try {
-      var url = await getDownloadURL(storageRef);
+      let url = await getDownloadURL(storageRef);
     } catch (err) {
       url = '';
     }
@@ -38,11 +54,8 @@ export class StorageService {
     while (url != '' || url == undefined) {
       try {
         tempName = Math.random().toString(36).substring(2);
-        storageRef = ref_storage(
-          storage,
-          path + tempName + file.name
-        );
-        var url = await getDownloadURL(storageRef);
+        storageRef = ref_storage(storage, path + tempName + file.name);
+        let url = await getDownloadURL(storageRef);
       } catch (err) {
         break;
       }
@@ -53,23 +66,21 @@ export class StorageService {
       console.log('Upload is ' + progress + '% done');
     });
     const snapshot = await uploadTask;
-    var downloadURL = await getDownloadURL(snapshot.ref);
+    let downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL + ',' + tempName;
   }
 
-  // Creates a unique id to store the user in the database
+  // Creates a unique id to store the postings in the database
   // Will mostly be used for job postings, as the users' id will be created by the authentication
-  // EXAMPLE OF HOW TO USE THIS FUNCTION
-  // var id = await this.storageService.IDgenerator('job-postings/', this.database);
   async IDgenerator(path: string, database: Database) {
-    var id = '';
-    var isGood = false;
-    var data: never[] | null | undefined = [];
+    let id = '';
+    let isGood = false;
+    let data: never[] | null | undefined = [];
     const dbRef = ref_data(database);
     while (!isGood) {
       try {
         id = Math.random().toString(36).substring(2);
-        var databaseRef = child(dbRef, path + id);
+        let databaseRef = child(dbRef, path + id);
         onValue(databaseRef, (snapshot) => {
           data = snapshot.val();
         });

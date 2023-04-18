@@ -35,7 +35,7 @@ describe('Employer Logs In', () => {
           cy.url().should('eq', 'http://localhost:4200/employer-form') 
 
       })
-      it('Employer fills up form without Image"', () => {
+      it('Employer fills up form with Image"', () => {
         login('isaczu15@gmail.com', 'soen341')
         cy.url().should('eq', 'http://localhost:4200/') 
         cy.get('nav')
@@ -88,9 +88,9 @@ describe('Employer Logs In', () => {
 
       it('employer navigates back to home, redirect to "my postings"',()=>{    
         
-        cy.visit('http://localhost:4200/')
-        login('isaczu15@gmail.com', 'soen341')
-        cy.url().should('eq', 'http://localhost:4200/')   
+      cy.visit('http://localhost:4200/')
+      login('isaczu15@gmail.com', 'soen341')
+      cy.url().should('eq', 'http://localhost:4200/')   
       cy.get('nav') 
       .find('#myDIV')
       .find('ul')
@@ -98,7 +98,7 @@ describe('Employer Logs In', () => {
       .eq(1)
       .click()
       // Added this to make sure the page is loaded
-      cy.wait(500)
+      cy.wait(1000)
       cy.url().should('eq','http://localhost:4200/my-postings')
       cy.get('div.cardz').contains('Cypress Tester88').click() //this works
       cy.contains('Delete').click()

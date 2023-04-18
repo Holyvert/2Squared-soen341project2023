@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import {Database,ref, onValue, child} from '@angular/fire/database'
 import { AuthService } from '../services/auth.service';
 import AOS from 'aos';
-import { SelectedInterview } from '../models/user.models';
 
 @Component({
   selector: 'app-student-int-card',
@@ -11,7 +10,7 @@ import { SelectedInterview } from '../models/user.models';
 })
 export class StudentIntCardComponent {
     myUser: any = {};
-    selectedInterviewsArray= [{} as SelectedInterview];
+    selectedInterviewsArray: any = [];
     selectedInterviewsIDs: any =[];
   
     constructor(
@@ -30,13 +29,14 @@ export class StudentIntCardComponent {
         const data = snapshot.val();
         const keys =  Object.keys(data);
         this.selectedInterviewsIDs = ((Object as any).values(keys));
-        console.log(this.selectedInterviewsIDs)
   
         this.selectedInterviewsIDs.forEach((element: any) => {
           const starCountRef = child(dbRef, `job-postings/${element}` );
           onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
-          this.selectedInterviewsArray.push(data);
+          if(data != undefined){
+            this.selectedInterviewsArray.push(data);
+          }
           });
         }); 
         });

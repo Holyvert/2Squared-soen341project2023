@@ -24,6 +24,7 @@ export const enterValueInInputEmployerForm = (index: number, value: string) => {
   cy.get('input')
     .eq(index)
     .click({ force: true })
+    .clear()
     .type(value)
 }
 
@@ -31,6 +32,7 @@ export const enterValueInTextAreaEmployerForm = (index: number, value: string) =
   cy.get('textarea')
     .eq(index)
     .click({ force: true })
+    .clear()
     .type(value)
 }
 

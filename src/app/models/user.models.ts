@@ -5,7 +5,6 @@ export interface Employer{
   LastName: string;
   Email: string;
   Language: string;
-  Password: string;
 }
 
 export interface JobPost {
@@ -20,18 +19,18 @@ export interface JobPost {
   Supervisor: string;
   Candidates: any; // list vof ids
   ID: string; //its own id
-  Requirements: String;
-  Deadline: String;
-  DocsRequired: String;
-  ApplicationMethod: String;
-  JcFirstName: String;
-  JcLastName: String;
-  Website: String;
-  City: String;
-  Province: String;
-  PostalCode: String;
-  Email: String;
-  EmployerID: String;
+  Requirements: string;
+  Deadline: string;
+  DocsRequired: string;
+  ApplicationMethod: string;
+  JcFirstName: string;
+  JcLastName: string;
+  Website: string;
+  City: string;
+  Province: string;
+  PostalCode: string;
+  Email: string;
+  EmployerID: string;
   SelectedInterviews: any;
 }
 
@@ -48,7 +47,6 @@ export interface StudentProfile {
   CVName: string;
   ID: string;
   SelectedInterviews: any;
-  Password: string;
   Favorites: any; // list of ids
 }
 

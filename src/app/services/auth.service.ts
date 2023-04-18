@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { StudentProfile, Employer, User } from '../models/user.models';
-import * as auth from 'firebase/auth';
+import { User } from '../models/user.models';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -101,9 +100,6 @@ export class AuthService {
       email: user.email,
       photoURL: authority ? authority : user.photoURL,
     };
-    console.log(userData.uid);
-    console.log(userData.email);
-    console.log(userData.photoURL);
     return userRef.set(userData, {
       merge: true,
     });

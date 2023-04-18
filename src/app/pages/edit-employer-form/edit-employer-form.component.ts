@@ -1,39 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import AOS from 'aos';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import {
-  Database,
-  set,
-  ref,
-  update,
-  onValue,
-  get,
-  child,
-  remove,
-} from '@angular/fire/database';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Database, ref, update, onValue, child } from '@angular/fire/database';
 import { Employer, JobPost } from 'src/app/models/user.models';
 import { StorageService } from 'src/app/services/storage.service';
-import {
-  Storage,
-  ref as ref_storage,
-  uploadBytesResumable,
-  getDownloadURL,
-} from '@angular/fire/storage';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Storage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-edit-employer-form',
@@ -42,10 +15,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class EditEmployerFormComponent {
   employerForm!: FormGroup;
-  canEdit: Boolean = false;
+  canEdit: boolean = false;
   jobPost = {} as JobPost;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   Uploading = false;
   public file: any = {};
   myUser: any = {};
@@ -57,7 +28,6 @@ export class EditEmployerFormComponent {
     private form_builder: FormBuilder,
     public database: Database,
     public storage: Storage,
-    private snackBar: MatSnackBar,
     public storageService: StorageService,
     private authService: AuthService,
     private router: Router,
@@ -66,12 +36,7 @@ export class EditEmployerFormComponent {
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
-    //this.posting = this.Acrouter.snapshot.queryParamMap;
-    //this.index= this.posting.get('ID');
-    // this.index = this.Acrouter.snapshot.fragment;
     this.index = this.Acrouter.snapshot.params['id'];
-    console.log(this.posting);
-    console.log(this.index);
     if (this.myUser) {
       if (this.myUser.photoURL == 'Student') {
         this.router.navigate(['']);
@@ -83,14 +48,11 @@ export class EditEmployerFormComponent {
       onValue(userRef, (snapshot) => {
         const data = snapshot.val();
         this.myEmployer = data;
-        console.log(this.myEmployer.Company);
       });
 
-      console.log('INDEX:' + this.index);
       const studentRef = child(dbRef, `job-postings/${this.index}`);
       onValue(studentRef, (snapshot) => {
         const data = snapshot.val();
-        console.log(data);
         this.jobPost = data;
       });
 
@@ -121,17 +83,9 @@ export class EditEmployerFormComponent {
   }
 
   async onSubmit() {
-    // console.log(this.file.name);
-    // if (this.employerForm.invalid) {
-    //   this.sendNotification('make sure to answer all required fields');
-    //   return;
-    // }
-
     this.EnableForm();
     this.Uploading = true;
-    console.log(this.file.name);
     if (this.file.name == undefined) {
-      
       const dbRef = ref(this.database);
       const userRef = child(dbRef, `job-postings/${this.index}`);
       onValue(userRef, (snapshot) => {
@@ -140,14 +94,14 @@ export class EditEmployerFormComponent {
       });
       this.Uploading = false;
     } else {
-      var result = await this.storageService.uploadToFirestore(
+      let result = await this.storageService.uploadToFirestore(
         this.file,
         'images/',
         this.storage
       );
 
-      var myValues = result.split(',');
-      var myDownloadLink = myValues[0];
+      let myValues = result.split(',');
+      let myDownloadLink = myValues[0];
 
       this.onEditPost(this.index, this.employerForm.value, myDownloadLink);
       this.Uploading = false;
@@ -160,14 +114,6 @@ export class EditEmployerFormComponent {
 
   handleFileInput(event: any) {
     this.file = event.target.files[0];
-  }
-
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 
   onEditPost(index: any, value: any, myDownloadLink: string) {
@@ -193,6 +139,6 @@ export class EditEmployerFormComponent {
       PostalCode: value.PostalCode,
       Image: myDownloadLink,
     });
-    this.sendNotification(`Post ${value.JobTitle} was updated!`);
+    this.storageService.sendNotification(`Post ${value.JobTitle} was updated!`);
   }
 } //end of EmployerFormComponent
