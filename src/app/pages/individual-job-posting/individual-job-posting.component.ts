@@ -8,11 +8,6 @@ import {
   onValue,
   update,
 } from '@angular/fire/database';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import firebase from 'firebase/compat/app';
 import {
@@ -20,6 +15,7 @@ import {
   ref as ref_storage,
   deleteObject,
 } from '@angular/fire/storage';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-individual-job-posting',
@@ -27,8 +23,6 @@ import {
   styleUrls: ['./individual-job-posting.component.scss'],
 })
 export class IndividualJobPostingComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   posting!: ParamMap;
   authority!: string;
   myUser!: any;
@@ -42,9 +36,9 @@ export class IndividualJobPostingComponent {
     private Acrouter: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     public database: Database,
-    public storage: Storage
+    public storage: Storage,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -165,19 +159,11 @@ export class IndividualJobPostingComponent {
 
       remove(child(dbRef, `job-postings/${this.posting.get('ID')}`));
 
-      this.sendNotification(
+      this.storageService.sendNotification(
         `Posting ${this.posting.get('JobTitle')} was deleted!`
       );
       this.router.navigate(['']);
     }
-  }
-
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 
   //will perform to backend for when apply button is clicked
@@ -211,7 +197,7 @@ export class IndividualJobPostingComponent {
         }
       });
     }
-    this.sendNotification(
+    this.storageService.sendNotification(
       'You have sucessfully applied to ' + this.posting.get('JobTitle')
     );
   }
@@ -240,7 +226,7 @@ export class IndividualJobPostingComponent {
       }
 
       this.favorited = true;
-      this.sendNotification('Post has been added to Favorites');
+      this.storageService.sendNotification('Post has been added to Favorites');
       this.Uploading = false;
     }
   }
@@ -262,18 +248,21 @@ export class IndividualJobPostingComponent {
         let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
-        this.sendNotification('Post has been removed from Favorites');
+        this.storageService.sendNotification(
+          'Post has been removed from Favorites'
+        );
         this.Uploading = false;
         return;
       } else if (keys.includes(this.posting.get('ID') as any)) {
         let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
-        this.sendNotification('Post has been removed from Favorites');
+        this.storageService.sendNotification(
+          'Post has been removed from Favorites'
+        );
         this.Uploading = false;
         return;
       }
-
     }
   }
 }

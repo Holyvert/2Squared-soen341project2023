@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,11 +9,6 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import AOS from 'aos';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import {
   Database,
   ref,
@@ -65,8 +60,6 @@ export class UserProfileComponent {
   faFilePowerpoint = faFilePowerpoint;
   faDownload = faDownload;
   matcher = new MyErrorStateMatcher();
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   submitted = false;
   canEdit: boolean = false;
   Uploading = false;
@@ -85,25 +78,22 @@ export class UserProfileComponent {
     public storage: Storage,
     public storageService: StorageService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
     public authService: AuthService,
     private Acrouter: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.registerid = this.Acrouter.snapshot.params['id'];
+    let type = this.Acrouter.snapshot.params['type'];
 
-        this.registerid = this.Acrouter.snapshot.params['id'];
-        let type = this.Acrouter.snapshot.params['type'];
- 
-      
     //example using a hard coded id (reading user profile)
     this.myUser = this.authService.getUser();
-       if (this.registerid != undefined) {
-        this.myUser.uid = this.registerid
-        this.myUser.photoURL= type
-        this.canEdit=true
-        this.canCancel =false
-       }
+    if (this.registerid != undefined) {
+      this.myUser.uid = this.registerid;
+      this.myUser.photoURL = type;
+      this.canEdit = true;
+      this.canCancel = false;
+    }
     if (this.myUser) {
       if (this.myUser.photoURL == 'Student') {
         this.path = 'students/' + this.myUser.uid;
@@ -155,7 +145,9 @@ export class UserProfileComponent {
   async onSubmit() {
     if (this.isStudent) {
       if (this.registerForm.invalid) {
-        this.sendNotification('make sure to answer all required fields');
+        this.storageService.sendNotification(
+          'make sure to answer all required fields'
+        );
         return;
       }
 
@@ -190,7 +182,9 @@ export class UserProfileComponent {
       this.Uploading = false;
     } else if (this.isEmployer) {
       if (this.registerFormEmployer.invalid) {
-        this.sendNotification('make sure to answer all required fields');
+        this.storageService.sendNotification(
+          'make sure to answer all required fields'
+        );
         return;
       }
 
@@ -243,7 +237,7 @@ export class UserProfileComponent {
       });
     }
 
-    this.sendNotification(
+    this.storageService.sendNotification(
       `user ${value.first_name} ${value.last_name} was updated!`
     );
   }
@@ -251,18 +245,11 @@ export class UserProfileComponent {
   onDeleteUser(index: any) {
     const dbRef = ref(this.database);
     remove(child(dbRef, `students/${index}`));
-    this.sendNotification(`user ${index} was deleted!`);
+    this.storageService.sendNotification(`user ${index} was deleted!`);
   }
 
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
   EnableForm() {
     this.canEdit = !this.canEdit;
-    this.canCancel=true
+    this.canCancel = true;
   }
 }

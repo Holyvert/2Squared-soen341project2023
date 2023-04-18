@@ -9,11 +9,7 @@ import {
 } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-candidate-card',
@@ -21,8 +17,6 @@ import {
   styleUrls: ['./candidate-card.component.scss'],
 })
 export class CandidateCardComponent implements OnInit, AfterContentChecked {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   posting: any;
   myStudent: any;
   SomeoneHere = true;
@@ -33,7 +27,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
     private router: Router,
     public database: Database,
     public authService: AuthService,
-    private snackBar: MatSnackBar
+    private storageService: StorageService
   ) {}
 
   @Input() student: any;
@@ -73,9 +67,9 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
     );
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-        keys = Object.keys(data);
+      keys = Object.keys(data);
     });
-    if ((!keys.includes(this.posting.ID) || !keys)) {
+    if (!keys.includes(this.posting.ID) || !keys) {
       const userRef = child(dbRef, `students/${studentID}/SelectedInterviews`);
       update(userRef, { [this.posting.ID]: '' });
     }
@@ -88,7 +82,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(this.posting.ID ) || !keys) {
+    if (!keys.includes(this.posting.ID) || !keys) {
       const userRef = child(
         dbRef,
         `job-postings/${this.posting.ID}/SelectedInterviews`
@@ -135,16 +129,10 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       );
     }
 
-    this.sendNotification('Student has been selected for interview.');
+    this.storageService.sendNotification(
+      'Student has been selected for interview.'
+    );
     this.Uploading = false;
     window.location.reload();
-  }
-
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 }

@@ -8,11 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { Database, set, ref } from '@angular/fire/database';
@@ -41,15 +36,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   hide = true;
   Uploading = false;
 
   constructor(
     public authService: AuthService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
     private storageService: StorageService,
     private database: Database,
     private router: Router
@@ -94,7 +86,9 @@ export class RegisterComponent implements OnInit {
   async onSubmit() {
     // stop the process here if form is invalid
     if (this.registerForm.invalid) {
-      this.sendNotification('make sure to answer all required fields');
+      this.storageService.sendNotification(
+        'make sure to answer all required fields'
+      );
 
       return;
     }
@@ -151,16 +145,8 @@ export class RegisterComponent implements OnInit {
       });
     }
 
-    this.sendNotification(
+    this.storageService.sendNotification(
       'user created! Make sure to add information to your profile'
     );
-  }
-
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 5000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 }

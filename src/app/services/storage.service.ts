@@ -12,20 +12,36 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  sendNotification(text: string) {
+    this.snackBar.open(text, '', {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
 
   async uploadToFirestore(
     file: any,
     path: string,
-    storage: Storage,
+    storage: Storage
   ): Promise<string> {
     let url = '';
-    let tempName = ''
+    let tempName = '';
     let storageRef = ref_storage(storage, path + file.name);
 
     try {
@@ -38,10 +54,7 @@ export class StorageService {
     while (url != '' || url == undefined) {
       try {
         tempName = Math.random().toString(36).substring(2);
-        storageRef = ref_storage(
-          storage,
-          path + tempName + file.name
-        );
+        storageRef = ref_storage(storage, path + tempName + file.name);
         let url = await getDownloadURL(storageRef);
       } catch (err) {
         break;

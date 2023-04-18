@@ -10,11 +10,7 @@ import {
 import { JobPost } from '../models/user.models';
 import { AuthService } from '../services/auth.service';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-employer-int-card',
@@ -22,8 +18,6 @@ import {
   styleUrls: ['./employer-int-card.component.scss'],
 })
 export class EmployerIntCardComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   faDownload = faDownload;
   myUser: any = {};
   jobsArray = [{} as JobPost];
@@ -35,7 +29,7 @@ export class EmployerIntCardComponent {
   constructor(
     private database: Database,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private storageService: StorageService,
   ) {}
 
   ngOnInit(): void {
@@ -155,16 +149,9 @@ export class EmployerIntCardComponent {
       );
     }
 
-    this.sendNotification('Student has been unselected from interview.');
+    this.storageService.sendNotification('Student has been unselected from interview.');
     this.Uploading = false;
     window.location.reload();
   }
 
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
 }
