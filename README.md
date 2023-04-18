@@ -29,6 +29,7 @@ Languages: <br />
 Frameworks: Angular, Bootstrap <br />
 Environment: Node.js <br />
 IDE: Visual Studio Code <br />
+Static Code Analysis: Sonarqube <br />
 
 ## Square
 
