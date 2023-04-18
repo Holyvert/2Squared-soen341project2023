@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
+import {Database,ref, onValue, child} from '@angular/fire/database'
 import { AuthService } from '../services/auth.service';
 import AOS from 'aos';
-import { SelectedInterview } from '../models/user.models';
 
 @Component({
   selector: 'app-student-int-card',

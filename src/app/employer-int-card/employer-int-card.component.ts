@@ -10,11 +10,7 @@ import {
 import { JobPost } from '../models/user.models';
 import { AuthService } from '../services/auth.service';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-employer-int-card',
@@ -22,8 +18,6 @@ import {
   styleUrls: ['./employer-int-card.component.scss'],
 })
 export class EmployerIntCardComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   faDownload = faDownload;
   myUser: any = {};
   jobsArray = [{} as JobPost];
@@ -35,7 +29,7 @@ export class EmployerIntCardComponent {
   constructor(
     private database: Database,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private storageService: StorageService,
   ) {}
 
   ngOnInit(): void {
@@ -72,13 +66,10 @@ export class EmployerIntCardComponent {
           });
         });
 
-        // console.log(this.myKeysArray);
-        // console.log(this.jobsArray);
-
-        for (let i = 0; i < this.myKeysArray.length; i++) {
+        for (const element of this.myKeysArray) {
           const promiseArray: Promise<any>[] = [];
 
-          this.myKeysArray[i].forEach((key: any) => {
+          element.forEach((key: any) => {
             const starCountRef = child(dbRef, `students/${key}`);
             const promise = new Promise((resolve) => {
               onValue(starCountRef, (snapshot) => {
@@ -93,21 +84,20 @@ export class EmployerIntCardComponent {
           this.myStudentArray.push(dataArray);
         }
 
-        // console.log(this.myStudentArray);
       });
     }
   }
 
   unselectForInterview(postingID: any, studentID: any) {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
     const starCountRef = child(dbRef, `students/${studentID}/JobsApplied`);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(postingID as any) || !keys) {
+    if (!keys.includes(postingID) || !keys) {
       const userRef = child(dbRef, `students/${studentID}/JobsApplied`);
       update(userRef, { [postingID]: '' });
     }
@@ -117,7 +107,7 @@ export class EmployerIntCardComponent {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(studentID as any) || !keys) {
+    if (!keys.includes(studentID) || !keys) {
       const userRef = child(dbRef, `job-postings/${postingID}/Candidates`);
       update(userRef, { [studentID]: '' });
     }
@@ -133,7 +123,7 @@ export class EmployerIntCardComponent {
     if (keys.length == 1) {
       const userRef = child(dbRef, `students/${studentID}`);
       update(userRef, { SelectedInterviews: '' });
-    } else if (keys.includes(postingID as any)) {
+    } else if (keys.includes(postingID)) {
       remove(
         child(dbRef, `students/${studentID}/SelectedInterviews/${postingID}`)
       );
@@ -150,7 +140,7 @@ export class EmployerIntCardComponent {
     if (keys.length == 1) {
       const userRef = child(dbRef, `job-postings/${postingID}`);
       update(userRef, { SelectedInterviews: '' });
-    } else if (keys.includes(studentID as any)) {
+    } else if (keys.includes(studentID)) {
       remove(
         child(
           dbRef,
@@ -159,16 +149,9 @@ export class EmployerIntCardComponent {
       );
     }
 
-    this.sendNotification('Student has been unselected from interview.');
+    this.storageService.sendNotification('Student has been unselected from interview.');
     this.Uploading = false;
     window.location.reload();
   }
 
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
 }

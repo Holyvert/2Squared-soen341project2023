@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   Database,
@@ -8,21 +8,14 @@ import {
   onValue,
   update,
 } from '@angular/fire/database';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { JobPost } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/services/auth.service';
 import firebase from 'firebase/compat/app';
 import {
   Storage,
   ref as ref_storage,
-  uploadBytesResumable,
-  getDownloadURL,
   deleteObject,
 } from '@angular/fire/storage';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-individual-job-posting',
@@ -30,24 +23,22 @@ import {
   styleUrls: ['./individual-job-posting.component.scss'],
 })
 export class IndividualJobPostingComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   posting!: ParamMap;
   authority!: string;
   myUser!: any;
   index!: any;
   isEmployerWhoPosted: boolean = false;
-  Applied: Boolean = false;
-  favorited: Boolean = false;
+  Applied: boolean = false;
+  favorited: boolean = false;
   Uploading = false;
 
   constructor(
     private Acrouter: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     public database: Database,
-    public storage: Storage
+    public storage: Storage,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -63,7 +54,7 @@ export class IndividualJobPostingComponent {
         }
       }
       const dbRef = ref(this.database);
-      var id = this.myUser.uid;
+      let id = this.myUser.uid;
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -92,7 +83,7 @@ export class IndividualJobPostingComponent {
   onDeleteJobPosting() {
     if (this.myUser) {
       const dbRef = ref(this.database);
-      var keys: any;
+      let keys: any;
 
       //Remove the job posting's id from the student's JobsApplied
       const starCountRef = child(
@@ -160,7 +151,7 @@ export class IndividualJobPostingComponent {
       const httpsReference = firebase
         .storage()
         .refFromURL(this.posting.get('Image')!);
-      var path = 'images/' + httpsReference.name;
+      let path = 'images/' + httpsReference.name;
       const fileRef = ref_storage(this.storage, path);
       deleteObject(fileRef)
         .then(() => {})
@@ -168,26 +159,16 @@ export class IndividualJobPostingComponent {
 
       remove(child(dbRef, `job-postings/${this.posting.get('ID')}`));
 
-      this.sendNotification(
+      this.storageService.sendNotification(
         `Posting ${this.posting.get('JobTitle')} was deleted!`
       );
       this.router.navigate(['']);
     }
   }
 
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-
   //will perform to backend for when apply button is clicked
   applyAftermath() {
-    const firebase = this.database;
     const dbRef = ref(this.database);
-    var id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(
         dbRef,
@@ -198,7 +179,7 @@ export class IndividualJobPostingComponent {
         const keys = Object.keys(data);
         if (!keys.includes(this.myUser.uid)) {
           //send user id to job posting in candidates attribute
-          var id1 = this.myUser.uid;
+          let id1 = this.myUser.uid;
           const dbRef = ref(this.database);
           const userRef1 = child(
             dbRef,
@@ -207,7 +188,7 @@ export class IndividualJobPostingComponent {
           update(userRef1, { [id1]: '' });
 
           //send job posting to user student in appliedto attribute
-          var id2 = this.posting.get('ID') as string;
+          let id2 = this.posting.get('ID') as string;
           const userRef2 = child(
             dbRef,
             `students/${this.myUser.uid}/JobsApplied`
@@ -216,10 +197,9 @@ export class IndividualJobPostingComponent {
         }
       });
     }
-    this.sendNotification(
+    this.storageService.sendNotification(
       'You have sucessfully applied to ' + this.posting.get('JobTitle')
     );
-    return;
   }
 
   //Send to candidates page
@@ -230,9 +210,9 @@ export class IndividualJobPostingComponent {
   }
   async addToFavorites() {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
-    var id = this.myUser.uid;
+    let id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
@@ -240,22 +220,21 @@ export class IndividualJobPostingComponent {
         keys = Object.keys(data);
       });
       if (!keys.includes(this.posting.get('ID') as any) || !keys) {
-        var postingId = this.posting.get('ID') as any;
+        let postingId = this.posting.get('ID') as any;
         const userRef = child(dbRef, `students/${id}/Favorites`);
         update(userRef, { [postingId]: '' });
       }
 
       this.favorited = true;
-      this.sendNotification('Post has been added to Favorites');
+      this.storageService.sendNotification('Post has been added to Favorites');
       this.Uploading = false;
-      return;
     }
   }
   deleteFromFavorites() {
     this.Uploading = true;
     const dbRef = ref(this.database);
-    var keys: any;
-    var id = this.myUser.uid;
+    let keys: any;
+    let id = this.myUser.uid;
     if (this.myUser) {
       const starCountRef = child(dbRef, `students/${id}/Favorites`);
       onValue(starCountRef, (snapshot) => {
@@ -266,21 +245,24 @@ export class IndividualJobPostingComponent {
         //need to fix
         const userRef = child(dbRef, `students/${id}`);
         update(userRef, { Favorites: '' });
+        let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
-        this.sendNotification('Post has been removed from Favorites');
+        this.storageService.sendNotification(
+          'Post has been removed from Favorites'
+        );
         this.Uploading = false;
         return;
       } else if (keys.includes(this.posting.get('ID') as any)) {
-        var postingId = this.posting.get('ID') as any;
+        let postingId = this.posting.get('ID') as any;
         remove(child(dbRef, `students/${id}/Favorites/${postingId}`));
         this.favorited = false;
-        this.sendNotification('Post has been removed from Favorites');
+        this.storageService.sendNotification(
+          'Post has been removed from Favorites'
+        );
         this.Uploading = false;
         return;
       }
-
-      return;
     }
   }
 }

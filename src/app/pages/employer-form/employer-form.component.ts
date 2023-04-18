@@ -1,16 +1,22 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import {Database,set,ref,update, onValue, get, child, remove} from '@angular/fire/database'
-import { Storage, ref as ref_storage, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
-import { Employer, JobPost } from 'src/app/models/user.models';
-import { faDownload, faFilePdf, faFilePowerpoint } from '@fortawesome/free-solid-svg-icons';
+import { Database, set, ref, onValue, child } from '@angular/fire/database';
+import { Storage } from '@angular/fire/storage';
+import { Employer } from 'src/app/models/user.models';
+import {
+  faDownload,
+  faFilePdf,
+  faFilePowerpoint,
+} from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from 'src/app/services/storage.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -35,9 +41,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class EmployerFormComponent {
   employerForm!: FormGroup;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  canEdit: Boolean = false;
+  canEdit: boolean = false;
   faFilePdf = faFilePdf;
   faFilePowerpoint = faFilePowerpoint;
   faDownload = faDownload;
@@ -53,60 +57,60 @@ export class EmployerFormComponent {
     public storage: Storage,
     public storageService: StorageService,
     private authService: AuthService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.myUser = this.authService.getUser();
-    if(this.myUser){
-    if (this.myUser.photoURL == 'Student') {
-      this.router.navigate([''])
-    }
+    if (this.myUser) {
+      if (this.myUser.photoURL == 'Student') {
+        this.router.navigate(['']);
+      }
 
-    const dbRef = ref(this.database);
-    const userRef = child(dbRef, 'employers/' + this.myUser.uid);
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
+      const dbRef = ref(this.database);
+      const userRef = child(dbRef, 'employers/' + this.myUser.uid);
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
         this.myEmployer = data;
-    });
+      });
 
-    this.employerForm = this.formBuilder.group({
-      JobTitle: ['', [Validators.required]],
-      JobLocation: ['', [Validators.required]],
-      JobLocationType: ['', [Validators.required]],
-      Salary: ['', [Validators.required]],
-      Duration: ['', [Validators.required]],
-      Supervisor: ['', [Validators.required]],
-      Description: ['', [Validators.required]],
-      Requirements: ['', [Validators.required]],
-      Deadline: ['', [Validators.required]],
-      DocsRequired: ['', [Validators.required]],
-      ApplicationMethod: ['', [Validators.required]],
-      JcFirstName: ['', [Validators.required]],
-      JcLastName: ['', [Validators.required]],
-      Website: ['', [Validators.required]],
-      Image: [null, [Validators.required]],
-      City: ['', [Validators.required]],
-      Province: ['', [Validators.required]],
-      PostalCode: ['', [Validators.required]],
-    });
-  }
+      this.employerForm = this.formBuilder.group({
+        JobTitle: ['', [Validators.required]],
+        JobLocation: ['', [Validators.required]],
+        JobLocationType: ['', [Validators.required]],
+        Salary: ['', [Validators.required]],
+        Duration: ['', [Validators.required]],
+        Supervisor: ['', [Validators.required]],
+        Description: ['', [Validators.required]],
+        Requirements: ['', [Validators.required]],
+        Deadline: ['', [Validators.required]],
+        DocsRequired: ['', [Validators.required]],
+        ApplicationMethod: ['', [Validators.required]],
+        JcFirstName: ['', [Validators.required]],
+        JcLastName: ['', [Validators.required]],
+        Website: ['', [Validators.required]],
+        Image: [null, [Validators.required]],
+        City: ['', [Validators.required]],
+        Province: ['', [Validators.required]],
+        PostalCode: ['', [Validators.required]],
+      });
+    }
   }
   async onSubmit() {
-
     if (this.employerForm.invalid) {
-      this.sendNotification('make sure to answer all required fields');
+      this.storageService.sendNotification(
+        'make sure to answer all required fields'
+      );
       return;
     }
     this.Uploading = true;
-    var result = await this.storageService.uploadToFirestore(
+    let result = await this.storageService.uploadToFirestore(
       this.file,
       'images/',
       this.storage
     );
-    var myValues = result.split(',');
-    var myDownloadLink = myValues[0];
+    let myValues = result.split(',');
+    let myDownloadLink = myValues[0];
     await this.registerJobPosting(this.employerForm.value, myDownloadLink);
     this.Uploading = false;
     // Navigate to the home page (can be changed to a different page)
@@ -114,7 +118,10 @@ export class EmployerFormComponent {
   }
 
   async registerJobPosting(value: any, myDownloadLink: string) {
-    var myId = await this.storageService.IDgenerator('job-postings/', this.database)
+    let myId = await this.storageService.IDgenerator(
+      'job-postings/',
+      this.database
+    );
     set(ref(this.database, 'job-postings/' + myId), {
       JobTitle: value.JobTitle,
       JobLocation: value.JobLocation,
@@ -124,7 +131,7 @@ export class EmployerFormComponent {
       Supervisor: value.Supervisor,
       Description: value.Description,
       Requirements: value.Requirements,
-      Deadline: JSON.stringify(value.Deadline).substring(1,11),
+      Deadline: JSON.stringify(value.Deadline).substring(1, 11),
       DocsRequired: value.DocsRequired,
       ApplicationMethod: value.ApplicationMethod,
       Company: this.myEmployer.Company,
@@ -142,21 +149,13 @@ export class EmployerFormComponent {
       SelectedInterviews: '',
     });
     this.Uploading = false;
-    this.sendNotification('Job Created');
+    this.storageService.sendNotification('Job Created');
   }
 
-  //error with send notification function, probably positions?
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
   handleFileInput(event: any) {
     this.file = event.target.files[0];
   }
   EnableForm() {
     this.canEdit = !this.canEdit;
   }
-}//end of EmployerFormComponent
+} //end of EmployerFormComponent

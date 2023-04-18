@@ -3,15 +3,12 @@ import AOS from 'aos';
 import { JobPost } from '../../models/user.models';
 import {
   Database,
-  set,
   ref,
   update,
   child,
   onValue,
-  getDatabase,
   remove,
 } from '@angular/fire/database';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -27,8 +24,8 @@ export class JobPostComponent {
     public authService: AuthService
   ) {}
 
-  jobTitle: String = 'Software Developer';
-  jobDescription: String = 'Knowledge of Angular and TypeScript...';
+  jobTitle: string = 'Software Developer';
+  jobDescription: string = 'Knowledge of Angular and TypeScript...';
   searchText: string = '';
   myUser: any = {};
 
@@ -46,9 +43,7 @@ export class JobPostComponent {
         const data = snapshot.val();
         this.jobsArray = (Object as any).values(data);
       });
-    }
-
-    if (this.router.url === '/my-postings') {
+    } else if (this.router.url === '/my-postings') {
       const dbRef = ref(this.database);
       const starCountRef = child(dbRef, `job-postings/`);
       onValue(starCountRef, (snapshot) => {
@@ -73,8 +68,7 @@ export class JobPostComponent {
           });
         });
       });
-    }
-    if (this.router.url === '/applications') {
+    } else if (this.router.url === '/applications') {
       const dbRef = ref(this.database);
       const starCountRef = child(
         dbRef,
@@ -114,7 +108,7 @@ export class JobPostComponent {
                 dbRef,
                 `students/${this.myUser.uid}/Favorites`
               );
-              var mykeys: any;
+              let mykeys: any;
               onValue(starCountRef2, (snapshot) => {
                 const data = snapshot.val();
                 mykeys = Object.keys(data);
@@ -123,7 +117,7 @@ export class JobPostComponent {
               if (mykeys.length == 1) {
                 const userRef = child(dbRef, `students/${this.myUser.uid}`);
                 update(userRef, { Favorites: '' });
-              } else if (mykeys.includes(element as any)) {
+              } else if (mykeys.includes(element)) {
                 remove(
                   child(
                     dbRef,

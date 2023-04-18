@@ -1,9 +1,6 @@
 import { Component, Input, OnInit, AfterContentChecked } from '@angular/core';
-import AOS from 'aos';
-import { Employer, JobPost, StudentProfile } from 'src/app/models/user.models';
 import {
   Database,
-  set,
   ref,
   onValue,
   child,
@@ -11,13 +8,8 @@ import {
   remove,
 } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-//import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-candidate-card',
@@ -25,8 +17,6 @@ import {
   styleUrls: ['./candidate-card.component.scss'],
 })
 export class CandidateCardComponent implements OnInit, AfterContentChecked {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   posting: any;
   myStudent: any;
   SomeoneHere = true;
@@ -37,7 +27,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
     private router: Router,
     public database: Database,
     public authService: AuthService,
-    private snackBar: MatSnackBar
+    private storageService: StorageService
   ) {}
 
   @Input() student: any;
@@ -69,7 +59,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
 
   selectForInterview(studentID: any) {
     this.Uploading = true;
-    var keys: any;
+    let keys: any;
     const dbRef = ref(this.database);
     const starCountRef = child(
       dbRef,
@@ -77,9 +67,9 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
     );
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-        keys = Object.keys(data);
+      keys = Object.keys(data);
     });
-    if ((!keys.includes(this.posting.ID as any) || !keys)) {
+    if (!keys.includes(this.posting.ID) || !keys) {
       const userRef = child(dbRef, `students/${studentID}/SelectedInterviews`);
       update(userRef, { [this.posting.ID]: '' });
     }
@@ -92,7 +82,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       const data = snapshot.val();
       keys = Object.keys(data);
     });
-    if (!keys.includes(this.posting.ID as any) || !keys) {
+    if (!keys.includes(this.posting.ID) || !keys) {
       const userRef = child(
         dbRef,
         `job-postings/${this.posting.ID}/SelectedInterviews`
@@ -112,7 +102,7 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       remove(
         child(dbRef, `students/${studentID}/JobsApplied/${this.posting.ID}`)
       );
-    } else if (keys.includes(this.posting.ID as any)) {
+    } else if (keys.includes(this.posting.ID)) {
       remove(
         child(dbRef, `students/${studentID}/JobsApplied/${this.posting.ID}`)
       );
@@ -133,22 +123,16 @@ export class CandidateCardComponent implements OnInit, AfterContentChecked {
       remove(
         child(dbRef, `job-postings/${this.posting.ID}/Candidates/${studentID}`)
       );
-    } else if (keys.includes(studentID as any)) {
+    } else if (keys.includes(studentID)) {
       remove(
         child(dbRef, `job-postings/${this.posting.ID}/Candidates/${studentID}`)
       );
     }
 
-    this.sendNotification('Student has been selected for interview.');
+    this.storageService.sendNotification(
+      'Student has been selected for interview.'
+    );
     this.Uploading = false;
     window.location.reload();
-  }
-
-  sendNotification(text: string) {
-    this.snackBar.open(text, '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 }
